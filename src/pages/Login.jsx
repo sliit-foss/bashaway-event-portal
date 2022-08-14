@@ -1,48 +1,14 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
 import { login } from "../services/auth";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-  const userNameRef = useRef();
-  const passwordRef = useRef();
-
   const handleLogin = async (e) => {
     e.preventDefault();
-    await setFormData({
-      email: userNameRef.current.value,
-      password: passwordRef.current.value,
-    });
-    setFormErrors(validateInputs(formData));
-    setIsSubmit(true);
-    try {
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        const response =await login(formData);
-        localStorage.setItem("access_token" , response.data.data.access_token)
-        if(response.status === 500){
-
-        }
-        console.log(response.status);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const validateInputs = (data) => {
-    const err = {};
-    if (!data.email) {
-      err.username = "Username field cannot be empty...";
-    }
-    if (!data.password) {
-      err.password = "Password field cannot be empty...";
-    }
-    return err;
+    await login({
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }).then((res) => {
+      localStorage.setItem("token", res.data.access_token);
+    })
   };
 
   return (
@@ -68,35 +34,30 @@ const Login = () => {
         </div>
 
         <div className=" flex flex-col w-4/5 mt-[92px] mr-20">
-          <form className=" flex items-end flex-col">
+          <form className="flex items-end flex-col" onSubmit={handleLogin}>
             <input
-              ref={userNameRef}
-              placeholder="Username"
-              type="text"
-              className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4"
+              placeholder="Email"
+              type="email"
+              name="email"
+              className="w-3/4 2xl:w-full h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4"
+              required
             />
-            {formErrors.username && (
-              <span className="text-red-600">{formErrors.username}</span>
-            )}
-
             <input
-              ref={passwordRef}
               placeholder="Password"
               type="password"
-              className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3"
+              name="password"
+              className="w-3/4 2xl:w-full h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3"
+              required
             />
-            {formErrors.password && (
-              <span className="text-red-600">{formErrors.password}</span>
-            )}
             <h1 className="text-white font-inter font-bold text-base mt-4">
               Forgot Password?
             </h1>
-            <div
-              onClick={handleLogin}
+            <button
+              type="submit"
               className="w-[165px] h-11 bg-[#d9d9d9] rounded-md flex items-center justify-center text-base font-normal mt-7 cursor-pointer"
             >
               Login
-            </div>
+            </button>
           </form>
         </div>
       </div>
