@@ -1,6 +1,52 @@
-import React, { useRef } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const userNameRef = useRef();
+  const passwordRef = useRef();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await setFormData({
+      email: userNameRef.current.value,
+      password: passwordRef.current.value,
+    });
+    setFormErrors(validateInputs(formData));
+    setIsSubmit(true);
+  };
+
+  const validateInputs = (data) => {
+    const err = {};
+    if (!data.email) {
+      err.username = "Username field cannot be empty...";
+    }
+    if (!data.password) {
+      err.password = "Password field cannot be empty...";
+    }
+    return err;
+  };
+
+  useEffect(() => {
+    const login = async () => {
+      if (Object.keys(formErrors).length === 0 && isSubmit) {
+        const response = await axios.post(
+          "http://localhost:3001/api/auth/login",
+          formData
+        )
+        localStorage.setItem("access_token", response.data.data.access_token);
+      } else {
+        setFormErrors("Something went wrong. Please try again later.");
+      }
+    };
+    login();
+  }, [formErrors]);
+
   return (
     <div className="bg-black w-screen h-screen flex flex-row font-inter">
       <div className="flex-1 flex justify-center items-center">
@@ -24,12 +70,34 @@ const Login = () => {
         </div>
 
         <div className="flex flex-col items-end mt-[92px] mr-20">
-            <input placeholder="Username" type="text" className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4"/>
-            <input placeholder="Password" type="password" className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3"/>
-            <h1 className="text-white font-inter font-bold text-base mt-4">Forgot Password?</h1>
-            <div className="w-[165px] h-11 bg-[#d9d9d9] rounded-md flex items-center justify-center text-base font-normal mt-7">
-              Login
-            </div>
+          <input
+            ref={userNameRef}
+            placeholder="Username"
+            type="text"
+            className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4"
+          />
+          {formErrors.username && (
+            <span className="text-red-600">{formErrors.username}</span>
+          )}
+
+          <input
+            ref={passwordRef}
+            placeholder="Password"
+            type="password"
+            className="w-[486px] h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3"
+          />
+          {formErrors.password && (
+            <span className="text-red-600">{formErrors.password}</span>
+          )}
+          <h1 className="text-white font-inter font-bold text-base mt-4">
+            Forgot Password?
+          </h1>
+          <div
+            onClick={handleLogin}
+            className="w-[165px] h-11 bg-[#d9d9d9] rounded-md flex items-center justify-center text-base font-normal mt-7 cursor-pointer"
+          >
+            Login
+          </div>
         </div>
       </div>
     </div>
