@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.VITE_BASHAWAY_BE_URL,
+  baseURL: import.meta.env.VITE_BASHAWAY_BE_URL,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${localStorage.getItem('token')}`,
