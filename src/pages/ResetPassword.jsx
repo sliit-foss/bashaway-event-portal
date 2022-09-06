@@ -1,4 +1,4 @@
-const Login = () => {
+const ResetPassword = () => {
   return (
     <div className="bg-black w-screen h-screen flex ">
       <div className="flex-1 flex items-center justify-center">
@@ -15,4 +15,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ResetPassword
