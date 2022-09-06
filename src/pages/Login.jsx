@@ -1,4 +1,5 @@
 import { login } from '../services/auth'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   const handleLogin = async (e) => {
@@ -32,7 +33,9 @@ const Login = () => {
             <form className="flex items-center sm:items-end flex-col" onSubmit={handleLogin}>
               <input placeholder="Email" type="email" name="email" className="w-11/12 sm:w-3/4  2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4" required />
               <input placeholder="Password" type="password" name="password" className="w-11/12 sm:w-3/4 2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3" required />
-              <h1 className="text-white font-inter font-bold text-sm sm:text-base mt-4">Forgot Password?</h1>
+              <Link to="/forgotPassword" className="text-white font-inter font-bold text-sm sm:text-base mt-4">
+                Forgot Password?
+              </Link>
               <button type="submit" className="w-[130px] h-8 sm:w-[165px] sm:h-11 bg-[#d9d9d9] rounded-md flex items-center justify-center text-base font-normal mt-7 cursor-pointer">
                 Login
               </button>
