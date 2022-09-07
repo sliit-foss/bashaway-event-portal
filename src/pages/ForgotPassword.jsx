@@ -14,17 +14,14 @@ const ForgotPassword = () => {
   }
 
   return (
-    <div className="bg-black w-screen h-screen flex ">
-      <div className="flex-1 flex items-center justify-center">
-        <img src="./assets/ForgotPassword.svg" />
-      </div>
-      <div className="flex-1 mt-48 flex flex-col font-inter">
-        {/* text-justify? */}
-        <span className="text-white font-medium text-[32px] tracking-[-0.04em]">Forgot Password?</span>
-        <p className="text-white font-light text-xl tracking-[-0.04em] w-[479px] mt-8 mb-[47px]">Please enter your registration email address. We'll send instructions to help reset your password.</p>
-        <form onSubmit={handleForm}>
-          <input className="bg-transparent border-2 border-input-border rounded-[5px] h-16 w-[486px] p-4 text-gray-100" type="email" name="email" placeholder="Email" required />
-          <button type="submit" className="bg-[#D9D9D9] w-[165px] h-[42px] rounded-[5px] flex justify-center items-center text-base font-normal mt-14">
+    <div className="bg-black w-screen h-screen flex md:flex-row relative items-center justify-center sm:px-16">
+      <img src="./assets/ForgotPassword.svg" alt="Forgot Password" className="absolute opacity-30 z-0 px-2 md:sticky md:h-[500px] md:w-[500px] md:opacity-100 md:flex-1" />
+      <div className="flex flex-col font-inter mx-6 z-50 md:flex-1 md:ml-10">
+        <span className="text-white font-medium text-3xl tracking-[-0.04em]">Forgot Password?</span>
+        <p className="text-white font-light tracking-tight text-lg w-11/12 mt-8 mb-[47px] sm:w-full">Please enter your registration email address. We'll send instructions to help reset your password.</p>
+        <form onSubmit={handleForm} className="md:items-end md:flex md:flex-col">
+          <input className="bg-transparent border-2 border-input-border rounded-[5px] h-10 w-11/12 sm:w-full sm:h-12 lg:h-16 p-4 text-gray-100" type="email" name="email" placeholder="Email" required />
+          <button type="submit" className="bg-[#D9D9D9] w-[130px] h-8 sm:h-11 rounded-[5px] flex justify-center items-center text-base font-normal mt-14">
             Send
           </button>
         </form>

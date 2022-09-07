@@ -26,13 +26,13 @@ const Login = () => {
       </div>
 
       <div className="flex-1 flex flex-col sm:flex-row w-screen items-center pt-14">
-        <img src="assets/Login.svg" className="bg-black h-[355px] sm:w-1/2 absolute sm:sticky opacity-20" />
+        <img src="assets/Login.svg" className="bg-black h-[355px] sm:w-1/2 absolute sm:sticky opacity-30 z-0 sm:opacity-100" />
 
-        <div className="flex flex-col w-full sm:w-1/2 mt-28 sm:mt-0">
+        <div className="flex flex-col w-full sm:w-1/2 mt-28 sm:mt-0 z-50">
           <div className=" sm:mr-8">
             <form className="flex items-center sm:items-end flex-col" onSubmit={handleLogin}>
-              <input placeholder="Email" type="email" name="email" className="w-11/12 sm:w-3/4  2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4" required />
-              <input placeholder="Password" type="password" name="password" className="w-11/12 sm:w-3/4 2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3" required />
+              <input placeholder="Email" type="email" name="email" className="w-11/12 sm:w-10/12  2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border text-gray-100 p-4" required />
+              <input placeholder="Password" type="password" name="password" className="w-11/12 sm:w-10/12 2xl:w-full h-10 sm:h-16 bg-transparent border-[1px] rounded-md border-input-border my-8 text-gray-100 p-3" required />
               <Link to="/forgotPassword" className="text-white font-inter font-bold text-sm sm:text-base mt-4">
                 Forgot Password?
               </Link>
