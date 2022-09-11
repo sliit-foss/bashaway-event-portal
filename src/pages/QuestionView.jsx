@@ -1,10 +1,6 @@
-import React from 'react'
-import Navbar from '../components/common/Navbar'
-
 export default function QuestionView() {
   return (
     <div className="flex flex-col bg-slate-100 ">
-      <Navbar />
       <div className=" flex flex-col justify-center">
         <div className="flex flex-row items-center justify-start p-12 pl-10 ">
           <h1 className="text-2xl font-semibold pr-6">Challenge</h1>

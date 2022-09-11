@@ -18,13 +18,15 @@ module.exports = {
     },
     extend: {
       colors: {
-        primary: '#007CF0',
+        primary: '#0070F3',
         secondary: '#00DFD8',
-        'input-border': '#888888',
+        'nav-links-unselected': '#888888',
+        'gray-light': '#D9D9D9',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      height: {},
     },
   },
   plugins: [],

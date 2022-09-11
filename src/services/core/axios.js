@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASHAWAY_BE_URL,
@@ -10,8 +11,16 @@ export const axiosInstance = axios.create({
 
 export const apiRequest = async (request) => {
   return await request()
-    .then((res) => res.data)
+    .then((res) => ({
+      success: true,
+      data: res.data,
+    }))
     .catch((error) => {
-      alert(error.response.data.message)
+      const message = error.response.data.message
+      toast.error(message)
+      return {
+        success: false,
+        message: message,
+      }
     })
 }
