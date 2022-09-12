@@ -29,17 +29,17 @@ const Login = () => {
       <div className="w-full h-full flex flex-col justify-center items-center p-8 md:p-12">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
-            <img src="assets/Login.svg" className="w-9/12" />
+            <img src="assets/images/login.svg" className="w-9/12" />
           </div>
           <div className="flex flex-col w-full md:w-1/2">
             <div>
               <form className="flex flex-col items-end" onSubmit={handleLogin}>
                 <Input placeholder="Email" type="email" name="email" className="p-4" required />
                 <Input placeholder="Password" type="password" name="password" className="my-8 p-3" required />
-                <Link to="/forgotPassword" className="text-white font-bold text-sm sm:text-base mt-4">
+                <Link to="/forgot-password" className="text-white font-bold text-sm sm:text-base mt-4">
                   Forgot Password?
                 </Link>
-                <Button className="w-[130px] h-10 sm:w-[165px] sm:h-11 mt-10 text-black">Login</Button>
+                <Button className="w-[130px] h-11 sm:w-[165px] mt-10">Login</Button>
               </form>
             </div>
           </div>

@@ -75,11 +75,11 @@ const Register = () => {
       }).then((res) => {
         if (res.success) {
           toast.success('Team registered successfully! Please check the registered email to verify the account', {
-            autoClose: 3000,
+            autoClose: 3500,
           })
           setTimeout(() => {
             navigate('/login')
-          }, 3000)
+          }, 3500)
         }
       })
     } else {

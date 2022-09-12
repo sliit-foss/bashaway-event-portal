@@ -40,7 +40,8 @@ const Layout = ({ children, title, skipAuthGuard }) => {
   }, [vantaEffect])
 
   useEffect(() => {
-    if (!skipAuthGuard && !localStorage.getItem('token') && window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+    const whitelistedPaths = ['login', 'register', 'forgot-password', 'reset-password']
+    if (!skipAuthGuard && !localStorage.getItem('token') && !whitelistedPaths.includes(window.location.pathname.split('/')[1])) {
       navigate('/login')
     }
   }, [navigate])

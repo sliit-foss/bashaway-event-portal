@@ -1,16 +1,46 @@
+import { toast } from 'react-toastify'
+import { resetPassword } from '../services/auth'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Button, Input } from '../components/common'
+import Layout from '../components/layout'
+
 const ResetPassword = () => {
+  const navigate = useNavigate()
+  const { code } = useParams()
+
+  const handleReset = async (e) => {
+    e.preventDefault()
+    await resetPassword(code, {
+      new_password: e.target.password.value,
+    }).then((res) => {
+      if (res.success) {
+        toast.success('Password reset successfully!', {
+          autoClose: 3500,
+        })
+        setTimeout(() => {
+          navigate('/login')
+        }, 3500)
+      }
+    })
+  }
+
   return (
-    <div className="bg-black w-screen h-screen flex ">
-      <div className="flex-1 flex items-center justify-center">
-        <img src="./assets/ResetPassword.svg" />
+    <Layout title="Reset Password | Bashaway">
+      <div className="w-full h-full flex flex-col justify-center items-center p-8 md:p-12">
+        <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
+          <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
+            <img src="../assets/images/resetPassword.svg" className="w-9/12" />
+          </div>
+          <div className="flex flex-col w-full md:w-1/2">
+            <span className="text-left text-gray-light text-3xl md:text-4xl">Reset Your Password</span>
+            <form className="flex flex-col items-end" onSubmit={handleReset}>
+              <Input placeholder="New Password" type="password" name="password" className="my-8 p-4" required />
+              <Button className="h-11 w-[165px] mt-6">Reset Password</Button>
+            </form>
+          </div>
+        </div>
       </div>
-      <div className="flex-1 mt-[167px] flex flex-col font-inter">
-        <span className="text-white font-medium text-[32px] tracking-[-0.04em] my-14 text-justify">Reset Your Password</span>
-        <input className="bg-transparent border-2 border-input-border rounded-[5px] h-16 w-[486px] p-4 text-gray-100" type="password" placeholder="New Password" />
-        <input className="bg-transparent border-2 border-input-border rounded-[5px] h-16 w-[486px] p-4 text-gray-100 my-14" type="password" placeholder="Re-enter New Password" />
-        <div className="bg-[#D9D9D9] w-[165px] h-[42px] rounded-[5px] flex justify-center items-center text-base font-normal">Reset Password</div>
-      </div>
-    </div>
+    </Layout>
   )
 }
 
