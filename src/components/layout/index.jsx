@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import FOG from 'vanta/dist/vanta.fog.min'
+import { Loader } from '../common'
 import Footer from './footer'
 import Navbar from './navbar'
 
@@ -13,6 +14,7 @@ const Layout = ({ children, title }) => {
 
   useEffect(() => {
     document.getElementById('vanta-placeholder').style.display = 'none'
+    document.title = title || 'Bashaway'
   }, [])
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Layout = ({ children, title }) => {
   }, [vantaEffect])
 
   useEffect(() => {
-    if (window.location.pathname !== '/login' && !localStorage.getItem('token')) {
+    if (!localStorage.getItem('token') && window.location.pathname !== '/login' && window.location.pathname !== '/register') {
       navigate('/login')
     }
   }, [navigate])
@@ -54,6 +56,7 @@ const Layout = ({ children, title }) => {
         {children}
         <Footer />
         <ToastContainer />
+        <Loader />
         <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
       </main>
     </>

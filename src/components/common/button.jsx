@@ -1,6 +1,6 @@
 const Button = ({ children, ...props }) => {
   return (
-    <button {...props} className={`bg-gray-light hover:bg-primary rounded-md flex items-center justify-center text-base font-normal hover:text-white transition duration-300 ${props.className}`}>
+    <button {...props} className={`${props.disabled ? 'bg-white/30' : 'bg-gray-light hover:bg-primary hover:text-white'} rounded-md flex items-center justify-center text-base font-normal transition duration-300 ${props.className}`}>
       {children}
     </button>
   )

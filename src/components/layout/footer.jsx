@@ -12,7 +12,7 @@ const Footer = () => {
     },
     {
       icon: 'linkedin',
-      url: 'https://twitter.com/fosssliit?lang=en',
+      url: 'https://www.linkedin.com/company/sliit-foss-community/?originalSubdomain=lk',
     },
     {
       icon: 'twitter',
@@ -59,7 +59,7 @@ const Footer = () => {
           </a>
           <div className="flex justify-start mb-8">
             {socialLinks.map((link) => (
-              <a href={link.url} target="_blank" rel="noreferrer">
+              <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
                 <img src={`/assets/images/social/${link.icon}.svg`} className="w-5 h-5 mx-2 fill-current hover:brightness-200 transition duration-300"></img>
               </a>
             ))}
@@ -72,7 +72,7 @@ const Footer = () => {
         <div className="flex flex-col items-start justify-end w-full mt-6 md:justify-start md:items-end md:pr-24">
           <h1 className="mb-6 text-2xl font-semibold text-white">Useful Links</h1>
           {usefulLinks.map((link) => (
-            <a className="mb-3 text-nav-links-unselected hover:text-primary transition duration-300" href={link.url} target="_blank" rel="noreferrer">
+            <a className="mb-3 text-nav-links-unselected hover:text-primary transition duration-300" key={link.url} href={link.url} target="_blank" rel="noreferrer">
               {link.name}
             </a>
           ))}

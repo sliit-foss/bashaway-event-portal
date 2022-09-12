@@ -1,9 +1,13 @@
 import { axiosInstance, apiRequest } from './core/axios'
 
-export const login = async (data) => {
-  return await apiRequest(() => axiosInstance.post(`/api/auth/login`, data))
+export const login = async (data, showLoader) => {
+  return await apiRequest(() => axiosInstance.post(`/api/auth/login`, data), showLoader)
 }
 
-export const forgotPassword = async (data) => {
-  return await apiRequest(() => axiosInstance.post(`/api/auth/forgot_password`, data))
+export const register = async (data, showLoader) => {
+  return await apiRequest(() => axiosInstance.post(`/api/auth/register`, data), showLoader)
+}
+
+export const forgotPassword = async (data, showLoader) => {
+  return await apiRequest(() => axiosInstance.post(`/api/auth/forgot_password`, data), showLoader)
 }

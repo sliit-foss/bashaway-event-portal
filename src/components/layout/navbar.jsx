@@ -1,38 +1,50 @@
 import { TiThMenu } from 'react-icons/ti'
 import { IoIosClose } from 'react-icons/io'
 import { useState } from 'react'
+import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+const initialNavItems = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'Rules',
+    path: '/rules',
+  },
+]
 
 const Header = () => {
   const [burgerNav, setBurgerNav] = useState(false)
+  const [navItems, setNavItems] = useState(initialNavItems)
 
   const burgerNavController = () => {
     document.querySelector('html').style.overflowY = !burgerNav ? 'hidden' : 'auto'
     setBurgerNav(!burgerNav)
   }
 
-  const handleNavItemClick = (path) => {
-    document.getElementById(path).scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const handleBurgerNavItemClick = (path) => {
-    document.getElementById(path).scrollIntoView({ behavior: 'smooth' })
-    burgerNavController()
-  }
-
-  const navItems = [
-    {
-      name: 'Home',
-      path: '',
-    },
-    {
-      name: 'Rules',
-      path: 'rules',
-    },
-    {
-      name: 'Settings',
-      path: 'settings',
-    },
-  ]
+  useEffect(() => {
+    const isLogged = localStorage.getItem('token')
+    if (isLogged && !navItems.find((item) => item.name === 'Settings')) {
+      setNavItems([
+        ...initialNavItems,
+        {
+          name: 'Settings',
+          path: '/settings',
+        },
+      ])
+    }
+    if (!isLogged && !navItems.find((item) => item.name === 'Register')) {
+      setNavItems([
+        ...initialNavItems,
+        {
+          name: 'Register',
+          path: '/register',
+        },
+      ])
+    }
+  }, [])
 
   return (
     <div>
@@ -43,15 +55,15 @@ const Header = () => {
         <div className="hidden lg:flex justify-end w-full md:w-1/2 xl:w-10/12">
           {navItems.map((item) => {
             return (
-              <div className="">
-                <span className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer" onClick={() => handleNavItemClick(item.path)}>
+              <div key={`mobile-${item.path}`}>
+                <Link to={item.path} className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer">
                   {item.name}
-                </span>
+                </Link>
               </div>
             )
           })}
         </div>
-        <TiThMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-5 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
+        <TiThMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-4 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
       </div>
       <div>
         <nav className={`h-full w-full flex items-center fixed top-0 left-0 z-50 ${burgerNav ? 'pointer-events-auto' : 'pointer-events-none opacity-0'} bg-black/50 backdrop-blur-2xl transition duration-300`}>
@@ -64,10 +76,10 @@ const Header = () => {
               <div className="h-full max-h-[200px] flex flex-col justify-between">
                 {navItems.map((item) => {
                   return (
-                    <div className="w-full flex flex-col justify-center items-center">
-                      <a className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer" onClick={() => handleBurgerNavItemClick(item.path)}>
+                    <div className="w-full flex flex-col justify-center items-center" key={`desktop-${item.path}`}>
+                      <Link to={item.path} className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer">
                         {item.name}
-                      </a>
+                      </Link>
                     </div>
                   )
                 })}

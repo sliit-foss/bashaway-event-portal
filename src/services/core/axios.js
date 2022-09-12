@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import store from '../../store'
+import { toggleLoader } from '../../store/ui'
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASHAWAY_BE_URL,
@@ -9,8 +11,9 @@ export const axiosInstance = axios.create({
   },
 })
 
-export const apiRequest = async (request) => {
-  return await request()
+export const apiRequest = async (request, showLoader = true) => {
+  store.dispatch(toggleLoader(true))
+  const response = await request()
     .then((res) => ({
       success: true,
       data: res.data,
@@ -23,4 +26,6 @@ export const apiRequest = async (request) => {
         message: message,
       }
     })
+  store.dispatch(toggleLoader(false))
+  return response
 }
