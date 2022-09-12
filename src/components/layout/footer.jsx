@@ -46,7 +46,7 @@ const Footer = () => {
   return (
     <>
       <Divider />
-      <div className="flex flex-col justify-between p-10 bg-black md:flex-row md:p-12" id="footer">
+      <div className="flex flex-col justify-between p-10 bg-transparent md:flex-row md:p-12 relative z-[2]" id="footer">
         <div className="flex justify-center w-full pl-0 md:pl-24 md:justify-start">
           <a href="https://sliitfoss.org" target="_blank" rel="noreferrer">
             <img src="/assets/images/foss_light.svg" className="w-28 h-28" />

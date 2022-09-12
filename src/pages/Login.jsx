@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <Layout>
-      <div className="bg-black w-full h-screen flex flex-col justify-center items-center p-8 md:p-12">
+      <div className="w-full h-screen flex flex-col justify-center items-center p-8 md:p-12 relative z-[5]">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
             <img src="assets/Login.svg" className="w-9/12" />
