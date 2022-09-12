@@ -2,7 +2,7 @@ import { TiThMenu } from 'react-icons/ti'
 import { IoIosClose } from 'react-icons/io'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const initialNavItems = [
   {
@@ -19,9 +19,20 @@ const Header = () => {
   const [burgerNav, setBurgerNav] = useState(false)
   const [navItems, setNavItems] = useState(initialNavItems)
 
+  const navigate = useNavigate()
+
   const burgerNavController = () => {
     document.querySelector('html').style.overflowY = !burgerNav ? 'hidden' : 'auto'
     setBurgerNav(!burgerNav)
+  }
+
+  const handleRouteChange = (path) => {
+    console.log(path)
+    if (path === '/rules') {
+      window.open('https://bashaway.sliitfoss.org#rules', '_blank')
+    } else {
+      navigate(path)
+    }
   }
 
   useEffect(() => {
@@ -56,9 +67,14 @@ const Header = () => {
           {navItems.map((item) => {
             return (
               <div key={`mobile-${item.path}`}>
-                <Link to={item.path} className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer">
+                <a
+                  className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer"
+                  onClick={() => {
+                    handleRouteChange(item.path)
+                  }}
+                >
                   {item.name}
-                </Link>
+                </a>
               </div>
             )
           })}
@@ -77,9 +93,14 @@ const Header = () => {
                 {navItems.map((item) => {
                   return (
                     <div className="w-full flex flex-col justify-center items-center" key={`desktop-${item.path}`}>
-                      <Link to={item.path} className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer">
+                      <a
+                        className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer"
+                        onClick={() => {
+                          handleRouteChange(item.path)
+                        }}
+                      >
                         {item.name}
-                      </Link>
+                      </a>
                     </div>
                   )
                 })}
