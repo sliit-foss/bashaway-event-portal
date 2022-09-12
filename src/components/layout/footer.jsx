@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Divider } from '../common'
 
 const Footer = () => {
@@ -28,20 +29,25 @@ const Footer = () => {
     {
       name: 'Register',
       url: '/register',
+      target: '_self',
     },
     {
       name: 'Competition',
       url: '/',
+      target: '_self',
     },
     {
       name: 'Code of Conduct',
       url: 'https://sliitfoss.org/code-conduct',
+      target: '_blank',
     },
     // {
     //     name: 'Source Code',
     //     url: 'https://github.com/sliit-foss/bashaway-landing'
     // },
   ]
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -72,7 +78,17 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-end w-full mt-6 md:justify-start md:items-end md:pr-24">
           <h1 className="mb-6 text-2xl font-semibold text-white">Useful Links</h1>
           {usefulLinks.map((link) => (
-            <a className="mb-3 text-nav-links-unselected hover:text-primary transition duration-300" key={link.url} href={link.url} target="_blank" rel="noreferrer">
+            <a
+              className="mb-3 text-nav-links-unselected hover:text-primary cursor-pointer transition duration-300"
+              key={link.url}
+              onClick={() => {
+                if (link.target === '_blank') {
+                  window.open(link.url, link.target)
+                } else {
+                  navigate(link.url)
+                }
+              }}
+            >
               {link.name}
             </a>
           ))}

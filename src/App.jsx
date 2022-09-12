@@ -3,10 +3,10 @@ import Register from './pages/register'
 import Questions from './pages/questions'
 import QuestionView from './pages/questionView'
 import ForgotPassword from './pages/forgotPassword'
+import NotFound from './pages/404'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-import './styles/App.css'
 
 const App = () => {
   return (
@@ -19,6 +19,7 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/question" element={<QuestionView />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </div>

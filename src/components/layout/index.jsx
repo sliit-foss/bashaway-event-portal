@@ -6,7 +6,7 @@ import { Loader } from '../common'
 import Footer from './footer'
 import Navbar from './navbar'
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children, title, skipAuthGuard }) => {
   const navigate = useNavigate()
 
   const [vantaEffect, setVantaEffect] = useState(0)
@@ -14,6 +14,7 @@ const Layout = ({ children, title }) => {
 
   useEffect(() => {
     document.getElementById('vanta-placeholder').style.display = 'none'
+    document.getElementById('vanta-placeholder').style.backgroundImage = 'radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1))'
     document.title = title || 'Bashaway'
   }, [])
 
@@ -39,7 +40,7 @@ const Layout = ({ children, title }) => {
   }, [vantaEffect])
 
   useEffect(() => {
-    if (!localStorage.getItem('token') && window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+    if (!skipAuthGuard && !localStorage.getItem('token') && window.location.pathname !== '/login' && window.location.pathname !== '/register') {
       navigate('/login')
     }
   }, [navigate])
