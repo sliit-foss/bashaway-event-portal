@@ -46,21 +46,14 @@ const Layout = ({ children, title, skipAuthGuard }) => {
   }, [navigate])
 
   return (
-    <>
-      <head>
-        <title>{title || 'App | Todo'}</title>
-        <meta name="description" content="Simple TODO app to manage your day to day tasks" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </head>
-      <main className="bg-black font-inter overflow-x-hidden">
-        <Navbar />
-        <div className="w-screen h-screen relative z-[5]">{children}</div>
-        <Footer />
-        <ToastContainer />
-        <Loader />
-        <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
-      </main>
-    </>
+    <main className="bg-black font-inter overflow-x-hidden">
+      <Navbar />
+      <div className="w-screen h-screen relative z-[5]">{children}</div>
+      <Footer />
+      <ToastContainer />
+      <Loader />
+      <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
+    </main>
   )
 }
 

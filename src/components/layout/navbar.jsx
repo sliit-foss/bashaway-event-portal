@@ -27,7 +27,6 @@ const Header = () => {
   }
 
   const handleRouteChange = (path) => {
-    console.log(path)
     if (path === '/rules') {
       window.open('https://bashaway.sliitfoss.org#rules', '_blank')
     } else if (path === '/logout') {
@@ -66,14 +65,14 @@ const Header = () => {
 
   return (
     <div>
-      <div className={`w-full flex flex-col md:flex-row justify-between items-center bg-black/70 p-5 fixed top-0 z-50 backdrop-blur-[5px] `}>
+      <div className={`w-full flex flex-col md:flex-row justify-between items-center bg-black/70 p-5 fixed top-0 z-50 backdrop-blur-[5px] pr-6`}>
         <div className="w-full md:w-4/12 pl-2">
           <img src="/assets/images/bashaway-logo.png" className="w-5/12 lg:w-4/12" />
         </div>
         <div className="hidden lg:flex justify-end w-full md:w-1/2 xl:w-10/12">
           {navItems.map((item) => {
             return (
-              <div key={`mobile-${item.path}`}>
+              <div key={`desktop-${item.path}`}>
                 <a
                   className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer"
                   onClick={() => {
@@ -99,7 +98,7 @@ const Header = () => {
               <div className="h-full max-h-[200px] flex flex-col justify-between">
                 {navItems.map((item) => {
                   return (
-                    <div className="w-full flex flex-col justify-center items-center" key={`desktop-${item.path}`}>
+                    <div className="w-full flex flex-col justify-center items-center" key={`mobile-${item.path}`}>
                       <a
                         className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer"
                         onClick={() => {

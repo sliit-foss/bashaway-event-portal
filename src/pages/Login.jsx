@@ -1,10 +1,14 @@
+import { useDispatch } from 'react-redux'
 import { login } from '../services/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input } from '../components/common'
 import Layout from '../components/layout'
+import { setUser } from '../store/user'
 
 const Login = () => {
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -14,6 +18,7 @@ const Login = () => {
     }).then((res) => {
       if (res.success) {
         localStorage.setItem('token', res.data.data.access_token)
+        dispatch(setUser(res.data.data.user))
         navigate('/')
       }
     })

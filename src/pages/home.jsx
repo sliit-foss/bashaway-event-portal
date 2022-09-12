@@ -1,7 +1,7 @@
 import { Timer } from '../components/home'
 import Layout from '../components/layout'
 
-export default function Questions() {
+const Home = () => {
   return (
     <Layout>
       <div className="w-screen h-screen flex flex-col justify-center items-center">
@@ -11,3 +11,5 @@ export default function Questions() {
     </Layout>
   )
 }
+
+export default Home
