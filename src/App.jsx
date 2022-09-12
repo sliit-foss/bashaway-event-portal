@@ -1,6 +1,6 @@
 import Login from './pages/login'
 import Register from './pages/register'
-import Questions from './pages/questions'
+import Home from './pages/home'
 import QuestionView from './pages/questionView'
 import ForgotPassword from './pages/forgotPassword'
 import NotFound from './pages/404'
@@ -14,7 +14,7 @@ const App = () => {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Questions />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/question" element={<QuestionView />} />

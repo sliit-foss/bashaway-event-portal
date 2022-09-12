@@ -30,6 +30,9 @@ const Header = () => {
     console.log(path)
     if (path === '/rules') {
       window.open('https://bashaway.sliitfoss.org#rules', '_blank')
+    } else if (path === '/logout') {
+      localStorage.clear()
+      navigate('/login')
     } else {
       navigate(path)
     }
@@ -43,6 +46,10 @@ const Header = () => {
         {
           name: 'Settings',
           path: '/settings',
+        },
+        {
+          name: 'Logout',
+          path: '/logout',
         },
       ])
     }
@@ -61,7 +68,7 @@ const Header = () => {
     <div>
       <div className={`w-full flex flex-col md:flex-row justify-between items-center bg-black/70 p-5 fixed top-0 z-50 backdrop-blur-[5px] `}>
         <div className="w-full md:w-4/12 pl-2">
-          <img src="/assets/images/bashaway-logo.png" className="w-6/12 lg:w-4/12" />
+          <img src="/assets/images/bashaway-logo.png" className="w-5/12 lg:w-4/12" />
         </div>
         <div className="hidden lg:flex justify-end w-full md:w-1/2 xl:w-10/12">
           {navItems.map((item) => {

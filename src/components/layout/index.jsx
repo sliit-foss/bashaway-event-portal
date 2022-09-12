@@ -54,7 +54,7 @@ const Layout = ({ children, title, skipAuthGuard }) => {
       </head>
       <main className="bg-black font-inter overflow-x-hidden">
         <Navbar />
-        {children}
+        <div className="w-screen h-screen relative z-[5]">{children}</div>
         <Footer />
         <ToastContainer />
         <Loader />
