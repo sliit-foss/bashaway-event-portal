@@ -12,7 +12,7 @@ export const axiosInstance = axios.create({
 })
 
 export const apiRequest = async (request, showLoader = true) => {
-  store.dispatch(toggleLoader(true))
+  store.dispatch(toggleLoader(showLoader))
   const response = await request()
     .then((res) => ({
       success: true,
