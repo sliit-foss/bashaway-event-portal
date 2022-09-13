@@ -1,44 +1,35 @@
-import { useState } from 'react'
-import logo from './public/logo.svg'
-import './styles/App.css'
+import Login from './pages/login'
+import Register from './pages/register'
+import Home from './pages/home'
+import QuestionView from './pages/questionView'
+import ForgotPassword from './pages/forgotPassword'
+import ResetPassword from './pages/resetPassword'
+import ChangePassword from './pages/changePassword'
+import Profile from './pages/profile'
+import NotFound from './pages/404'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/question" element={<QuestionView />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:code" element={<ResetPassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </Provider>
   )
 }
 
