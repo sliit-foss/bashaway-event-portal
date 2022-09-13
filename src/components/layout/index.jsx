@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import FOG from 'vanta/dist/vanta.fog.min'
 import { Loader } from '../common'
@@ -9,8 +9,15 @@ import Navbar from './navbar'
 const Layout = ({ children, title, skipAuthGuard }) => {
   const navigate = useNavigate()
 
+  const { pathname } = useLocation()
+
   const [vantaEffect, setVantaEffect] = useState(0)
+
   const myRef = useRef(null)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [pathname])
 
   useEffect(() => {
     document.getElementById('vanta-placeholder').style.display = 'none'
@@ -44,12 +51,12 @@ const Layout = ({ children, title, skipAuthGuard }) => {
     if (!skipAuthGuard && !localStorage.getItem('token') && !whitelistedPaths.includes(window.location.pathname.split('/')[1])) {
       navigate('/login')
     }
-  }, [navigate])
+  }, [])
 
   return (
     <main className="bg-black font-inter overflow-x-hidden">
       <Navbar />
-      <div className="w-screen h-screen relative z-[5]">{children}</div>
+      <div className="w-screen min-h-screen relative z-[5]">{children}</div>
       <Footer />
       <ToastContainer />
       <Loader />

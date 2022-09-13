@@ -1,7 +1,6 @@
 import { TiThMenu } from 'react-icons/ti'
 import { IoIosClose } from 'react-icons/io'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const initialNavItems = [
@@ -39,12 +38,12 @@ const Header = () => {
 
   useEffect(() => {
     const isLogged = localStorage.getItem('token')
-    if (isLogged && !navItems.find((item) => item.name === 'Settings')) {
+    if (isLogged && !navItems.find((item) => item.name === 'Profile')) {
       setNavItems([
         ...initialNavItems,
         {
-          name: 'Settings',
-          path: '/settings',
+          name: 'Profile',
+          path: '/profile',
         },
         {
           name: 'Logout',

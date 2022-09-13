@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
-import { resetPassword } from '../services/auth'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Input } from '../components/common'
 import Layout from '../components/layout'
+import { resetPassword } from '../services/auth'
 
 const ResetPassword = () => {
   const navigate = useNavigate()
@@ -26,12 +26,12 @@ const ResetPassword = () => {
 
   return (
     <Layout title="Reset Password | Bashaway">
-      <div className="w-full h-full flex flex-col justify-center items-center p-8 md:p-12">
+      <div className="w-full h-screen flex flex-col justify-center items-center px-6 sm:px-16">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
             <img src="../assets/images/resetPassword.svg" className="w-9/12" />
           </div>
-          <div className="flex flex-col w-full md:w-1/2">
+          <div className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6">
             <span className="text-left text-gray-light text-3xl md:text-4xl">Reset Your Password</span>
             <form className="flex flex-col items-end" onSubmit={handleReset}>
               <Input placeholder="New Password" type="password" name="password" className="my-8 p-4" required />

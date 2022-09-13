@@ -15,3 +15,7 @@ export const forgotPassword = async (data, showLoader) => {
 export const resetPassword = async (code, data, showLoader) => {
   return await apiRequest(() => axiosInstance.post(`/api/auth/reset_password/${code}`, data), showLoader)
 }
+
+export const getCurrentUser = async (showLoader) => {
+  return await apiRequest(() => axiosInstance.get(`/api/auth/current`), showLoader)
+}

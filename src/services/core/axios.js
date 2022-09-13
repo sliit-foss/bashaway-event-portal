@@ -15,8 +15,8 @@ export const apiRequest = async (request, showLoader = true) => {
   store.dispatch(toggleLoader(showLoader))
   const response = await request()
     .then((res) => ({
+      ...res.data,
       success: true,
-      data: res.data,
     }))
     .catch((error) => {
       const message = error.response.data.message

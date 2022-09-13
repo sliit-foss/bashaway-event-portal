@@ -4,6 +4,8 @@ import Home from './pages/home'
 import QuestionView from './pages/questionView'
 import ForgotPassword from './pages/forgotPassword'
 import ResetPassword from './pages/resetPassword'
+import ChangePassword from './pages/changePassword'
+import Profile from './pages/profile'
 import NotFound from './pages/404'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -21,6 +23,8 @@ const App = () => {
             <Route path="/question" element={<QuestionView />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:code" element={<ResetPassword />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

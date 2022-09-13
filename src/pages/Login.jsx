@@ -17,8 +17,8 @@ const Login = () => {
       password: e.target.password.value,
     }).then((res) => {
       if (res.success) {
-        localStorage.setItem('token', res.data.data.access_token)
-        dispatch(setUser(res.data.data.user))
+        localStorage.setItem('token', res.data.access_token)
+        dispatch(setUser(res.data.user))
         navigate('/')
       }
     })
@@ -26,12 +26,12 @@ const Login = () => {
 
   return (
     <Layout title="Login | Bashaway">
-      <div className="w-full h-full flex flex-col justify-center items-center p-8 md:p-12">
+      <div className="w-full h-screen flex flex-col justify-center items-center px-6 sm:px-16">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
             <img src="assets/images/login.svg" className="w-9/12" />
           </div>
-          <div className="flex flex-col w-full md:w-1/2">
+          <div className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6">
             <div>
               <form className="flex flex-col items-end" onSubmit={handleLogin}>
                 <Input placeholder="Email" type="email" name="email" className="p-4" required />
