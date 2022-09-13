@@ -1,11 +1,18 @@
-import Login from './pages/Login'
-import './styles/App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
 
-function App() {
+import Login from './pages/Login'
+
+const App = () => {
   return (
-    <div className="App">
-      <Login />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   )
 }
 
