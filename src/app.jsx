@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import AnimatedRoutes from './routes'
 import store from './store'
-import AnimatedRoutes from './components/AnimatedRoutes'
 
 const App = () => {
   return (

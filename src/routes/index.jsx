@@ -1,4 +1,5 @@
-import React from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Login from '../pages/login'
 import Register from '../pages/register'
 import Home from '../pages/home'
@@ -8,8 +9,6 @@ import ResetPassword from '../pages/resetPassword'
 import ChangePassword from '../pages/changePassword'
 import Profile from '../pages/profile'
 import NotFound from '../pages/404'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
 
 const AnimatedRoutes = () => {
   const location = useLocation()

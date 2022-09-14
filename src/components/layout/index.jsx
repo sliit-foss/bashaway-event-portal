@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import FOG from 'vanta/dist/vanta.fog.min'
 import { Loader } from '../common'
 import Footer from './footer'
 import Navbar from './navbar'
-import { motion } from 'framer-motion'
 
 const Layout = ({ children, title, skipAuthGuard }) => {
   const navigate = useNavigate()
@@ -55,7 +55,7 @@ const Layout = ({ children, title, skipAuthGuard }) => {
   }, [])
 
   return (
-    <motion.main className="bg-black font-inter overflow-x-hidden" initial={{ width: 0 }} animate={{ width: '100%' }} exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}>
+    <motion.main className="bg-black font-inter overflow-x-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.3 } }} transition={{ duration: 0.3 }}>
       <Navbar />
       <div className="w-screen min-h-screen relative z-[5]">{children}</div>
       <Footer />
