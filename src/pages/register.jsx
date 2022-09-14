@@ -93,7 +93,7 @@ const Register = () => {
     <Layout title="Register | Bashaway">
       <div className="w-full min-h-screen flex flex-col justify-center items-center p-8 md:p-12">
         <div className="w-full flex flex-col justify-center items-center lg:items-center pt-14">
-          <div className="w-full md:w-3/4 lg:w-1/2 flex flex-wrap justify-evenly items-center mb-12">
+          <div className="w-full md:w-3/4 xl:w-1/2 flex flex-wrap justify-evenly items-center mb-12">
             {steps.map((list, index) => {
               return (
                 <div className="w-2/12 grow">
@@ -102,23 +102,32 @@ const Register = () => {
                       <div className="absolute w-6 md:w-10 h-6 md:h-10 rounded-full left-0" style={{ backgroundImage: `linear-gradient(to right, ${step >= index + 1 ? list.gradientColor1 : '#888888'}, ${step >= index + 1 ? list.gradientColor2 : '#888888'})` }}></div>
                     </div>
                   </div>
-                  <span className="hidden md:block text-sm text-white text-left font-semibold">{list.name}</span>
+                  <div className="flex justify-start items-center">
+                    <span className="hidden md:block text-sm text-white text-left font-semibold">{list.name}</span>
+                    <span className="hidden md:block text-red-500 text-sm ml-2">{index <= 1 ? '*' : ''}</span>
+                  </div>
                 </div>
               )
             })}
           </div>
-          <div className="flex flex-col w-full md:w-3/4 lg:w-1/2">
+          <div className="flex flex-col w-full md:w-3/4 xl:w-1/2">
             <form className="flex flex-col items-end" onSubmit={handleSubmit}>
               {Object.keys(formData).reduce((acc, curr, index, arr) => {
                 acc = [
                   ...acc,
                   ...Object.keys(formData[arr[index]]).map((key, i) => {
                     const show = index + 1 == step
+                    const required =
+                      show &&
+                      (step <= 2 ||
+                        Object.keys(formData[step]).find((memberKey) => {
+                          return formData[step][memberKey] !== ''
+                        }))
                     return (
                       <Input
                         key={`${key}-${index},${i}`}
-                        placeholder={_.startCase(key)}
-                        type={key === 'password' ? 'password' : 'text'}
+                        placeholder={`${key === 'name' && step === 1 ? 'Team Name' : _.startCase(key)}${required ? ' *' : ''}`}
+                        type={key === 'password' || key === 'email' ? key : 'text'}
                         pattern={getRegexPatternFromKey(key).regex}
                         title={getRegexPatternFromKey(key).title}
                         name={key}
@@ -132,19 +141,16 @@ const Register = () => {
                             },
                           })
                         }}
-                        required={
-                          show &&
-                          (step <= 2 ||
-                            Object.keys(formData[step]).find((memberKey) => {
-                              return formData[step][memberKey] !== ''
-                            }))
-                        }
+                        required={required}
                       />
                     )
                   }),
                 ]
                 return acc
               }, [])}
+              <span className="text-gray-light mt-6">
+                * From 2<sup>nd</sup> member onwards please fill all fields or leave all fields empty
+              </span>
               <div className="flex">
                 {step !== 1 && (
                   <Button

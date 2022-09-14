@@ -9,16 +9,20 @@ import ResetPassword from '../pages/resetPassword'
 import ChangePassword from '../pages/changePassword'
 import Profile from '../pages/profile'
 import NotFound from '../pages/404'
+import useAuth from '../hooks/auth'
 
 const AnimatedRoutes = () => {
+  useAuth()
+
   const location = useLocation()
+
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/question" element={<QuestionView />} />
+        <Route path="/question/:id" element={<QuestionView />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:code" element={<ResetPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />
