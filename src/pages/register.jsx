@@ -91,7 +91,7 @@ const Register = () => {
 
   return (
     <Layout title="Register | Bashaway">
-      <div className="w-full h-screen flex flex-col justify-center items-center p-8 md:p-12">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center p-8 md:p-12">
         <div className="w-full flex flex-col justify-center items-center lg:items-center pt-14">
           <div className="w-full md:w-3/4 lg:w-1/2 flex flex-wrap justify-evenly items-center mb-12">
             {steps.map((list, index) => {
