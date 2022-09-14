@@ -28,7 +28,22 @@ const Register = () => {
   })
 
   useEffect(() => {
-    setFormData(user)
+    const userData = { ...user }
+    if (userData.members) {
+      const memberCount = userData.members.length
+      for (let i = 0; i < 4 - memberCount; i++) {
+        userData.members = [
+          ...userData.members,
+          {
+            name: '',
+            email: '',
+            phone: '',
+            academic_year: '',
+          },
+        ]
+      }
+    }
+    setFormData(userData)
   }, [user])
 
   const handleSubmit = async (e) => {
@@ -101,6 +116,7 @@ const Register = () => {
                             members,
                           })
                         }}
+                        required={!!Object.keys(formData.members[index]).find((k) => formData.members[index][k] !== '')}
                       />
                     )
                   })}
