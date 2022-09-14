@@ -9,7 +9,7 @@ import Layout from '../components/layout'
 import { getCurrentUser } from '../services/auth'
 import { updateUser } from '../services/user'
 import { getRegexPatternFromKey } from '../helpers'
-import useEffectOnce from '../hooks/useEffectOnce'
+import { useEffectOnce } from '../hooks'
 import { setUser } from '../store/user'
 
 const Register = () => {

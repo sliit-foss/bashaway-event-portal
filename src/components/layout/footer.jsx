@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useEffectOnce from '../../hooks/useEffectOnce'
+import { useEffectOnce } from '../../hooks'
 import { Divider } from '../common'
 
 const initialUsefulLinks = [

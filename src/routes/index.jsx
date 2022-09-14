@@ -9,10 +9,11 @@ import ResetPassword from '../pages/resetPassword'
 import ChangePassword from '../pages/changePassword'
 import Profile from '../pages/profile'
 import NotFound from '../pages/404'
-import useAuth from '../hooks/auth'
+import { useAuth, useRedirect } from '../hooks'
 
 const AnimatedRoutes = () => {
   useAuth()
+  useRedirect()
 
   const location = useLocation()
 
