@@ -6,6 +6,7 @@ import { register } from '../services/auth'
 import { Button, Input } from '../components/common'
 import Layout from '../components/layout'
 import { getRegexPatternFromKey } from '../helpers'
+import Terms from '../components/register/terms'
 
 const steps = [
   {
@@ -40,6 +41,8 @@ const Register = () => {
 
   const [step, setStep] = useState(1)
 
+  const [modalVisibility, setModalVisibility] = useState(false)
+
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState(
@@ -63,27 +66,31 @@ const Register = () => {
     }, {}),
   )
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e, isConfirmation) => {
+    e?.preventDefault()
     if (step === totalSteps) {
-      await register({
-        name: formData[1].name,
-        email: formData[1].email,
-        password: formData[1].password,
-        university: formData[1].university,
-        members: Object.values(formData)
-          .slice(1)
-          .filter((member) => !!member.name),
-      }).then((res) => {
-        if (res.success) {
-          toast.success(res.message, {
-            autoClose: 3500,
-          })
-          setTimeout(() => {
-            navigate('/login')
-          }, 3500)
-        }
-      })
+      if (isConfirmation) {
+        await register({
+          name: formData[1].name,
+          email: formData[1].email,
+          password: formData[1].password,
+          university: formData[1].university,
+          members: Object.values(formData)
+            .slice(1)
+            .filter((member) => !!member.name),
+        }).then((res) => {
+          if (res.success) {
+            toast.success(res.message, {
+              autoClose: 3500,
+            })
+            setTimeout(() => {
+              navigate('/login')
+            }, 3500)
+          }
+        })
+      } else {
+        setModalVisibility(true)
+      }
     } else {
       setStep(step + 1)
     }
@@ -163,11 +170,12 @@ const Register = () => {
                     Back
                   </Button>
                 )}
-                <Button className="w-[110px] sm:w-[165px] h-10 sm:h-11 mt-10 text-black" type="submit">
+                <Button className="w-[110px] sm:w-[165px] h-10 sm:h-11 mt-10 text-black" type="submit" data-modal-toggle="terms-and-conditions">
                   {step === totalSteps ? 'Register' : 'Next'}
                 </Button>
               </div>
             </form>
+            <Terms show={modalVisibility} setShow={setModalVisibility} onConfirm={handleSubmit} />
           </div>
         </div>
       </div>
