@@ -23,7 +23,7 @@ const ForgotPassword = () => {
 
   return (
     <Layout title="Reset Password | Bashaway">
-      <div className="w-full h-screen flex items-center justify-center px-6 sm:px-16">
+      <div className="w-full min-h-screen flex items-center justify-center px-6 sm:px-16">
         <img src="./assets/images/forgotPassword.svg" alt="Forgot Password" className="absolute opacity-30 z-0 px-2 md:sticky md:h-[500px] md:w-[500px] md:opacity-100 md:flex-1" />
         <div className="flex flex-col mx-0 sm:mx-6 z-50 md:flex-1 md:ml-10">
           <span className="text-white font-medium text-3xl tracking-[-0.04em]">Forgot Password?</span>

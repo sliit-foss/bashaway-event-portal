@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
   return (
     <Layout title="Change Password | Bashaway">
-      <div className="w-full h-screen flex flex-col justify-center items-center px-6 sm:px-16">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center px-6 sm:px-16">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
             <img src="../assets/images/resetPassword.svg" className="w-9/12" />
