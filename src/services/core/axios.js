@@ -7,8 +7,12 @@ export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASHAWAY_BE_URL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
   },
+})
+
+axiosInstance.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+  return config
 })
 
 export const apiRequest = async (request, showLoader = true) => {
