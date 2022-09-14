@@ -36,7 +36,7 @@ const Register = () => {
     await updateUser(user._id, {
       name: formData.name,
       university: formData.university,
-      members: formData.members,
+      members: formData.members.filter((member) => !!member.name),
     }).then((res) => {
       if (res.success) {
         dispatch(setUser(formData))

@@ -71,7 +71,9 @@ const Register = () => {
         email: formData[1].email,
         password: formData[1].password,
         university: formData[1].university,
-        members: Object.values(formData).slice(1),
+        members: Object.values(formData)
+          .slice(1)
+          .filter((member) => !!member.name),
       }).then((res) => {
         if (res.success) {
           toast.success(res.message, {
@@ -130,7 +132,13 @@ const Register = () => {
                             },
                           })
                         }}
-                        required={show}
+                        required={
+                          show &&
+                          (step <= 2 ||
+                            Object.keys(formData[step]).find((memberKey) => {
+                              return formData[step][memberKey] !== ''
+                            }))
+                        }
                       />
                     )
                   }),
