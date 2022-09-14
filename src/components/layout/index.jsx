@@ -5,6 +5,7 @@ import FOG from 'vanta/dist/vanta.fog.min'
 import { Loader } from '../common'
 import Footer from './footer'
 import Navbar from './navbar'
+import { motion } from 'framer-motion'
 
 const Layout = ({ children, title, skipAuthGuard }) => {
   const navigate = useNavigate()
@@ -54,14 +55,14 @@ const Layout = ({ children, title, skipAuthGuard }) => {
   }, [])
 
   return (
-    <main className="bg-black font-inter overflow-x-hidden">
+    <motion.main className="bg-black font-inter overflow-x-hidden" initial={{ width: 0 }} animate={{ width: '100%' }} exit={{ x: window.innerWidth, transition: { duration: 0.1 } }}>
       <Navbar />
       <div className="w-screen min-h-screen relative z-[5]">{children}</div>
       <Footer />
       <ToastContainer />
       <Loader />
       <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
-    </main>
+    </motion.main>
   )
 }
 
