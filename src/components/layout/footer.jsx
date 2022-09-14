@@ -1,7 +1,33 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useEffectOnce from '../../hooks/useEffectOnce'
 import { Divider } from '../common'
 
+const initialUsefulLinks = [
+  {
+    name: 'Register',
+    url: '/register',
+    target: '_self',
+  },
+  {
+    name: 'Competition',
+    url: '/',
+    target: '_self',
+  },
+  {
+    name: 'Code of Conduct',
+    url: 'https://sliitfoss.org/code-conduct',
+    target: '_blank',
+  },
+  // {
+  //     name: 'Source Code',
+  //     url: 'https://github.com/sliit-foss/bashaway-landing'
+  // },
+]
+
 const Footer = () => {
+  const [usefulLinks, setUsefulLinks] = useState(initialUsefulLinks)
+
   const socialLinks = [
     {
       icon: 'fb',
@@ -25,29 +51,15 @@ const Footer = () => {
     },
   ]
 
-  const usefulLinks = [
-    {
-      name: 'Register',
-      url: '/register',
-      target: '_self',
-    },
-    {
-      name: 'Competition',
-      url: '/',
-      target: '_self',
-    },
-    {
-      name: 'Code of Conduct',
-      url: 'https://sliitfoss.org/code-conduct',
-      target: '_blank',
-    },
-    // {
-    //     name: 'Source Code',
-    //     url: 'https://github.com/sliit-foss/bashaway-landing'
-    // },
-  ]
-
   const navigate = useNavigate()
+
+  useEffectOnce(() => {
+    if (localStorage.getItem('token')) {
+      const cpy = [...usefulLinks]
+      cpy.splice(0, 1)
+      setUsefulLinks(cpy)
+    }
+  })
 
   return (
     <>

@@ -104,7 +104,7 @@ const Register = () => {
                         name={key}
                         className={`p-4 transition duration-300 opacity-100 block`}
                         value={member[key]}
-                        type={key === 'email' ? 'email' : 'text'}
+                        type={key === 'password' || key === 'email' ? key : 'text'}
                         onChange={(e) => {
                           const members = [...formData.members]
                           members.splice(index, 1, {

@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import FOG from 'vanta/dist/vanta.fog.min'
 import { Loader } from '../common'
 import Footer from './footer'
 import Navbar from './navbar'
 
-const Layout = ({ children, title, skipAuthGuard }) => {
-  const navigate = useNavigate()
-
+const Layout = ({ children, title }) => {
   const { pathname } = useLocation()
 
   const [vantaEffect, setVantaEffect] = useState(0)
@@ -46,22 +45,15 @@ const Layout = ({ children, title, skipAuthGuard }) => {
     }
   }, [vantaEffect])
 
-  useEffect(() => {
-    const whitelistedPaths = ['login', 'register', 'forgot-password', 'reset-password']
-    if (!skipAuthGuard && !localStorage.getItem('token') && !whitelistedPaths.includes(window.location.pathname.split('/')[1])) {
-      navigate('/login')
-    }
-  }, [])
-
   return (
-    <main className="bg-black font-inter overflow-x-hidden">
+    <motion.main className="bg-black font-inter overflow-x-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.3 } }} transition={{ duration: 0.3 }}>
       <Navbar />
       <div className="w-screen min-h-screen relative z-[5]">{children}</div>
       <Footer />
       <ToastContainer />
       <Loader />
       <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
-    </main>
+    </motion.main>
   )
 }
 

@@ -9,5 +9,10 @@ export const getRegexPatternFromKey = (key) => {
       regex: '[1-4]{1}',
       title: 'Academic year should be a number between 1 and 4',
     }
+  if (key === 'phone')
+    return {
+      regex: '[0-9]{10}',
+      title: 'Phone number must be 10 digits',
+    }
   return {}
 }
