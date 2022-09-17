@@ -4,7 +4,7 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs'
 const Input = ({ children, ...props }) => {
   const [localType, setLocalType] = useState(props.type || 'text')
   return (
-    <div className="w-full relative">
+    <div className={`${props.wrapperclasses} w-full relative`}>
       <input {...props} className={`w-full h-14 sm:h-16 bg-transparent border-[1px] focus:border-primary outline-none rounded-md text-gray-100 p-4 text-base font-normal hover:text-white transition duration-300 ${props.className}`} type={localType}>
         {children}
       </input>
