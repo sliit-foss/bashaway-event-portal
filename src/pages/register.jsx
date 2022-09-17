@@ -96,6 +96,14 @@ const Register = () => {
     }
   }
 
+  const checkPasswordMatch = (e, id) => {
+    if (e.target.value != document.getElementById(id).value) {
+      document.getElementById('confirm-password').setCustomValidity('Passwords do not match')
+    } else {
+      document.getElementById('confirm-password').setCustomValidity('')
+    }
+  }
+
   return (
     <Layout title="Register | Bashaway">
       <div className="w-full min-h-screen flex flex-col justify-center items-center p-8 md:p-12">
@@ -130,26 +138,53 @@ const Register = () => {
                         Object.keys(formData[step]).find((memberKey) => {
                           return formData[step][memberKey] !== ''
                         }))
+                    const elementKey = key === 'password' ? key : `${key}-${index},${i}`
                     return (
-                      <Input
-                        key={`${key}-${index},${i}`}
-                        placeholder={`${key === 'name' && step === 1 ? 'Team Name' : _.startCase(key)}${required ? ' *' : ''}`}
-                        type={key === 'password' || key === 'email' ? key : 'text'}
-                        pattern={getRegexPatternFromKey(key).regex}
-                        title={getRegexPatternFromKey(key).title}
-                        name={key}
-                        className={`p-4 my-4 transition duration-300 ${show ? 'opacity-100 block' : 'opacity-0 hidden'}`}
-                        onChange={(e) => {
-                          setFormData({
-                            ...formData,
-                            [step]: {
-                              ...formData[step],
-                              [key]: e.target.value,
-                            },
-                          })
-                        }}
-                        required={required}
-                      />
+                      <div key={elementKey} className={`w-full ${key === 'password' ? 'md:flex justify-between items-center' : 'flex flex-col'}`}>
+                        <Input
+                          id={elementKey}
+                          placeholder={`${key === 'name' && step === 1 ? 'Team Name' : _.startCase(key)}${required ? ' *' : ''}`}
+                          type={key === 'password' || key === 'email' ? key : 'text'}
+                          pattern={getRegexPatternFromKey(key).regex}
+                          title={getRegexPatternFromKey(key).title}
+                          name={key}
+                          className={`p-4 my-4 transition duration-300 ${show ? 'opacity-100 block' : 'opacity-0 hidden'}`}
+                          onChange={(e) => {
+                            setFormData({
+                              ...formData,
+                              [step]: {
+                                ...formData[step],
+                                [key]: e.target.value,
+                              },
+                            })
+                            if (key === 'password') {
+                              checkPasswordMatch(e, 'confirm-password')
+                            }
+                          }}
+                          required={required}
+                          wrapperclasses={key === 'password' ? 'w-full md:w-11/12 md:mr-2' : 'w-full'}
+                        />
+                        {key === 'password' && (
+                          <Input
+                            id="confirm-password"
+                            placeholder="Confirm Password *"
+                            type="password"
+                            pattern={getRegexPatternFromKey(key).regex}
+                            title={getRegexPatternFromKey(key).title}
+                            name={key}
+                            className={`p-4 my-4 mt-8 md:mt-4 transition duration-300 ${show ? 'opacity-100 block' : 'opacity-0 hidden'}`}
+                            required={required}
+                            wrapperclasses="w-full md:w-11/12 md:ml-2"
+                            onChange={(e) => {
+                              if (e.target.value === '') {
+                                e.target.setCustomValidity('Please fill out this field.')
+                                return
+                              }
+                              checkPasswordMatch(e, elementKey)
+                            }}
+                          />
+                        )}
+                      </div>
                     )
                   }),
                 ]
