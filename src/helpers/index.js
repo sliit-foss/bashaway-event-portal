@@ -11,8 +11,8 @@ export const getRegexPatternFromKey = (key) => {
     }
   if (key === 'phone')
     return {
-      regex: '[0-9]{10}',
-      title: 'Phone number must be 10 digits',
+      regex: '[0-9 ]{9,}',
+      title: 'Phone number must contain at least 9 digits',
     }
   return {}
 }
