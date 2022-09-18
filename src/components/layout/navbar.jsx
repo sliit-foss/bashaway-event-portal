@@ -72,14 +72,14 @@ const Header = () => {
           {navItems.map((item) => {
             return (
               <div key={`desktop-${item.path}`}>
-                <a
+                <span
                   className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer"
                   onClick={() => {
                     handleRouteChange(item.path)
                   }}
                 >
                   {item.name}
-                </a>
+                </span>
               </div>
             )
           })}
@@ -98,14 +98,14 @@ const Header = () => {
                 {navItems.map((item) => {
                   return (
                     <div className="w-full flex flex-col justify-center items-center" key={`mobile-${item.path}`}>
-                      <a
+                      <span
                         className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer"
                         onClick={() => {
                           handleRouteChange(item.path)
                         }}
                       >
                         {item.name}
-                      </a>
+                      </span>
                     </div>
                   )
                 })}

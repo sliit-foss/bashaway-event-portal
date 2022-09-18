@@ -106,7 +106,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-end w-full mt-6 md:justify-start  md:pr-0 ">
           <h1 className="mb-6 text-2xl font-semibold text-white">Useful Links</h1>
           {usefulLinks.map((link) => (
-            <a
+            <span
               className="mb-3 text-nav-links-unselected hover:text-primary cursor-pointer transition duration-300"
               key={link.url}
               onClick={() => {
@@ -118,7 +118,7 @@ const Footer = () => {
               }}
             >
               {link.name}
-            </a>
+            </span>
           ))}
         </div>
       </div>

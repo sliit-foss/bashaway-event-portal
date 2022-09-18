@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {}
@@ -8,7 +7,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action) {
-      return action.payload
+      return Object.keys(action.payload).reduce((acc, curr) => {
+        acc[curr] = action.payload[curr] || state[curr]
+        return acc
+      }, {})
     },
   },
 })

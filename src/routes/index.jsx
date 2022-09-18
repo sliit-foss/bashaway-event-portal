@@ -23,7 +23,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/question/:id" element={<QuestionView />} />
+        <Route path="/questions/:id" element={<QuestionView />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:code" element={<ResetPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />
