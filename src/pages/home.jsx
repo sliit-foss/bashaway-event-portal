@@ -17,9 +17,9 @@ const Home = () => {
   }, [page])
 
   return (
-    <Layout>
+    <Layout title="Bashaway | Home">
       <div className="w-screen min-h-screen flex flex-col justify-center items-center">
-        {Date.now() > openingDate ? (
+        {Date.now() < openingDate ? (
           questionRes && (
             <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mt-24 mb-12">
               {questionRes.docs?.map((question) => {
