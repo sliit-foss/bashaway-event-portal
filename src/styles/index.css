@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .markdown * {
+    all: revert;
+  }
+}
+
 html {
   overflow-x: hidden !important;
 }

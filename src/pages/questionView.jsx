@@ -1,22 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router'
 import { IoStar } from 'react-icons/io5'
 import { toast } from 'react-toastify'
+import ReactMarkdown from 'react-markdown'
 import Layout from '../components/layout'
 import { getQuestionById } from '../services/question'
 import { Button } from '../components/common'
 import { uploadFile } from '../services/azure'
+import { useEffectOnce } from '../hooks'
 
 export default function QuestionView() {
   const { id } = useParams()
 
   const [question, setQuestion] = useState(null)
 
-  useEffect(() => {
+  useEffectOnce(() => {
     getQuestionById(id).then((res) => {
       setQuestion(res.data)
     })
-  }, [id])
+  })
 
   const onFileChange = (e) => {
     uploadFile(e.target.files[0])
@@ -60,6 +62,9 @@ export default function QuestionView() {
                   Attempt Now
                 </Button>
               </div>
+            </div>
+            <div className="w-10/12 flex justify-start items-center my-6">
+              <ReactMarkdown className="invert markdown" children={question.description} />
             </div>
             <div className="w-10/12 flex mt-4 justify-start items-center">
               <a href={question.codebase_url} download>
