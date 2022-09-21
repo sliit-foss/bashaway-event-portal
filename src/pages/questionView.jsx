@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { IoStar } from 'react-icons/io5'
+import { toast } from 'react-toastify'
 import Layout from '../components/layout'
 import { getQuestionById } from '../services/question'
+import { Button } from '../components/common'
+import { uploadFile } from '../services/azure'
 
 export default function QuestionView() {
   const { id } = useParams()
@@ -14,6 +17,17 @@ export default function QuestionView() {
       setQuestion(res.data)
     })
   }, [id])
+
+  const onFileChange = (e) => {
+    uploadFile(e.target.files[0])
+      .then(() => {
+        toast.success('Submission added successfully')
+      })
+      .catch((e) => {
+        console.error(`Error during submission - message: `, e.message)
+        toast.error('Submission failed')
+      })
+  }
 
   return (
     <Layout>
@@ -37,9 +51,22 @@ export default function QuestionView() {
                 </div>
               </div>
               <div className="flex mt-4 ml-6 items-center md:justify-end mr-8 sm:ml-6 sm:mt-4 md:col-span-2 md:mt-0 md:ml-0 ">
-                <span className=" px-6 py-2 font-semibold sm:text-xl focus:outline-none focus:ring focus:ring-offset-1 cursor-pointer bg-white text-black rounded-md hover:bg-primary hover:text-white focus:ring-black focus:ring-opacity-20 transition-all duration-300">Attempt Now</span>
+                <Button
+                  className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 bg-white focus:ring-black focus:ring-opacity-10"
+                  onClick={() => {
+                    document.getElementById('file-upload').click()
+                  }}
+                >
+                  Attempt Now
+                </Button>
               </div>
             </div>
+            <div className="w-10/12 flex mt-4 justify-start items-center">
+              <a href={question.codebase_url} download>
+                <Button className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 bg-white focus:ring-black focus:ring-opacity-10">Download Attachments</Button>
+              </a>
+            </div>
+            <input id="file-upload" type="file" className="hidden" onChange={onFileChange} />
           </div>
         )}
       </div>
