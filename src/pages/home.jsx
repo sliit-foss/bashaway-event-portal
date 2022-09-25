@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Pagination } from 'flowbite-react'
 import { Question, Timer } from '../components/home'
+import { Filters, Sorts, NoRecords } from '../components/common'
 import Layout from '../components/layout'
 import { getAllQuestions } from '../services/question'
 import { questionFilters, questionSorts } from '../filters'
-import { Filters, NoRecords } from '../components/common'
-import Sorts from '../components/common/sorts'
 
 const openingDate = new Date(2022, 9, 1, 0, 0, 0).getTime()
 

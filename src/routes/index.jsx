@@ -4,6 +4,7 @@ import Login from '../pages/login'
 import Register from '../pages/register'
 import Home from '../pages/home'
 import QuestionView from '../pages/questionView'
+import Submissions from '../pages/submissions'
 import ForgotPassword from '../pages/forgotPassword'
 import ResetPassword from '../pages/resetPassword'
 import ChangePassword from '../pages/changePassword'
@@ -24,6 +25,7 @@ const AnimatedRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/questions/:id" element={<QuestionView />} />
+        <Route path="/questions/:id/submissions" element={<Submissions />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:code" element={<ResetPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />

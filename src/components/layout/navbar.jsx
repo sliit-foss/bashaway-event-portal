@@ -1,4 +1,4 @@
-import { TiThMenu } from 'react-icons/ti'
+import { HiOutlineMenu } from 'react-icons/hi'
 import { IoIosClose } from 'react-icons/io'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -84,7 +84,7 @@ const Header = () => {
             )
           })}
         </div>
-        <TiThMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-4 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
+        <HiOutlineMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-4 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
       </div>
       <div>
         <nav className={`h-full w-full flex items-center fixed top-0 left-0 z-50 ${burgerNav ? 'pointer-events-auto' : 'pointer-events-none opacity-0'} bg-black/50 backdrop-blur-2xl transition duration-300`}>
