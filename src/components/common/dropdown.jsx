@@ -45,15 +45,16 @@ const Dropdown = ({ options, onChange, ...props }) => {
         onClick={() => {
           setShowItems(!showItems)
         }}
+        onChange={() => {}}
       />
       {showItems && (
-        <div class="absolute w-full left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-          <div class="py-1" role="none">
+        <div className="absolute w-full left-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+          <div className="py-1" role="none">
             {options.map((option, index) => {
               return (
                 <div
                   key={`${option.key}-${index}`}
-                  class="text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 hover:text-gray-900"
+                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 hover:text-gray-900"
                   role="menuitem"
                   tabIndex="-1"
                   id="menu-item-0"

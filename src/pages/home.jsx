@@ -35,7 +35,7 @@ const Home = () => {
                   {questionRes.docs?.length > 0 ? (
                     questionRes.docs?.map((question) => {
                       return (
-                        <div className="w-full flex justify-center items-center">
+                        <div key={`question-list-${question.id}`} className="w-full flex justify-center items-center">
                           <Question question={question} />
                         </div>
                       )
