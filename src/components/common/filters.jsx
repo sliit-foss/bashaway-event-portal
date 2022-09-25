@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input, Dropdown } from '.'
 
 const Filters = ({ filters, setFilterQuery }) => {
@@ -16,14 +15,14 @@ const Filters = ({ filters, setFilterQuery }) => {
   }, [filtersLocalState])
 
   const onFilterChange = (e, key) => {
-    let newFiltersLocalState = [...filtersLocalState]
-    newFiltersLocalState = newFiltersLocalState.map((filter) => {
-      if (filter.key === key) {
-        filter.value = e.target.value
-      }
-      return filter
-    })
-    setFiltersLocalState(newFiltersLocalState)
+    setFiltersLocalState(
+      filtersLocalState.map((filter) => {
+        if (filter.key === key) {
+          filter.value = e.target.value
+        }
+        return filter
+      }),
+    )
   }
 
   return (
@@ -32,7 +31,7 @@ const Filters = ({ filters, setFilterQuery }) => {
       <div className="w-full flex justify-start items-center gap-6">
         {filtersLocalState.map((filter, index) => {
           return (
-            <div key={`${filter.key}-${index}`} className="w-1/2 h-full flex flex-col justify-center items-start">
+            <div key={`filter-${filter.key}-${index}`} className="w-1/2 h-full flex flex-col justify-center items-start">
               <span className="text-md text-white mt-2 mb-3">{filter.label}</span>
               {filter.options ? (
                 <Dropdown filterkey={filter.key} options={filter.options} className="h-12 sm:h-14" onChange={onFilterChange} />

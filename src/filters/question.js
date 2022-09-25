@@ -1,4 +1,4 @@
-const questionFilters = [
+export const questionFilters = [
   {
     key: 'name',
     label: 'Name',
@@ -27,4 +27,10 @@ const questionFilters = [
   },
 ]
 
-export default questionFilters
+export const questionSorts = [
+  {
+    key: 'max_score',
+    label: 'Sort by maximum score',
+    direction: 0,
+  },
+]

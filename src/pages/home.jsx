@@ -3,8 +3,9 @@ import { Pagination } from 'flowbite-react'
 import { Question, Timer } from '../components/home'
 import Layout from '../components/layout'
 import { getAllQuestions } from '../services/question'
-import { questionFilters } from '../filters'
+import { questionFilters, questionSorts } from '../filters'
 import { Filters, NoRecords } from '../components/common'
+import Sorts from '../components/common/sorts'
 
 const openingDate = new Date(2022, 9, 1, 0, 0, 0).getTime()
 
@@ -12,12 +13,13 @@ const Home = () => {
   const [questionRes, setQuestionRes] = useState(null)
   const [page, setPage] = useState(1)
   const [filterQuery, setFilterQuery] = useState('')
+  const [sortQuery, setSortQuery] = useState('')
 
   useEffect(() => {
-    getAllQuestions(filterQuery, page).then((res) => {
+    getAllQuestions(filterQuery, sortQuery, page).then((res) => {
       setQuestionRes(res.data)
     })
-  }, [page, filterQuery])
+  }, [page, filterQuery, sortQuery])
 
   return (
     <Layout title="Bashaway | Home">
@@ -27,6 +29,7 @@ const Home = () => {
             <>
               <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
                 <Filters filters={questionFilters} setFilterQuery={setFilterQuery} />
+                <Sorts sorts={questionSorts} setSortQuery={setSortQuery} />
               </div>
               <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mb-16">
                 <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">

@@ -1,1 +1,1 @@
-export { default as questionFilters } from './question'
+export * from './question'
