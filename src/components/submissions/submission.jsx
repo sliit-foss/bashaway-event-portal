@@ -12,7 +12,7 @@ const Submission = ({ submission }) => {
               Submitted At --&gt; <span className="text-primary">{moment(submission.created_at).format('hh:mm:ss:A')}</span>
             </h3>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 text-sm text ml-6 mt-4 text-gray-400">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 text-sm text ml-6 mt-4 gap-y-2 text-gray-400">
             <p>Marked - {submission.graded_by ? <span className="text-primary">Yes</span> : <span className="text-red-500">No</span>}</p>
             <p>Score - {submission.graded_by ? <span className="text-primary">{submission.score}</span> : <span className="text-red-500">N/A</span>}</p>
           </div>
