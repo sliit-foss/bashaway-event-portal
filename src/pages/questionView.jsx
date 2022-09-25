@@ -50,7 +50,7 @@ export default function QuestionView() {
                   <div className="grid sm:grid-cols-3 text-xs text ml-6 mt-4 text-gray-400">
                     <p>Complexity - {question.difficulty}</p>
                     <p>Maximum Score - {question.max_score}</p>
-                    <p>Constraints - {question.constraints.join(',')}</p>
+                    <p>Constraints - {question.constraints?.join(',')}</p>
                   </div>
                 </div>
                 <div className="flex mt-4 ml-6 items-center md:justify-end mr-8 sm:ml-6 sm:mt-4 md:col-span-2 md:mt-0 md:ml-0 ">

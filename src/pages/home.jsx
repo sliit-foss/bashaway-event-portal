@@ -4,7 +4,7 @@ import { Question, Timer } from '../components/home'
 import Layout from '../components/layout'
 import { getAllQuestions } from '../services/question'
 import { questionFilters } from '../filters'
-import { Filters } from '../components/common'
+import { Filters, NoRecords } from '../components/common'
 
 const openingDate = new Date(2022, 9, 1, 0, 0, 0).getTime()
 
@@ -30,13 +30,17 @@ const Home = () => {
               </div>
               <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mb-16">
                 <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">
-                  {questionRes.docs?.map((question) => {
-                    return (
-                      <div className="w-full flex justify-center items-center">
-                        <Question question={question} />
-                      </div>
-                    )
-                  })}
+                  {questionRes.docs?.length > 0 ? (
+                    questionRes.docs?.map((question) => {
+                      return (
+                        <div className="w-full flex justify-center items-center">
+                          <Question question={question} />
+                        </div>
+                      )
+                    })
+                  ) : (
+                    <NoRecords text="No Questions Found" className="mt-12" />
+                  )}
                 </div>
                 <div className="w-full flex justify-end items-center mt-4 md:mt-0">
                   <Pagination
