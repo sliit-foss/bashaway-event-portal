@@ -8,6 +8,7 @@ import { getQuestionById } from '../services/question'
 import { Button } from '../components/common'
 import { uploadFile } from '../services/azure'
 import { useEffectOnce } from '../hooks'
+import { downloadFile } from '../helpers'
 
 export default function QuestionView() {
   const { id } = useParams()
@@ -80,9 +81,14 @@ export default function QuestionView() {
                 <ReactMarkdown className="invert markdown" children={question.description} />
               </div>
               <div className="w-10/12 flex mt-10 mb-4 ml-6 justify-start items-center">
-                <a href={question.codebase_url} download>
-                  <Button className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 bg-white focus:ring-black focus:ring-opacity-10">Download Attachments</Button>
-                </a>
+                <Button
+                  className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 cursor-pointer bg-white focus:ring-black focus:ring-opacity-10"
+                  onClick={() => {
+                    downloadFile(question.codebase_url)
+                  }}
+                >
+                  Download Attachments
+                </Button>
               </div>
             </div>
 
