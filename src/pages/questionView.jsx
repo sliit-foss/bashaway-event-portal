@@ -18,10 +18,14 @@ export default function QuestionView() {
 
   const [question, setQuestion] = useState(null)
 
-  useEffectOnce(() => {
+  const refresh = () => {
     getQuestionById(id).then((res) => {
       setQuestion(res.data)
     })
+  }
+
+  useEffectOnce(() => {
+    refresh()
   })
 
   const onFileChange = (e) => {
@@ -29,6 +33,7 @@ export default function QuestionView() {
       uploadFile(e.target.files[0])
         .then(() => {
           toast.success('Submission added successfully')
+          refresh()
         })
         .catch((e) => {
           console.error(`Error during submission - message: `, e.message)
