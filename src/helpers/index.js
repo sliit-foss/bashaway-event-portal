@@ -23,7 +23,7 @@ export const downloadFile = (url) => {
       const blobUrl = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = blobUrl
-      a.download = url.split('/').pop()
+      a.download = decodeURIComponent(url).split('/').pop()?.split('?')[0]
       a.click()
     })
   })
