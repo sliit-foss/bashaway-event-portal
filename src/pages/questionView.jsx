@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router'
 import { IoStar } from 'react-icons/io5'
 import { toast } from 'react-toastify'
+import { isEmpty } from 'lodash'
 import ReactMarkdown from 'react-markdown'
 import Layout from '../components/layout'
 import { getQuestionById } from '../services/question'
@@ -24,14 +25,16 @@ export default function QuestionView() {
   })
 
   const onFileChange = (e) => {
-    uploadFile(e.target.files[0])
-      .then(() => {
-        toast.success('Submission added successfully')
-      })
-      .catch((e) => {
-        console.error(`Error during submission - message: `, e.message)
-        toast.error('Submission failed')
-      })
+    if (!isEmpty(e.target.files)) {
+      uploadFile(e.target.files[0])
+        .then(() => {
+          toast.success('Submission added successfully')
+        })
+        .catch((e) => {
+          console.error(`Error during submission - message: `, e.message)
+          toast.error('Submission failed')
+        })
+    }
   }
 
   return (
