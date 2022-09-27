@@ -1,9 +1,10 @@
 import { BlobServiceClient } from '@azure/storage-blob'
+import store from '../store'
 
-const blobServiceClient = new BlobServiceClient(import.meta.env.VITE_BLOB_SAS_URL)
-const containerClient = blobServiceClient.getContainerClient('bashaway-prod')
+const blobServiceClient = new BlobServiceClient(`https://${import.meta.env.VITE_AZURE_STORAGE_ACCOUNT}.blob.core.windows.net${import.meta.env.VITE_AZURE_SAS_TOKEN}`)
+const containerClient = blobServiceClient.getContainerClient(`answers-${import.meta.env.VITE_APP_ENV}`)
 
 export const uploadFile = async (file) => {
-  const blockBlobClient = containerClient.getBlockBlobClient(file.name)
+  const blockBlobClient = containerClient.getBlockBlobClient(`${store.getState().user?.name}/${file.name}`)
   return blockBlobClient.uploadBrowserData(file)
 }

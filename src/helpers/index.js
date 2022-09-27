@@ -20,10 +20,10 @@ export const getRegexPatternFromKey = (key) => {
 export const downloadFile = (url) => {
   fetch(url).then((response) => {
     response.blob().then((blob) => {
-      const url = window.URL.createObjectURL(blob)
+      const blobUrl = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
-      a.href = url
-      a.download = ''
+      a.href = blobUrl
+      a.download = url.split('/').pop()
       a.click()
     })
   })
