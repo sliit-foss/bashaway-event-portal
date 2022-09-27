@@ -6,5 +6,6 @@ const containerClient = blobServiceClient.getContainerClient(`answers-${import.m
 
 export const uploadFile = async (file) => {
   const blockBlobClient = containerClient.getBlockBlobClient(`${store.getState().user?.name}/${file.name}`)
-  return blockBlobClient.uploadBrowserData(file)
+  await blockBlobClient.uploadBrowserData(file)
+  return blockBlobClient.url
 }

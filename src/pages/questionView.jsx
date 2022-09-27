@@ -6,6 +6,7 @@ import { isEmpty } from 'lodash'
 import ReactMarkdown from 'react-markdown'
 import Layout from '../components/layout'
 import { getQuestionById } from '../services/question'
+import { addSubmission } from '../services/submission'
 import { Button } from '../components/common'
 import { uploadFile } from '../services/azure'
 import { useEffectOnce } from '../hooks'
@@ -31,9 +32,16 @@ export default function QuestionView() {
   const onFileChange = (e) => {
     if (!isEmpty(e.target.files)) {
       uploadFile(e.target.files[0])
-        .then(() => {
-          toast.success('Submission added successfully')
-          refresh()
+        .then((url) => {
+          addSubmission({
+            question: id,
+            link: url,
+          }).then((res) => {
+            if (res.success) {
+              toast.success('Submission added successfully')
+              refresh()
+            }
+          })
         })
         .catch((e) => {
           console.error(`Error during submission - message: `, e.message)
