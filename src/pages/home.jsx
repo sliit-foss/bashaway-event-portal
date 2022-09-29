@@ -6,7 +6,7 @@ import Layout from '../components/layout'
 import { getAllQuestions } from '../services/question'
 import { questionFilters, questionSorts } from '../filters'
 
-const openingDate = new Date(2022, 9, 1, 0, 0, 0).getTime()
+const openingDate = new Date(2022, 9, 1, 9, 0, 0).getTime()
 
 const Home = () => {
   const [questionRes, setQuestionRes] = useState(null)
