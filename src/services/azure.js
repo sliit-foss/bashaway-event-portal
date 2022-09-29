@@ -5,7 +5,7 @@ const blobServiceClient = new BlobServiceClient(`https://${import.meta.env.VITE_
 const containerClient = blobServiceClient.getContainerClient(`answers-${import.meta.env.VITE_APP_ENV}`)
 
 export const uploadFile = async (file) => {
-  const blockBlobClient = containerClient.getBlockBlobClient(`${store.getState().user?.name}/${file.name}`)
+  const blockBlobClient = containerClient.getBlockBlobClient(`${store.getState().user?.name}/${Date.now().toLocaleString()}/${file.name}`)
   await blockBlobClient.uploadBrowserData(file)
   return blockBlobClient.url
 }
