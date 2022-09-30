@@ -34,7 +34,7 @@ const Timer = () => {
 
   return (
     <header>
-      <Countdown date={new Date(2022, 9, 1, 0, 0, 0).getTime()} renderer={renderer} />
+      <Countdown date={new Date(2022, 9, 1, 9, 0, 0).getTime()} renderer={renderer} />
     </header>
   )
 }
