@@ -19,6 +19,8 @@ export default function QuestionView() {
 
   const [question, setQuestion] = useState(null)
 
+  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 14, 0, 0).getTime()
+
   const refresh = () => {
     getQuestionById(id).then((res) => {
       setQuestion(res.data)
@@ -84,7 +86,8 @@ export default function QuestionView() {
                     View Submissions
                   </Button>
                   <Button
-                    className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 bg-white focus:ring-black focus:ring-opacity-10"
+                    className={`px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 ${submissionsDisabled ? '' : 'bg-white'} focus:ring-black focus:ring-opacity-10`}
+                    disabled={submissionsDisabled}
                     onClick={() => {
                       document.getElementById('file-upload').click()
                     }}
