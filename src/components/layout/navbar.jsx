@@ -51,15 +51,16 @@ const Header = () => {
         },
       ])
     }
-    if (!isLogged && !navItems.find((item) => item.name === 'Register')) {
-      setNavItems([
-        ...initialNavItems,
-        {
-          name: 'Register',
-          path: '/register',
-        },
-      ])
-    }
+    // Commented out after registration closed
+    // if (!isLogged && !navItems.find((item) => item.name === 'Register')) {
+    //   setNavItems([
+    //     ...initialNavItems,
+    //     {
+    //       name: 'Register',
+    //       path: '/register',
+    //     },
+    //   ])
+    // }
   }, [])
 
   return (
