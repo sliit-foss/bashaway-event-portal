@@ -4,11 +4,11 @@ import { useEffectOnce } from '../../hooks'
 import { Divider } from '../common'
 
 const initialUsefulLinks = [
-  {
-    name: 'Register',
-    url: '/register',
-    target: '_self',
-  },
+  // {
+  //   name: 'Register',
+  //   url: '/register',
+  //   target: '_self',
+  // },
   {
     name: 'Competition',
     url: '/',
