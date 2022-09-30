@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Tooltip } from 'flowbite-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { GoSync, GoKey } from 'react-icons/go'
@@ -127,19 +128,23 @@ const Register = () => {
           </div>
         </div>
         <div className="sticky mb-20 left-[93%] flex">
-          <Button
-            className="p-5 mr-8"
-            type="button"
-            style={{ borderRadius: '100%' }}
-            onClick={() => {
-              navigate('/change-password')
-            }}
-          >
-            <GoKey className="w-[3.1rem] h-[3rem]" />
-          </Button>
-          <Button className="p-4 animate-spin" type="submit" style={{ borderRadius: '100%' }}>
-            <GoSync className="w-14 h-14" />
-          </Button>
+          <Tooltip content="Change Password">
+            <Button
+              className="p-5 mr-8"
+              type="button"
+              style={{ borderRadius: '100%' }}
+              onClick={() => {
+                navigate('/change-password')
+              }}
+            >
+              <GoKey className="w-[3.1rem] h-[3rem]" />
+            </Button>
+          </Tooltip>
+          <Tooltip content="Sync Changes">
+            <Button className="p-4 animate-spin" type="submit" style={{ borderRadius: '100%' }}>
+              <GoSync className="w-14 h-14" />
+            </Button>
+          </Tooltip>
         </div>
       </form>
     </Layout>
