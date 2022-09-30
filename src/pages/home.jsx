@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <Layout title="Bashaway | Home">
       <div className="w-screen min-h-screen flex flex-col justify-center items-center">
-        {Date.now() < openingDate ? (
+        {Date.now() >= openingDate ? (
           questionRes && (
             <>
               <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
