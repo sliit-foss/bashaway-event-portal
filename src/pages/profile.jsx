@@ -22,9 +22,10 @@ const Register = () => {
   const [formData, setFormData] = useState(user)
 
   useEffectOnce(() => {
-    getCurrentUser().then((res) => {
-      dispatch(setUser(res.data))
-    })
+    _.isEmpty(user) &&
+      getCurrentUser().then((res) => {
+        dispatch(setUser(res.data))
+      })
   })
 
   useEffect(() => {

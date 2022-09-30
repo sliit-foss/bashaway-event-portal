@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .markdown * {
+    all: revert;
+  }
+}
+
 html {
   overflow-x: hidden !important;
 }
@@ -33,4 +39,8 @@ input:-internal-autofill-selected {
   background-color: #ff0000 !important;
   color-scheme: dark !important;
   border: 1px solid #0070f3 !important;
+}
+
+.hide-blink {
+  caret-color: transparent;
 }

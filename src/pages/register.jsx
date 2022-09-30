@@ -97,7 +97,7 @@ const Register = () => {
   }
 
   const checkPasswordMatch = (e, id) => {
-    if (e.target.value != document.getElementById(id).value) {
+    if (e.target.value !== document.getElementById(id).value) {
       document.getElementById('confirm-password').setCustomValidity('Passwords do not match')
     } else {
       document.getElementById('confirm-password').setCustomValidity('')
@@ -131,7 +131,7 @@ const Register = () => {
                 acc = [
                   ...acc,
                   ...Object.keys(formData[arr[index]]).map((key, i) => {
-                    const show = index + 1 == step
+                    const show = index + 1 === step
                     const required =
                       show &&
                       (step <= 2 ||

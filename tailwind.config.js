@@ -23,6 +23,7 @@ module.exports = {
         'nav-links-unselected': '#888888',
         'gray-light': '#D9D9D9',
         'profile-card': 'rgba(255, 255, 255, 0.02)',
+        card: '#181818',
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],

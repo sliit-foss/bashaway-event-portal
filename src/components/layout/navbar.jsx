@@ -1,7 +1,12 @@
-import { TiThMenu } from 'react-icons/ti'
-import { IoIosClose } from 'react-icons/io'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Tooltip } from 'flowbite-react'
+import { twMerge } from 'tailwind-merge'
+import { HiOutlineMenu } from 'react-icons/hi'
+import { IoIosClose } from 'react-icons/io'
+import { MdAnimation } from 'react-icons/md'
+import { toggleBackgroundAnimation } from '../../store/ui'
 
 const initialNavItems = [
   {
@@ -73,19 +78,21 @@ const Header = () => {
           {navItems.map((item) => {
             return (
               <div key={`desktop-${item.path}`}>
-                <a
+                <span
                   className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer"
                   onClick={() => {
                     handleRouteChange(item.path)
                   }}
                 >
                   {item.name}
-                </a>
+                </span>
               </div>
             )
           })}
+          <AnimationToggle />
         </div>
-        <TiThMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-4 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
+        <AnimationToggle wrapperclasses="fixed top-4 right-16 lg:hidden" classes="h-[1.85rem] w-[1.85rem] text-white hover:text-primary" />
+        <HiOutlineMenu className="fixed top-0 h-8 w-8 text-white right-1 lg:hidden mt-4 lg:mt-4 mr-4 lg:mr-2 cursor-pointer" onClick={burgerNavController} />
       </div>
       <div>
         <nav className={`h-full w-full flex items-center fixed top-0 left-0 z-50 ${burgerNav ? 'pointer-events-auto' : 'pointer-events-none opacity-0'} bg-black/50 backdrop-blur-2xl transition duration-300`}>
@@ -99,14 +106,14 @@ const Header = () => {
                 {navItems.map((item) => {
                   return (
                     <div className="w-full flex flex-col justify-center items-center" key={`mobile-${item.path}`}>
-                      <a
+                      <span
                         className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer"
                         onClick={() => {
                           handleRouteChange(item.path)
                         }}
                       >
                         {item.name}
-                      </a>
+                      </span>
                     </div>
                   )
                 })}
@@ -116,6 +123,25 @@ const Header = () => {
         </nav>
       </div>
       <div className="hidden lg:flex w-full h-[0.25px] bg bg-nav-links-unselected opacity-20"></div>
+    </div>
+  )
+}
+
+const AnimationToggle = ({ wrapperclasses = '', classes = '' }) => {
+  const dispatch = useDispatch()
+  const { backgroundAnimation } = useSelector((state) => state.ui)
+
+  return (
+    <div className={wrapperclasses}>
+      <Tooltip content={backgroundAnimation ? 'Disable animation' : 'Enable animation'}>
+        <MdAnimation
+          className={twMerge(`w-6 h-6 ml-5 cursor-pointer transition duration-300 ${backgroundAnimation ? 'text-primary hover:text-white' : 'text-white hover:text-primary'}`, classes)}
+          onClick={() => {
+            dispatch(toggleBackgroundAnimation(!backgroundAnimation))
+            localStorage.setItem('backgroundAnimation', !backgroundAnimation)
+          }}
+        />
+      </Tooltip>
     </div>
   )
 }
