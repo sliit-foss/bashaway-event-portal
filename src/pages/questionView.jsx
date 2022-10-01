@@ -19,7 +19,7 @@ export default function QuestionView() {
 
   const [question, setQuestion] = useState(null)
 
-  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 14, 0, 0).getTime()
+  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 15, 0, 0).getTime()
 
   const refresh = () => {
     getQuestionById(id).then((res) => {
