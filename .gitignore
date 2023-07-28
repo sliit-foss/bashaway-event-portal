@@ -27,3 +27,5 @@ dist-ssr
 .yarn
 .yarnrc.yml
 .history
+
+.eslintcache

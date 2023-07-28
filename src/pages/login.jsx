@@ -1,28 +1,28 @@
-import { useDispatch } from 'react-redux'
-import { login } from '../services/auth'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button, Input } from '../components/common'
-import Layout from '../components/layout'
-import { setUser } from '../store/user'
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input } from "@/components/common";
+import { default as Layout } from "@/components/layout";
+import { login } from "@/services/auth";
+import { setUser } from "@/store/user";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     await login({
       email: e.target.email.value,
-      password: e.target.password.value,
+      password: e.target.password.value
     }).then((res) => {
       if (res.success) {
-        localStorage.setItem('token', res.data.access_token)
-        dispatch(setUser(res.data.user))
-        navigate('/')
+        localStorage.setItem("token", res.data.access_token);
+        dispatch(setUser(res.data.user));
+        navigate("/");
       }
-    })
-  }
+    });
+  };
 
   return (
     <Layout title="Login | Bashaway">
@@ -46,7 +46,7 @@ const Login = () => {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

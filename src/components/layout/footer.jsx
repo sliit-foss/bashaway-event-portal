@@ -1,65 +1,65 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useEffectOnce } from '../../hooks'
-import { Divider } from '../common'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffectOnce } from "../../hooks";
+import { Divider } from "../common";
 
 const initialUsefulLinks = [
-  // {
-  //   name: 'Register',
-  //   url: '/register',
-  //   target: '_self',
-  // },
   {
-    name: 'Competition',
-    url: '/',
-    target: '_self',
+    name: "Register",
+    url: "/register",
+    target: "_self"
   },
   {
-    name: 'Code of Conduct',
-    url: 'https://sliitfoss.org/code-conduct',
-    target: '_blank',
+    name: "Competition",
+    url: "/",
+    target: "_self"
   },
-  // {
-  //     name: 'Source Code',
-  //     url: 'https://github.com/sliit-foss/bashaway-landing'
-  // },
-]
+  {
+    name: "Code of Conduct",
+    url: "https://sliitfoss.org/code-conduct",
+    target: "_blank"
+  },
+  {
+    name: "Source Code",
+    url: "https://github.com/sliit-foss/bashaway-event-portal"
+  }
+];
 
 const Footer = () => {
-  const [usefulLinks, setUsefulLinks] = useState(initialUsefulLinks)
+  const [usefulLinks, setUsefulLinks] = useState(initialUsefulLinks);
 
   const socialLinks = [
     {
-      icon: 'fb',
-      url: 'https://www.facebook.com/sliitfoss',
+      icon: "fb",
+      url: "https://www.facebook.com/sliitfoss"
     },
     {
-      icon: 'insta',
-      url: 'https://www.instagram.com/sliitfoss/',
+      icon: "insta",
+      url: "https://www.instagram.com/sliitfoss/"
     },
     {
-      icon: 'linkedin',
-      url: 'https://www.linkedin.com/company/sliit-foss-community/?originalSubdomain=lk',
+      icon: "linkedin",
+      url: "https://www.linkedin.com/company/sliit-foss-community/?originalSubdomain=lk"
     },
     {
-      icon: 'twitter',
-      url: 'https://twitter.com/fosssliit?lang=en',
+      icon: "twitter",
+      url: "https://twitter.com/fosssliit?lang=en"
     },
     {
-      icon: 'youtube',
-      url: 'https://www.youtube.com/channel/UCPPO-QR0Dv13ewjhPsc_I3w/featured',
-    },
-  ]
+      icon: "youtube",
+      url: "https://www.youtube.com/channel/UCPPO-QR0Dv13ewjhPsc_I3w/featured"
+    }
+  ];
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffectOnce(() => {
-    if (localStorage.getItem('token')) {
-      const cpy = [...usefulLinks]
-      cpy.splice(0, 1)
-      setUsefulLinks(cpy)
+    if (localStorage.getItem("token")) {
+      const cpy = [...usefulLinks];
+      cpy.splice(0, 1);
+      setUsefulLinks(cpy);
     }
-  })
+  });
 
   return (
     <>
@@ -76,8 +76,15 @@ const Footer = () => {
               </a>
             </div>
             <div className="flex justify-start items-center">
-              <a href="https://community.mozilla.org/en/groups/mozilla-campus-club-of-sliit/" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/mozilla-logo.png" className="w-[6.1rem] h-[6.1rem] mx-6 mr-10 mb-3 filter brightness-115" />
+              <a
+                href="https://community.mozilla.org/en/groups/mozilla-campus-club-of-sliit/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/assets/images/club-logos/mozilla-logo.png"
+                  className="w-[6.1rem] h-[6.1rem] mx-6 mr-10 mb-3 filter brightness-115"
+                />
               </a>
               <a href="https://wif-web.web.app" target="_blank" rel="noreferrer">
                 <img src="/assets/images/club-logos/wif-logo.png" className="w-28 h-28 ml-4 mx-6 relative sm:mb-4" />
@@ -85,7 +92,10 @@ const Footer = () => {
             </div>
             <div className="flex justify-start items-center">
               <a href="https://www.facebook.com/csnesc/" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/csne-logo.png" className="w-[7.2rem] h-[7.2rem] mx-0 ml-4 sm:ml-0 mr-12 mb-3 filter brightness-115" />
+                <img
+                  src="/assets/images/club-logos/csne-logo.png"
+                  className="w-[7.2rem] h-[7.2rem] mx-0 ml-4 sm:ml-0 mr-12 mb-3 filter brightness-115"
+                />
               </a>
               <a href="https://www.facebook.com/sliit.cscs/" target="_blank" rel="noreferrer">
                 <img src="/assets/images/club-logos/cs-logo.png" className="w-20 h-22 ml-4 mx-6 relative mb-8" />
@@ -96,18 +106,31 @@ const Footer = () => {
 
         <div className="flex flex-col items-center justify-center w-full mt-6 md:justify-start md:items-center ">
           <h1 className="mb-8 text-2xl font-semibold text-white">Contact</h1>
-          <a className="mb-8 text-nav-links-unselected hover:text-primary transition duration-300" href="mailto:sllitfoss@gmail.com" target="_blank" rel="noreferrer">
+          <a
+            className="mb-8 text-nav-links-unselected hover:text-primary transition duration-300"
+            href="mailto:sllitfoss@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             sllitfoss@gmail.com
           </a>
           <div className="flex justify-start mb-8">
             {socialLinks.map((link) => (
               <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                <img src={`/assets/images/social/${link.icon}.svg`} className="w-5 h-5 mx-2 fill-current hover:brightness-200 transition duration-300"></img>
+                <img
+                  src={`/assets/images/social/${link.icon}.svg`}
+                  className="w-5 h-5 mx-2 fill-current hover:brightness-200 transition duration-300"
+                ></img>
               </a>
             ))}
           </div>
           <h1 className="mb-4 text-2xl font-semibold text-white">Visit Us On</h1>
-          <a className="mb-2 text-nav-links-unselected hover:text-primary transition duration-300" href="https://sliitfoss.org" target="_blank" rel="noreferrer">
+          <a
+            className="mb-2 text-nav-links-unselected hover:text-primary transition duration-300"
+            href="https://sliitfoss.org"
+            target="_blank"
+            rel="noreferrer"
+          >
             sllitfoss.org
           </a>
         </div>
@@ -118,10 +141,10 @@ const Footer = () => {
               className="mb-3 text-nav-links-unselected hover:text-primary cursor-pointer transition duration-300"
               key={link.url}
               onClick={() => {
-                if (link.target === '_blank') {
-                  window.open(link.url, link.target)
+                if (link.target === "_blank") {
+                  window.open(link.url, link.target);
                 } else {
-                  navigate(link.url)
+                  navigate(link.url);
                 }
               }}
             >
@@ -136,12 +159,15 @@ const Footer = () => {
         <div className="flex items-center justify-center mt-4 md:justify-start md:mt-0">
           <span className="mr-3 md:mr-8">Visit us On</span>
           <a href="https://github.com/sliit-foss" target="_blank" rel="noreferrer">
-            <img src={`/assets/images/social/github.svg`} className="w-5 h-5 mb-0.5 hover:brightness-200 transition duration-300"></img>
+            <img
+              src={`/assets/images/social/github.svg`}
+              className="w-5 h-5 mb-0.5 hover:brightness-200 transition duration-300"
+            ></img>
           </a>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

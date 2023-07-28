@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Pagination } from 'flowbite-react'
-import Layout from '../components/layout'
-import { Sorts, NoRecords } from '../components/common'
-import { Submission } from '../components/submissions'
-import { getMySubmissions } from '../services/submission'
-import { submissionSorts } from '../filters'
+import { useEffect, useState } from "react";
+import { Pagination } from "flowbite-react";
+import { useParams } from "react-router-dom";
+import { NoRecords, Sorts } from "@/components/common";
+import { default as Layout } from "@/components/layout";
+import { Submission } from "@/components/submissions";
+import { submissionSorts } from "@/filters";
+import { getMySubmissions } from "@/services/submission";
 
 const Submissions = () => {
-  const { id: questionId } = useParams()
+  const { id: questionId } = useParams();
 
-  const [submissionRes, setSubmissionRes] = useState(null)
-  const [page, setPage] = useState(1)
-  const [sortQuery, setSortQuery] = useState('')
+  const [submissionRes, setSubmissionRes] = useState(null);
+  const [page, setPage] = useState(1);
+  const [sortQuery, setSortQuery] = useState("");
 
   useEffect(() => {
     getMySubmissions(`filter[question]=${questionId}`, sortQuery, page).then((res) => {
-      setSubmissionRes(res.data)
-    })
-  }, [page, sortQuery])
+      setSubmissionRes(res.data);
+    });
+  }, [page, sortQuery]);
 
   return (
     <Layout title="Bashaway | Submissions">
@@ -32,7 +32,7 @@ const Submissions = () => {
               <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">
                 {submissionRes.docs?.length > 0 ? (
                   submissionRes.docs?.map((submission) => {
-                    return <Submission submission={submission} />
+                    return <Submission key={submission._id} submission={submission} />;
                   })
                 ) : (
                   <NoRecords text="No Submissions Made Yet" className="mt-12" />
@@ -42,7 +42,7 @@ const Submissions = () => {
                 <Pagination
                   currentPage={page}
                   onPageChange={(newPage) => {
-                    setPage(newPage)
+                    setPage(newPage);
                   }}
                   showIcons={true}
                   totalPages={submissionRes.totalPages}
@@ -53,7 +53,7 @@ const Submissions = () => {
         )}
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Submissions
+export default Submissions;

@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router'
-import { IoStar } from 'react-icons/io5'
-import { toast } from 'react-toastify'
-import { isEmpty } from 'lodash'
-import ReactMarkdown from 'react-markdown'
-import Layout from '../components/layout'
-import { getQuestionById } from '../services/question'
-import { addSubmission } from '../services/submission'
-import { Button } from '../components/common'
-import { uploadFile } from '../services/azure'
-import { useEffectOnce } from '../hooks'
-import { downloadFile } from '../helpers'
+import { useState } from "react";
+import { IoStar } from "react-icons/io5";
+import { default as ReactMarkdown } from "react-markdown";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { isEmpty } from "lodash";
+import { Button } from "@/components/common";
+import { default as Layout } from "@/components/layout";
+import { downloadFile } from "@/helpers";
+import { useEffectOnce } from "@/hooks";
+import { addSubmission, getQuestionById, uploadFile } from "@/services";
 
 export default function QuestionView() {
-  const { id } = useParams()
+  const { id } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const [question, setQuestion] = useState(null)
+  const [question, setQuestion] = useState(null);
 
-  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 15, 0, 0).getTime()
+  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 15, 0, 0).getTime();
 
   const refresh = () => {
     getQuestionById(id).then((res) => {
-      setQuestion(res.data)
-    })
-  }
+      setQuestion(res.data);
+    });
+  };
 
   useEffectOnce(() => {
-    refresh()
-  })
+    refresh();
+  });
 
   const onFileChange = (e) => {
     if (!isEmpty(e.target.files)) {
@@ -37,20 +35,20 @@ export default function QuestionView() {
         .then((url) => {
           addSubmission({
             question: id,
-            link: url,
+            link: url
           }).then((res) => {
             if (res.success) {
-              toast.success('Submission added successfully')
-              refresh()
+              toast.success("Submission added successfully");
+              refresh();
             }
-          })
+          });
         })
         .catch((e) => {
-          console.error(`Error during submission - message: `, e.message)
-          toast.error('Submission failed')
-        })
+          console.error(`Error during submission - message: `, e.message);
+          toast.error("Submission failed");
+        });
     }
-  }
+  };
 
   return (
     <Layout>
@@ -72,24 +70,28 @@ export default function QuestionView() {
                     <p>Complexity - {question.difficulty}</p>
                     <p>Maximum Score - {question.max_score}</p>
                     <p>Teams Submitted - {question.total_submissions}</p>
-                    <p>Constraints - {question.constraints?.join(',')}</p>
+                    <p>Constraints - {question.constraints?.join(",")}</p>
                   </div>
                 </div>
                 <div className="w-full flex mt-4 ml-6 items-center md:justify-end mr-8 sm:ml-6 sm:mt-4 md:col-span-3 2xl:col-span-2 md:mt-0 md:ml-0 ">
                   <Button
-                    className={`px-6 py-2 mr-4 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 ${question.total_submissions === 0 ? '' : 'bg-white'}  focus:ring-black focus:ring-opacity-10`}
+                    className={`px-6 py-2 mr-4 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 ${
+                      question.total_submissions === 0 ? "" : "bg-white"
+                    }  focus:ring-black focus:ring-opacity-10`}
                     disabled={question.total_submissions === 0}
                     onClick={() => {
-                      navigate(`/questions/${question._id}/submissions`)
+                      navigate(`/questions/${question._id}/submissions`);
                     }}
                   >
                     View Submissions
                   </Button>
                   <Button
-                    className={`px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 ${submissionsDisabled ? '' : 'bg-white'} focus:ring-black focus:ring-opacity-10`}
+                    className={`px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 ${
+                      submissionsDisabled ? "" : "bg-white"
+                    } focus:ring-black focus:ring-opacity-10`}
                     disabled={submissionsDisabled}
                     onClick={() => {
-                      document.getElementById('file-upload').click()
+                      document.getElementById("file-upload").click();
                     }}
                   >
                     Add Submission
@@ -97,13 +99,13 @@ export default function QuestionView() {
                 </div>
               </div>
               <div className="w-11/12 flex justify-start items-center my-6 pl-6">
-                <ReactMarkdown className="invert markdown" children={question.description} />
+                <ReactMarkdown className="invert markdown">{question.description}</ReactMarkdown>
               </div>
               <div className="w-10/12 flex mt-10 mb-4 ml-6 justify-start items-center">
                 <Button
                   className="px-6 py-2 font-semibold md:text-xl focus:outline-none focus:ring focus:ring-offset-1 cursor-pointer bg-white focus:ring-black focus:ring-opacity-10"
                   onClick={() => {
-                    downloadFile(question.codebase_url)
+                    downloadFile(question.codebase_url);
                   }}
                 >
                   Download Attachments
@@ -116,5 +118,5 @@ export default function QuestionView() {
         )}
       </div>
     </Layout>
-  )
+  );
 }

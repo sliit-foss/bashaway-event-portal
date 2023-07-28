@@ -1,24 +1,24 @@
-/* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   showLoader: false,
-  backgroundAnimation: 'backgroundAnimation' in localStorage ? localStorage.getItem('backgroundAnimation') === 'true' : true,
-}
+  backgroundAnimation:
+    "backgroundAnimation" in localStorage ? localStorage.getItem("backgroundAnimation") === "true" : true
+};
 
 export const uiSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState,
   reducers: {
     toggleLoader(state, action) {
-      state.showLoader = action.payload
+      state.showLoader = action.payload;
     },
     toggleBackgroundAnimation(state, action) {
-      state.backgroundAnimation = action.payload
-    },
-  },
-})
+      state.backgroundAnimation = action.payload;
+    }
+  }
+});
 
-export const { toggleLoader, toggleBackgroundAnimation } = uiSlice.actions
+export const { toggleLoader, toggleBackgroundAnimation } = uiSlice.actions;
 
-export default uiSlice.reducer
+export default uiSlice.reducer;

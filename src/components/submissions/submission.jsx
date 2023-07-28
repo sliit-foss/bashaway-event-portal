@@ -1,6 +1,6 @@
-import { IoStar } from 'react-icons/io5'
-import moment from 'moment'
-import { downloadFile } from '../../helpers'
+import { IoStar } from "react-icons/io5";
+import moment from "moment";
+import { downloadFile } from "@/helpers";
 
 const Submission = ({ submission }) => {
   return (
@@ -10,12 +10,27 @@ const Submission = ({ submission }) => {
           <div className="flex items-center ">
             <IoStar className="text-white" />
             <h3 className="ml-2 text-md md:text-lg text-white">
-              Submitted At --&gt; <span className="text-primary">{moment(submission.created_at).format('hh:mm:ss:A')}</span>
+              Submitted At --&gt;{" "}
+              <span className="text-primary">{moment(submission.created_at).format("hh:mm:ss:A")}</span>
             </h3>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 text-sm text ml-6 mt-4 gap-y-2 text-gray-400">
-            <p>Marked - {submission.graded_by ? <span className="text-primary">Yes</span> : <span className="text-red-500">No</span>}</p>
-            <p>Score - {submission.graded_by ? <span className="text-primary">{submission.score}</span> : <span className="text-red-500">N/A</span>}</p>
+            <p>
+              Marked -{" "}
+              {submission.graded_by ? (
+                <span className="text-primary">Yes</span>
+              ) : (
+                <span className="text-red-500">No</span>
+              )}
+            </p>
+            <p>
+              Score -{" "}
+              {submission.graded_by ? (
+                <span className="text-primary">{submission.score}</span>
+              ) : (
+                <span className="text-red-500">N/A</span>
+              )}
+            </p>
           </div>
         </div>
 
@@ -23,7 +38,7 @@ const Submission = ({ submission }) => {
           <span
             className=" px-6 py-2 font-semibold sm:text-xl focus:outline-none focus:ring focus:ring-offset-1 cursor-pointer bg-white text-black rounded-md hover:bg-primary hover:text-white focus:ring-black focus:ring-opacity-20 transition-all duration-300"
             onClick={() => {
-              downloadFile(submission.link)
+              downloadFile(submission.link);
             }}
           >
             Download
@@ -31,7 +46,7 @@ const Submission = ({ submission }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Submission
+export default Submission;

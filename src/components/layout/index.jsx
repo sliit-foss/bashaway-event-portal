@@ -1,54 +1,55 @@
-import { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { useDispatch, useSelector } from 'react-redux'
-import { useLocation } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import { isEmpty } from 'lodash'
-import FOG from 'vanta/dist/vanta.fog.min'
-import { Loader } from '../common'
-import Footer from './footer'
-import Navbar from './navbar'
-import { useEffectOnce } from '../../hooks'
-import { setUser } from '../../store/user'
-import { getCurrentUser } from '../../services/auth'
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import { motion } from "framer-motion";
+import { isEmpty } from "lodash";
+import { useEffectOnce } from "@/hooks";
+import { getCurrentUser } from "@/services/auth";
+import { setUser } from "@/store/user";
+import { default as FOG } from "vanta/dist/vanta.fog.min";
+import { Loader } from "../common";
+import Footer from "./footer";
+import Navbar from "./navbar";
 
 const Layout = ({ children, title }) => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
-  const { backgroundAnimation } = useSelector((state) => state.ui)
+  const { backgroundAnimation } = useSelector((state) => state.ui);
 
-  const [vantaEffect, setVantaEffect] = useState(0)
+  const [vantaEffect, setVantaEffect] = useState(0);
 
-  const myRef = useRef(null)
+  const myRef = useRef(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { currentUser } = useSelector((state) => state.user)
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffectOnce(() => {
-    localStorage.getItem('token') &&
+    localStorage.getItem("token") &&
       isEmpty(currentUser) &&
       getCurrentUser().then((res) => {
-        dispatch(setUser(res.data))
-      })
-  })
+        dispatch(setUser(res.data));
+      });
+  });
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [pathname])
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   useEffect(() => {
     if (backgroundAnimation) {
-      document.getElementById('vanta-placeholder').style.display = 'none'
-      document.getElementById('vanta-placeholder').style.backgroundImage = 'radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1))'
+      document.getElementById("vanta-placeholder").style.display = "none";
+      document.getElementById("vanta-placeholder").style.backgroundImage =
+        "radial-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1))";
     }
-    document.title = title || 'Bashaway'
-  }, [])
+    document.title = title || "Bashaway";
+  }, []);
 
   useEffect(() => {
     if (backgroundAnimation) {
       if (!vantaEffect) {
-        document.getElementById('vanta-placeholder').style.display = 'block'
+        document.getElementById("vanta-placeholder").style.display = "block";
         setVantaEffect(
           FOG({
             el: myRef.current,
@@ -58,29 +59,37 @@ const Layout = ({ children, title }) => {
             midtoneColor: 0xc0c0c,
             lowlightColor: 0x414141,
             baseColor: 0x90909,
-            blurFactor: 0.37,
-          }),
-        )
+            blurFactor: 0.37
+          })
+        );
       }
       return () => {
         if (vantaEffect) {
-          vantaEffect.destroy()
-          setVantaEffect(0)
+          vantaEffect.destroy();
+          setVantaEffect(0);
         }
-      }
+      };
     }
-  }, [vantaEffect, backgroundAnimation])
+  }, [vantaEffect, backgroundAnimation]);
 
   return (
-    <motion.main className="bg-black font-inter overflow-x-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.3 } }} transition={{ duration: 0.3 }}>
+    <motion.main
+      className="bg-black font-inter overflow-x-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.3 } }}
+      transition={{ duration: 0.3 }}
+    >
       <Navbar />
       <div className="w-screen min-h-screen relative z-[5]">{children}</div>
       <Footer />
       <ToastContainer />
       <Loader />
-      {backgroundAnimation && <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />}
+      {backgroundAnimation && (
+        <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
+      )}
     </motion.main>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

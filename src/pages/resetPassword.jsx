@@ -1,28 +1,28 @@
-import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Input } from '../components/common'
-import Layout from '../components/layout'
-import { resetPassword } from '../services/auth'
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Button, Input } from "@/components/common";
+import { default as Layout } from "@/components/layout";
+import { resetPassword } from "@/services/auth";
 
 const ResetPassword = () => {
-  const navigate = useNavigate()
-  const { code } = useParams()
+  const navigate = useNavigate();
+  const { code } = useParams();
 
   const handleReset = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     await resetPassword(code, {
-      new_password: e.target.password.value,
+      new_password: e.target.password.value
     }).then((res) => {
       if (res.success) {
-        toast.success('Password reset successfully!', {
-          autoClose: 3500,
-        })
+        toast.success("Password reset successfully!", {
+          autoClose: 3500
+        });
         setTimeout(() => {
-          navigate('/login')
-        }, 3500)
+          navigate("/login");
+        }, 3500);
       }
-    })
-  }
+    });
+  };
 
   return (
     <Layout title="Reset Password | Bashaway">
@@ -41,7 +41,7 @@ const ResetPassword = () => {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

@@ -1,28 +1,28 @@
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { Button, Input } from '../components/common'
-import Layout from '../components/layout'
-import { changePassword } from '../services/user'
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Button, Input } from "@/components/common";
+import { default as Layout } from "@/components/layout";
+import { changePassword } from "@/services/user";
 
 const ChangePassword = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     await changePassword({
       old_password: e.target.old_password.value,
-      new_password: e.target.new_password.value,
+      new_password: e.target.new_password.value
     }).then((res) => {
       if (res.success) {
-        toast.success('Password changed successfully!', {
-          autoClose: 3500,
-        })
+        toast.success("Password changed successfully!", {
+          autoClose: 3500
+        });
         setTimeout(() => {
-          navigate('/profile')
-        }, 3500)
+          navigate("/profile");
+        }, 3500);
       }
-    })
-  }
+    });
+  };
 
   return (
     <Layout title="Change Password | Bashaway">
@@ -42,7 +42,7 @@ const ChangePassword = () => {
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default ChangePassword
+export default ChangePassword;

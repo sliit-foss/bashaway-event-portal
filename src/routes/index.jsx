@@ -1,22 +1,24 @@
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence } from 'framer-motion'
-import Login from '../pages/login'
-import Register from '../pages/register'
-import Home from '../pages/home'
-import QuestionView from '../pages/questionView'
-import Submissions from '../pages/submissions'
-import ForgotPassword from '../pages/forgotPassword'
-import ResetPassword from '../pages/resetPassword'
-import ChangePassword from '../pages/changePassword'
-import Profile from '../pages/profile'
-import NotFound from '../pages/404'
-import { useAuth, useRedirect } from '../hooks'
+import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import { useAuth, useRedirect } from "@/hooks";
+import {
+  ChangePassword,
+  ForgotPassword,
+  Home,
+  Login,
+  NotFound,
+  Profile,
+  QuestionView,
+  Register,
+  ResetPassword,
+  Submissions
+} from "@/pages";
 
 const AnimatedRoutes = () => {
-  useAuth()
-  useRedirect()
+  useAuth();
+  useRedirect();
 
-  const location = useLocation()
+  const location = useLocation();
 
   return (
     <AnimatePresence>
@@ -33,7 +35,7 @@ const AnimatedRoutes = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default AnimatedRoutes
+export default AnimatedRoutes;

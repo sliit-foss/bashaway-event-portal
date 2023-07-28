@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { Pagination } from 'flowbite-react'
-import { Question, Timer } from '../components/home'
-import { Filters, Sorts, NoRecords } from '../components/common'
-import Layout from '../components/layout'
-import { getAllQuestions } from '../services/question'
-import { questionFilters, questionSorts } from '../filters'
+import { useEffect, useState } from "react";
+import { Pagination } from "flowbite-react";
+import { Filters, NoRecords, Sorts } from "@/components/common";
+import { Question, Timer } from "@/components/home";
+import { default as Layout } from "@/components/layout";
+import { questionFilters, questionSorts } from "@/filters";
+import { getAllQuestions } from "@/services/question";
 
-const openingDate = new Date(2022, 9, 1, 9, 0, 0).getTime()
+const openingDate = new Date(2022, 9, 1, 9, 0, 0).getTime();
 
 const Home = () => {
-  const [questionRes, setQuestionRes] = useState(null)
-  const [page, setPage] = useState(1)
-  const [filterQuery, setFilterQuery] = useState('')
-  const [sortQuery, setSortQuery] = useState('')
+  const [questionRes, setQuestionRes] = useState(null);
+  const [page, setPage] = useState(1);
+  const [filterQuery, setFilterQuery] = useState("");
+  const [sortQuery, setSortQuery] = useState("");
 
   useEffect(() => {
     getAllQuestions(filterQuery, sortQuery, page).then((res) => {
-      setQuestionRes(res.data)
-    })
-  }, [page, filterQuery, sortQuery])
+      setQuestionRes(res.data);
+    });
+  }, [page, filterQuery, sortQuery]);
 
   return (
     <Layout title="Bashaway | Home">
@@ -38,7 +38,7 @@ const Home = () => {
                         <div key={`question-list-${question.id}`} className="w-full flex justify-center items-center">
                           <Question question={question} />
                         </div>
-                      )
+                      );
                     })
                   ) : (
                     <NoRecords text="No Questions Found" className="mt-12" />
@@ -48,7 +48,7 @@ const Home = () => {
                   <Pagination
                     currentPage={page}
                     onPageChange={(newPage) => {
-                      setPage(newPage)
+                      setPage(newPage);
                     }}
                     showIcons={true}
                     totalPages={questionRes.totalPages}
@@ -59,13 +59,15 @@ const Home = () => {
           )
         ) : (
           <>
-            <span className="text-gray-light text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-semibold">Competition Starts In</span>
+            <span className="text-gray-light text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-semibold">
+              Competition Starts In
+            </span>
             <Timer />
           </>
         )}
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
