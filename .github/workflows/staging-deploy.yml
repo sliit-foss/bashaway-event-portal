@@ -14,7 +14,7 @@ jobs:
 
       - name: Create .env from secrets
         run: |
-          echo ${{ secrets.SECRETS_STAGING }} > .env
+          echo "${{ secrets.SECRETS_STAGING }}" > .env
           cat .env
 
       - name: Build 🏗️
