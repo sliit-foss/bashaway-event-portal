@@ -29,7 +29,7 @@ const ResetPassword = () => {
       <div className="w-full min-h-screen flex flex-col justify-center items-center px-6 sm:px-16">
         <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
           <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
-            <img src="../assets/images/resetPassword.svg" className="w-9/12" />
+            <img src="./assets/images/resetPassword.svg" className="w-9/12" />
           </div>
           <div className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6">
             <span className="text-left text-gray-light text-3xl md:text-4xl">Reset Your Password</span>
