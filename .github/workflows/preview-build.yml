@@ -17,14 +17,13 @@ jobs:
   build-preview:
     name: Build preview 🏗️
     runs-on: ubuntu-latest
-    environment: Staging
     steps:
       - name: Checkout repository 🛎️
         uses: actions/checkout@v3
       
       - name: Create .env from secrets
         run: |
-          echo ${{ secrets.SECRETS_FILE }} > .env
+          echo ${{ secrets.SECRETS_STAGING }} > .env
 
       - name: Build 🏗️
         uses: ./.github/actions/build

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import * as _ from "lodash";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import Terms from "@/components/register/terms";
+import { default as Terms } from "@/components/register/terms";
 import { getRegexPatternFromKey } from "@/helpers";
 import { register } from "@/services/auth";
 
