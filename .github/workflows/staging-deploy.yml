@@ -5,11 +5,10 @@ on:
     branches:
       - development
 jobs:
-  deploy-production:
+  deploy:
+    name: Deploy to staging 🚀
     runs-on: ubuntu-latest
-    environment: 
-      name: Staging
-      url: https://portal.staging.bashaway.sliitfoss.org
+    environment: Staging
     steps:
       - name: Checkout repository 🛎️
         uses: actions/checkout@v3

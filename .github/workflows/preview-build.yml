@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   build-preview:
+    name: Build preview 🏗️
     runs-on: ubuntu-latest
     environment: Staging
     steps:
