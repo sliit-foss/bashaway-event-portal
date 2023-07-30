@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const protectedRoutes = ["question", "leaderboard"];
-const closedRoutes = ["register"];
+const closedRoutes = [];
 
 const useRedirect = () => {
   const navigate = useNavigate();
