@@ -13,9 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create .env from secrets
-        run: |
-          echo "${{ secrets.SECRETS_STAGING }}" > .env
-          cat .env
+        run: echo "${{ secrets.SECRETS_STAGING }}" > .env
 
       - name: Build 🏗️
         uses: ./.github/actions/build
