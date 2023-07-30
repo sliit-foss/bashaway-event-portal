@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
+import axios from "axios";
 import store from "@/store";
 import { toggleLoader } from "@/store/ui";
-import axios from "axios";
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASHAWAY_BE_URL,

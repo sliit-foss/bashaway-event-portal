@@ -1,0 +1,35 @@
+name: Build PR preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+        - development
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    name: Build preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+      
+      - name: Create .env from secrets
+        run: |
+          echo ${{ secrets.SECRETS_STAGING }} > .env
+
+      - name: Build 🏗️
+        uses: ./.github/actions/build
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+      - name: Upload build files 📤
+        uses: sliit-foss/actions/preview-deployments/postbuild@main

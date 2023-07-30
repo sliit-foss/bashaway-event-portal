@@ -1,0 +1,32 @@
+name: CI staging deploy
+
+on:
+  push:
+    branches:
+      - development
+jobs:
+  deploy:
+    name: Deploy to staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Create .env from secrets
+        run: echo "${{ secrets.SECRETS_STAGING }}" > .env
+
+      - name: Build 🏗️
+        uses: ./.github/actions/build
+        env:
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+      - name: Fix 404 on page reload 🚧
+        uses: sliit-foss/actions/preview-deployments/404@main
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./dist/
+          branch: gh-pages
+          clean-exclude: preview
