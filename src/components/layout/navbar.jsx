@@ -11,10 +11,6 @@ import { toggleBackgroundAnimation } from "@/store/ui";
 
 const initialNavItems = [
   {
-    name: "Home",
-    path: "/"
-  },
-  {
     name: "Rules",
     path: "/rules"
   }
@@ -48,6 +44,10 @@ const Header = () => {
     const isLogged = localStorage.getItem("token");
     if (isLogged && !navItems.find((item) => item.name === "Profile")) {
       setNavItems([
+        {
+          name: "Home",
+          path: "/"
+        },
         ...initialNavItems,
         {
           name: "Profile",
