@@ -11,6 +11,11 @@ const initialUsefulLinks = [
     target: "_self"
   },
   {
+    name: "Login",
+    url: "/login",
+    target: "_self"
+  },
+  {
     name: "Competition",
     url: "/",
     target: "_self"
@@ -59,7 +64,11 @@ const Footer = () => {
   useEffectOnce(() => {
     if (authUser) {
       const cpy = [...usefulLinks];
-      cpy.splice(0, 1);
+      cpy.splice(0, 2);
+      setUsefulLinks(cpy);
+    } else {
+      const cpy = [...usefulLinks];
+      cpy.splice(2, 1);
       setUsefulLinks(cpy);
     }
   });

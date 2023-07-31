@@ -11,10 +11,6 @@ import { toggleBackgroundAnimation } from "@/store/reducers/ui/global";
 
 const initialNavItems = [
   {
-    name: "Home",
-    path: "/"
-  },
-  {
     name: "Rules",
     path: "/rules"
   }
@@ -52,6 +48,10 @@ const Header = () => {
     const isLogged = localStorage.getItem("access_token");
     if (isLogged && !navItems.find((item) => item.name === "Profile")) {
       setNavItems([
+        {
+          name: "Home",
+          path: "/"
+        },
         ...initialNavItems,
         {
           name: "Profile",
