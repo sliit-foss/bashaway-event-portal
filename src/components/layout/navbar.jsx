@@ -5,6 +5,7 @@ import { IoIosClose } from "react-icons/io";
 import { MdAnimation } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { toggleBackgroundAnimation } from "@/store/ui";
 
@@ -24,6 +25,8 @@ const Header = () => {
   const [navItems, setNavItems] = useState(initialNavItems);
 
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   const burgerNavController = () => {
     document.querySelector("html").style.overflowY = !burgerNav ? "hidden" : "auto";
@@ -56,16 +59,15 @@ const Header = () => {
         }
       ]);
     }
-    // Commented out after registration closed
-    // if (!isLogged && !navItems.find((item) => item.name === 'Register')) {
-    //   setNavItems([
-    //     ...initialNavItems,
-    //     {
-    //       name: 'Register',
-    //       path: '/register',
-    //     },
-    //   ])
-    // }
+    if (!isLogged && !navItems.find((item) => item.name === "Register")) {
+      setNavItems([
+        ...initialNavItems,
+        {
+          name: "Register",
+          path: "/register"
+        }
+      ]);
+    }
   }, []);
 
   return (
@@ -81,7 +83,10 @@ const Header = () => {
             return (
               <div key={`desktop-${item.path}`}>
                 <span
-                  className="px-2 ml-4 text-nav-links-unselected hover:text-primary transition duration-300 cursor-pointer"
+                  className={twMerge(
+                    "px-2 ml-4 hover:text-primary transition duration-300 cursor-pointer",
+                    item.path === location.pathname ? "text-primary" : "text-nav-links-unselected"
+                  )}
                   onClick={() => {
                     handleRouteChange(item.path);
                   }}
@@ -122,7 +127,10 @@ const Header = () => {
                   return (
                     <div className="w-full flex flex-col justify-center items-center" key={`mobile-${item.path}`}>
                       <span
-                        className="w-full text-white hover:text-primary text-center transition duration-300 cursor-pointer"
+                        className={twMerge(
+                          "w-full  hover:text-primary text-center transition duration-300 cursor-pointer",
+                          item.path === location.pathname ? "text-primary" : "text-white"
+                        )}
                         onClick={() => {
                           handleRouteChange(item.path);
                         }}

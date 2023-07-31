@@ -6,7 +6,7 @@ import store from "./store";
 const App = () => {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="bg-black">
         <BrowserRouter>
           <AnimatedRoutes />
         </BrowserRouter>
