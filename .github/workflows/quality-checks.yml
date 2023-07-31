@@ -10,10 +10,6 @@ on:
       - reopened
       - synchronize
 
-concurrency:
-  group: preview-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   commitlint:
     name: Commitlint

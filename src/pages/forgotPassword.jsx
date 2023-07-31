@@ -2,23 +2,27 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import { forgotPassword } from "@/services/auth";
+import { useRequestPasswordResetCodeMutation } from "@/store/api";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
 
+  const [requestPasswordResetCode] = useRequestPasswordResetCodeMutation();
+
   const handleForm = async (e) => {
     e.preventDefault();
-    await forgotPassword({
+    await requestPasswordResetCode({
       email: e.target.email.value
-    }).then(() => {
-      toast.success("An email has been sent with a link to reset your password!", {
-        autoClose: 3500
+    })
+      .unwrap()
+      .then(() => {
+        toast.success("An email has been sent with a link to reset your password!", {
+          autoClose: 3500
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 3500);
       });
-      setTimeout(() => {
-        navigate("/");
-      }, 3500);
-    });
   };
 
   return (

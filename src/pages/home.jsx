@@ -1,39 +1,34 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pagination } from "flowbite-react";
 import { Filters, NoRecords, Sorts } from "@/components/common";
 import { Question, Timer } from "@/components/home";
 import { default as Layout } from "@/components/layout";
 import { questionFilters, questionSorts } from "@/filters";
-import { getAllQuestions } from "@/services/question";
+import { useGetQuestionsQuery } from "@/store/api";
 
 const openingDate = new Date(2022, 9, 1, 9, 0, 0).getTime();
 
 const Home = () => {
-  const [questionRes, setQuestionRes] = useState(null);
   const [page, setPage] = useState(1);
-  const [filterQuery, setFilterQuery] = useState("");
-  const [sortQuery, setSortQuery] = useState("");
+  const [filters, setFilters] = useState("");
+  const [sorts, setSorts] = useState("");
 
-  useEffect(() => {
-    getAllQuestions(filterQuery, sortQuery, page).then((res) => {
-      setQuestionRes(res.data);
-    });
-  }, [page, filterQuery, sortQuery]);
+  const { data: questions } = useGetQuestionsQuery({ filters, sorts, page });
 
   return (
     <Layout title="Bashaway | Home">
       <div className="w-screen min-h-screen flex flex-col justify-center items-center">
         {Date.now() >= openingDate ? (
-          questionRes && (
+          questions && (
             <>
               <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
-                <Filters filters={questionFilters} setFilterQuery={setFilterQuery} />
-                <Sorts sorts={questionSorts} setSortQuery={setSortQuery} />
+                <Filters filters={questionFilters} setFilterQuery={setFilters} />
+                <Sorts sorts={questionSorts} setSortQuery={setSorts} />
               </div>
               <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mb-16">
                 <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">
-                  {questionRes.docs?.length > 0 ? (
-                    questionRes.docs?.map((question) => {
+                  {questions.data?.docs?.length > 0 ? (
+                    questions.data?.docs?.map((question) => {
                       return (
                         <div key={`question-list-${question.id}`} className="w-full flex justify-center items-center">
                           <Question question={question} />
@@ -51,7 +46,7 @@ const Home = () => {
                       setPage(newPage);
                     }}
                     showIcons={true}
-                    totalPages={questionRes.totalPages}
+                    totalPages={questions.data?.totalPages}
                   />
                 </div>
               </div>

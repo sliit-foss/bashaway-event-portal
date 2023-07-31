@@ -6,8 +6,9 @@ const blacklistedPaths = ["", "question", "profile", "change-password", "leaderb
 const useAuth = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   useEffect(() => {
-    if (!localStorage.getItem("token") && blacklistedPaths.includes(window.location.pathname.split("/")[1])) {
+    if (!localStorage.getItem("access_token") && blacklistedPaths.includes(location.pathname.split("/")[1])) {
       navigate("/login");
     }
   }, [location]);

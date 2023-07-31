@@ -1,3 +1,5 @@
+import jwt_decode from "jwt-decode";
+
 export const getRegexPatternFromKey = (key) => {
   if (key === "password")
     return {
@@ -28,4 +30,12 @@ export const downloadFile = (url) => {
       a.click();
     });
   });
+};
+
+export const authUser = () => {
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    return jwt_decode(token);
+  }
+  return null;
 };

@@ -6,8 +6,8 @@ const initialState = {
     "backgroundAnimation" in localStorage ? localStorage.getItem("backgroundAnimation") === "true" : true
 };
 
-export const uiSlice = createSlice({
-  name: "ui",
+export const slice = createSlice({
+  name: "global",
   initialState,
   reducers: {
     toggleLoader(state, action) {
@@ -19,6 +19,6 @@ export const uiSlice = createSlice({
   }
 });
 
-export const { toggleLoader, toggleBackgroundAnimation } = uiSlice.actions;
+export const { toggleLoader, toggleBackgroundAnimation } = slice.actions;
 
-export default uiSlice.reducer;
+export default slice.reducer;

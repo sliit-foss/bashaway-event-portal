@@ -1,17 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit";
-import uiSlice from "./ui";
-import userSlice from "./user";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { authApi, questionApi, submissionApi, userApi } from "./api";
+import { default as rootReducer } from "./reducers";
 
 export function makeStore() {
   return configureStore({
-    devTools: true,
-    reducer: {
-      ui: uiSlice,
-      user: userSlice
+    devTools: process.env.NODE_ENV !== "production",
+    reducer: combineReducers({
+      ...rootReducer,
+      [authApi.reducerPath]: authApi.reducer,
+      [questionApi.reducerPath]: questionApi.reducer,
+      [submissionApi.reducerPath]: submissionApi.reducer,
+      [userApi.reducerPath]: userApi.reducer
+    }),
+    middleware: (getDefaultMiddleware) => {
+      const middleware = getDefaultMiddleware({ serializableCheck: false })
+        .concat(authApi.middleware)
+        .concat(questionApi.middleware)
+        .concat(submissionApi.middleware)
+        .concat(userApi.middleware);
+      return middleware;
     }
   });
 }
 
-const store = makeStore();
+export const store = makeStore();
 
-export default store;
+export default { store };

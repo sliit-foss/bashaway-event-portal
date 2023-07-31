@@ -2,26 +2,28 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import { changePassword } from "@/services/user";
+import { useChangePasswordMutation } from "@/store/api";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
+
+  const [changePassword] = useChangePasswordMutation();
 
   const handleChange = async (e) => {
     e.preventDefault();
     await changePassword({
       old_password: e.target.old_password.value,
       new_password: e.target.new_password.value
-    }).then((res) => {
-      if (res.success) {
+    })
+      .unwrap()
+      .then(() => {
         toast.success("Password changed successfully!", {
           autoClose: 3500
         });
         setTimeout(() => {
           navigate("/profile");
         }, 3500);
-      }
-    });
+      });
   };
 
   return (

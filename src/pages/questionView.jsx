@@ -1,33 +1,36 @@
-import { useState } from "react";
 import { IoStar } from "react-icons/io5";
 import { default as ReactMarkdown } from "react-markdown";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { createSelector } from "@reduxjs/toolkit";
 import { isEmpty } from "lodash";
 import { Button } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import { downloadFile } from "@/helpers";
-import { useEffectOnce } from "@/hooks";
-import { addSubmission, getQuestionById, uploadFile } from "@/services";
+import { uploadFile } from "@/services";
+import { useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
+import { downloadFile } from "@/utils";
 
 export default function QuestionView() {
   const { id } = useParams();
 
   const navigate = useNavigate();
 
-  const [question, setQuestion] = useState(null);
+  const questionFromStore = useSelector(
+    createSelector(
+      (store) => store.questionApi.queries,
+      (queries) =>
+        Object.values(queries)
+          ?.sort((a, b) => b?.fulfilledTimeStamp - a.fulfilledTimeStamp)?.[0]
+          ?.data?.data?.docs?.filter((q) => q?._id === id)
+    )
+  );
+
+  const { data: { data: question = questionFromStore } = {}, refetch } = useGetQuestionByIdQuery(id);
+
+  const [addSubmission] = useAddSubmissionMutation();
 
   const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 15, 0, 0).getTime();
-
-  const refresh = () => {
-    getQuestionById(id).then((res) => {
-      setQuestion(res.data);
-    });
-  };
-
-  useEffectOnce(() => {
-    refresh();
-  });
 
   const onFileChange = (e) => {
     if (!isEmpty(e.target.files)) {
@@ -36,12 +39,12 @@ export default function QuestionView() {
           addSubmission({
             question: id,
             link: url
-          }).then((res) => {
-            if (res.success) {
+          })
+            .unwrap()
+            .then(() => {
               toast.success("Submission added successfully");
-              refresh();
-            }
-          });
+              refetch();
+            });
         })
         .catch((e) => {
           console.error(`Error during submission - message: `, e.message);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthUserQuery } from "@/store/api";
 import { useEffectOnce } from "../../hooks";
 import { Divider } from "../common";
 
@@ -28,6 +29,8 @@ const initialUsefulLinks = [
 const Footer = () => {
   const [usefulLinks, setUsefulLinks] = useState(initialUsefulLinks);
 
+  const { data: { data: authUser } = {} } = useAuthUserQuery();
+
   const socialLinks = [
     {
       icon: "fb",
@@ -54,7 +57,7 @@ const Footer = () => {
   const navigate = useNavigate();
 
   useEffectOnce(() => {
-    if (localStorage.getItem("token")) {
+    if (authUser) {
       const cpy = [...usefulLinks];
       cpy.splice(0, 1);
       setUsefulLinks(cpy);

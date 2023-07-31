@@ -2,26 +2,31 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import { resetPassword } from "@/services/auth";
+import { useResetPasswordMutation } from "@/store/api";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
   const { code } = useParams();
 
+  const [resetPassword] = useResetPasswordMutation();
+
   const handleReset = async (e) => {
     e.preventDefault();
-    await resetPassword(code, {
-      new_password: e.target.password.value
-    }).then((res) => {
-      if (res.success) {
+    await resetPassword({
+      code,
+      data: {
+        new_password: e.target.password.value
+      }
+    })
+      .unwrap()
+      .then(() => {
         toast.success("Password reset successfully!", {
           autoClose: 3500
         });
         setTimeout(() => {
           navigate("/login");
         }, 3500);
-      }
-    });
+      });
   };
 
   return (

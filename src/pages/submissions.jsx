@@ -1,37 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pagination } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import { NoRecords, Sorts } from "@/components/common";
 import { default as Layout } from "@/components/layout";
 import { Submission } from "@/components/submissions";
 import { submissionSorts } from "@/filters";
-import { getMySubmissions } from "@/services/submission";
+import { useGetMySubmissionsQuery } from "@/store/api";
 
 const Submissions = () => {
   const { id: questionId } = useParams();
 
-  const [submissionRes, setSubmissionRes] = useState(null);
   const [page, setPage] = useState(1);
-  const [sortQuery, setSortQuery] = useState("");
+  const [sorts, setSorts] = useState("");
 
-  useEffect(() => {
-    getMySubmissions(`filter[question]=${questionId}`, sortQuery, page).then((res) => {
-      setSubmissionRes(res.data);
-    });
-  }, [page, sortQuery]);
+  const { data: submissions } = useGetMySubmissionsQuery({ filters: `filter[question]=${questionId}`, sorts, page });
 
   return (
     <Layout title="Bashaway | Submissions">
       <div className="w-screen min-h-screen flex flex-col justify-center items-center">
-        {submissionRes && (
+        {submissions && (
           <>
             <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
-              <Sorts sorts={submissionSorts} setSortQuery={setSortQuery} />
+              <Sorts sorts={submissionSorts} setSortQuery={setSorts} />
             </div>
             <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mb-16">
               <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">
-                {submissionRes.docs?.length > 0 ? (
-                  submissionRes.docs?.map((submission) => {
+                {submissions.data?.docs?.length > 0 ? (
+                  submissions.data?.docs?.map((submission) => {
                     return <Submission key={submission._id} submission={submission} />;
                   })
                 ) : (
@@ -45,7 +40,7 @@ const Submissions = () => {
                     setPage(newPage);
                   }}
                   showIcons={true}
-                  totalPages={submissionRes.totalPages}
+                  totalPages={submissions.data?.totalPages}
                 />
               </div>
             </div>

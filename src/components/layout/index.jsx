@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
-import { isEmpty } from "lodash";
 import { default as FOG } from "vanta/dist/vanta.fog.min";
-import { useEffectOnce } from "@/hooks";
-import { getCurrentUser } from "@/services/auth";
-import { setUser } from "@/store/user";
 import { Loader } from "../common";
 import Footer from "./footer";
 import Navbar from "./navbar";
@@ -15,23 +11,11 @@ import Navbar from "./navbar";
 const Layout = ({ children, title }) => {
   const { pathname } = useLocation();
 
-  const { backgroundAnimation } = useSelector((state) => state.ui);
+  const { backgroundAnimation } = useSelector((state) => state.ui.global);
 
   const [vantaEffect, setVantaEffect] = useState(0);
 
   const myRef = useRef(null);
-
-  const dispatch = useDispatch();
-
-  const { currentUser } = useSelector((state) => state.user);
-
-  useEffectOnce(() => {
-    localStorage.getItem("token") &&
-      isEmpty(currentUser) &&
-      getCurrentUser().then((res) => {
-        dispatch(setUser(res.data));
-      });
-  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

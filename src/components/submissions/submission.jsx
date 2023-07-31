@@ -1,6 +1,6 @@
 import { IoStar } from "react-icons/io5";
 import moment from "moment";
-import { downloadFile } from "@/helpers";
+import { downloadFile } from "@/utils";
 
 const Submission = ({ submission }) => {
   return (

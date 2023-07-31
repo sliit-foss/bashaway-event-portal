@@ -5,8 +5,8 @@ import * as _ from "lodash";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
 import { default as Terms } from "@/components/register/terms";
-import { getRegexPatternFromKey } from "@/helpers";
-import { register } from "@/services/auth";
+import { useRegisterMutation } from "@/store/api";
+import { getRegexPatternFromKey } from "@/utils";
 
 const steps = [
   {
@@ -45,6 +45,8 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  const [register] = useRegisterMutation();
+
   const [formData, setFormData] = useState(
     [1, 2, 3, 4, 5].reduce((acc, curr, index) => {
       if (index === 0) {
@@ -78,16 +80,16 @@ const Register = () => {
           members: Object.values(formData)
             .slice(1)
             .filter((member) => !!member.name)
-        }).then((res) => {
-          if (res.success) {
+        })
+          .unwrap()
+          .then((res) => {
             toast.success(res.message, {
               autoClose: 3500
             });
             setTimeout(() => {
               navigate("/login");
             }, 3500);
-          }
-        });
+          });
       } else {
         setModalVisibility(true);
       }

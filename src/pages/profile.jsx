@@ -1,32 +1,22 @@
 import { useEffect, useState } from "react";
 import { Tooltip } from "flowbite-react";
 import { GoKey, GoSync } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as _ from "lodash";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
-import { getRegexPatternFromKey } from "@/helpers";
-import { useEffectOnce } from "@/hooks";
-import { getCurrentUser, updateUser } from "@/services";
-import { setUser } from "@/store/user";
+import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
+import { getRegexPatternFromKey } from "@/utils";
 
-const Register = () => {
+const Profile = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+  const { data: { data: user } = {} } = useAuthUserQuery();
 
-  const user = useSelector((state) => state.user);
+  const [updateProfile] = useUpdateProfileMutation();
 
   const [formData, setFormData] = useState(user);
-
-  useEffectOnce(() => {
-    _.isEmpty(user) &&
-      getCurrentUser().then((res) => {
-        dispatch(setUser(res.data));
-      });
-  });
 
   useEffect(() => {
     const userData = { ...user };
@@ -49,18 +39,18 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateUser(user._id, {
+    await updateProfile(user._id, {
       name: formData.name,
       university: formData.university,
       members: formData.members.filter((member) => !!member.name)
-    }).then((res) => {
-      if (res.success) {
-        dispatch(setUser(formData));
+    })
+      .unwrap()
+      .then(() => {
+        authApi.util.updateQueryData("authUser", (prev) => ({ ...prev, ...formData }));
         toast.success("Team details updated successfully", {
           autoClose: 3500
         });
-      }
-    });
+      });
   };
 
   return (
@@ -153,4 +143,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Profile;

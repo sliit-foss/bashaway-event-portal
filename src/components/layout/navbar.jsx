@@ -4,10 +4,10 @@ import { HiOutlineMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { MdAnimation } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { toggleBackgroundAnimation } from "@/store/ui";
+import { useLogoutMutation } from "@/store/api";
+import { toggleBackgroundAnimation } from "@/store/reducers/ui/global";
 
 const initialNavItems = [
   {
@@ -28,6 +28,8 @@ const Header = () => {
 
   const location = useLocation();
 
+  const [logout] = useLogoutMutation();
+
   const burgerNavController = () => {
     document.querySelector("html").style.overflowY = !burgerNav ? "hidden" : "auto";
     setBurgerNav(!burgerNav);
@@ -37,7 +39,9 @@ const Header = () => {
     if (path === "/rules") {
       window.open("https://bashaway.sliitfoss.org#rules", "_blank");
     } else if (path === "/logout") {
-      localStorage.clear();
+      logout().finally(() => {
+        localStorage.clear();
+      });
       navigate("/login");
     } else {
       navigate(path);
@@ -45,7 +49,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const isLogged = localStorage.getItem("token");
+    const isLogged = localStorage.getItem("access_token");
     if (isLogged && !navItems.find((item) => item.name === "Profile")) {
       setNavItems([
         ...initialNavItems,
@@ -152,7 +156,7 @@ const Header = () => {
 
 const AnimationToggle = ({ wrapperclasses = "", classes = "" }) => {
   const dispatch = useDispatch();
-  const { backgroundAnimation } = useSelector((state) => state.ui);
+  const { backgroundAnimation } = useSelector((state) => state.ui.global);
 
   return (
     <div className={wrapperclasses}>
