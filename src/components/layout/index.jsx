@@ -57,10 +57,10 @@ const Layout = ({ children, title }) => {
   }, [vantaEffect, backgroundAnimation]);
 
   return (
-    <>
+    <div className="font-inter w-screen min-h-screen ">
       <Navbar />
       <motion.main
-        className="font-inter w-screen min-h-screen relative z-[5] overflow-x-hidden"
+        className="relative z-[5] overflow-x-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, transition: { duration: 0.3 } }}
@@ -74,7 +74,7 @@ const Layout = ({ children, title }) => {
       {backgroundAnimation && (
         <div id="vanta-placeholder" ref={myRef} className="w-full h-full bg-black fixed top-0 right-0" />
       )}
-    </>
+    </div>
   );
 };
 

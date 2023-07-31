@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Tooltip } from "flowbite-react";
-import { GoKey, GoSync } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as _ from "lodash";
@@ -56,7 +54,8 @@ const Profile = () => {
   return (
     <Layout title="Profile | Bashaway">
       <form className="w-full h-full flex flex-col justify-center items-center p-8 md:p-12" onSubmit={handleSubmit}>
-        <div className="h-full flex flex-col w-full md:w-10/12 justify-center items-center pt-28">
+        <div className="h-full flex flex-col w-full md:w-10/12 justify-center items-center pt-20">
+          <span className="text-3xl text-white font-semibold pb-12 self-start">Update Profile</span>
           <Input
             placeholder="Team Name"
             name="name"
@@ -118,25 +117,17 @@ const Profile = () => {
               );
             })}
           </div>
-        </div>
-        <div className="sticky mb-20 left-[93%] flex">
-          <Tooltip content="Change Password">
+          <div className="w-full mb-20 flex flex-col md:flex-row justify-end gap-6 md:gap-8">
             <Button
-              className="p-5 mr-8"
-              type="button"
-              style={{ borderRadius: "100%" }}
-              onClick={() => {
-                navigate("/change-password");
-              }}
+              className="w-full md:w-auto px-6 py-2 font-semibold sm:text-xl"
+              onClick={() => navigate("/change-password")}
             >
-              <GoKey className="w-[3.1rem] h-[3rem]" />
+              Change Password
             </Button>
-          </Tooltip>
-          <Tooltip content="Sync Changes">
-            <Button className="p-4 animate-spin" type="submit" style={{ borderRadius: "100%" }}>
-              <GoSync className="w-14 h-14" />
+            <Button className="w-full md:w-auto px-6 py-2 font-semibold sm:text-xl" type="submit">
+              Update
             </Button>
-          </Tooltip>
+          </div>
         </div>
       </form>
     </Layout>
