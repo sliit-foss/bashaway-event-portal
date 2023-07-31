@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Tooltip } from "flowbite-react";
 import { HiOutlineMenu } from "react-icons/hi";
 import { IoIosClose } from "react-icons/io";
 import { MdAnimation } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useLogoutMutation } from "@/store/api";
 import { toggleBackgroundAnimation } from "@/store/reducers/ui/global";
 
@@ -160,19 +160,24 @@ const AnimationToggle = ({ wrapperclasses = "", classes = "" }) => {
 
   return (
     <div className={wrapperclasses}>
-      <Tooltip content={backgroundAnimation ? "Disable animation" : "Enable animation"}>
-        <MdAnimation
-          className={twMerge(
-            `w-6 h-6 ml-5 cursor-pointer transition duration-300 ${
-              backgroundAnimation ? "text-primary hover:text-white" : "text-white hover:text-primary"
-            }`,
-            classes
-          )}
-          onClick={() => {
-            dispatch(toggleBackgroundAnimation(!backgroundAnimation));
-            localStorage.setItem("backgroundAnimation", !backgroundAnimation);
-          }}
-        />
+      <Tooltip delayDuration={100}>
+        <TooltipTrigger>
+          <MdAnimation
+            className={twMerge(
+              `w-6 h-6 ml-5 cursor-pointer transition duration-300 ${
+                backgroundAnimation ? "text-primary hover:text-white" : "text-white hover:text-primary"
+              }`,
+              classes
+            )}
+            onClick={() => {
+              dispatch(toggleBackgroundAnimation(!backgroundAnimation));
+              localStorage.setItem("backgroundAnimation", !backgroundAnimation);
+            }}
+          />
+        </TooltipTrigger>
+        <TooltipContent className="mr-4">
+          <p>{backgroundAnimation ? "Disable animation" : "Enable animation"}</p>
+        </TooltipContent>
       </Tooltip>
     </div>
   );
