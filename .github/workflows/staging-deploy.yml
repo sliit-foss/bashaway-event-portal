@@ -24,6 +24,8 @@ jobs:
       - name: Fix 404 on page reload 🚧
         uses: sliit-foss/actions/preview-deployments/404@main
 
+      - run: sed -i "s/.\/assets/\/assets/" dist/404.html
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

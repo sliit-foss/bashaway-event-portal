@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import * as _ from "lodash";
+import { startCase } from "lodash";
 import { Button, Input } from "@/components/common";
 import { default as Layout } from "@/components/layout";
 import { default as Terms } from "@/components/register/terms";
@@ -143,7 +143,7 @@ const Register = () => {
           </div>
           <div className="flex flex-col w-full md:w-3/4 xl:w-1/2">
             <form className="flex flex-col items-end" onSubmit={handleSubmit}>
-              {Object.keys(formData).reduce((acc, curr, index, arr) => {
+              {Object.keys(formData).reduce((acc, _, index, arr) => {
                 acc = [
                   ...acc,
                   ...Object.keys(formData[arr[index]]).map((key, i) => {
@@ -164,7 +164,7 @@ const Register = () => {
                       >
                         <Input
                           id={elementKey}
-                          placeholder={`${key === "name" && step === 1 ? "Team Name" : _.startCase(key)}${
+                          placeholder={`${key === "name" && step === 1 ? "Team Name" : startCase(key)}${
                             required ? " *" : ""
                           }`}
                           type={key === "password" || key === "email" ? key : "text"}
