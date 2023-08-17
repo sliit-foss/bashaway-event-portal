@@ -17,7 +17,7 @@ const Submission = ({ submission }) => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 text-sm text ml-6 mt-4 gap-y-2 text-gray-400">
             <p>
               Marked -{" "}
-              {submission.graded_by ? (
+              {submission.graded_by || submission.automatically_graded ? (
                 <span className="text-primary">Yes</span>
               ) : (
                 <span className="text-red-500">No</span>
@@ -25,7 +25,7 @@ const Submission = ({ submission }) => {
             </p>
             <p>
               Score -{" "}
-              {submission.graded_by ? (
+              {submission.graded_by || submission.automatically_graded ? (
                 <span className="text-primary">{submission.score}</span>
               ) : (
                 <span className="text-red-500">N/A</span>
