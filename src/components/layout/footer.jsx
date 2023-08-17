@@ -1,29 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthUserQuery } from "@/store/api";
-import { useEffectOnce } from "../../hooks";
-import { Divider } from "../common";
+import { AiFillFacebook, AiFillInstagram, AiFillLinkedin, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
+import { twMerge } from "tailwind-merge";
+import { facebook, instagram, linkedIn, twitter, youTube } from "@/constants";
+import { Bashaway, FOSS } from "@/icons";
 
-const initialUsefulLinks = [
+const usefulLinks = [
   {
-    name: "Register",
-    url: "/register",
-    target: "_self"
-  },
-  {
-    name: "Login",
-    url: "/login",
-    target: "_self"
-  },
-  {
-    name: "Competition",
-    url: "/",
-    target: "_self"
-  },
-  {
-    name: "Code of Conduct",
-    url: "https://sliitfoss.org/code-conduct",
-    target: "_blank"
+    name: "Visit Us",
+    url: "https://sliitfoss.org"
   },
   {
     name: "Source Code",
@@ -31,153 +14,62 @@ const initialUsefulLinks = [
   }
 ];
 
-const Footer = () => {
-  const [usefulLinks, setUsefulLinks] = useState(initialUsefulLinks);
-
-  const { data: { data: authUser } = {} } = useAuthUserQuery();
-
-  const socialLinks = [
-    {
-      icon: "fb",
-      url: "https://www.facebook.com/sliitfoss"
-    },
-    {
-      icon: "insta",
-      url: "https://www.instagram.com/sliitfoss/"
-    },
-    {
-      icon: "linkedin",
-      url: "https://www.linkedin.com/company/sliit-foss-community/?originalSubdomain=lk"
-    },
-    {
-      icon: "twitter",
-      url: "https://twitter.com/fosssliit?lang=en"
-    },
-    {
-      icon: "youtube",
-      url: "https://www.youtube.com/channel/UCPPO-QR0Dv13ewjhPsc_I3w/featured"
-    }
-  ];
-
-  const navigate = useNavigate();
-
-  useEffectOnce(() => {
-    if (authUser) {
-      const cpy = [...usefulLinks];
-      cpy.splice(0, 2);
-      setUsefulLinks(cpy);
-    } else {
-      const cpy = [...usefulLinks];
-      cpy.splice(2, 1);
-      setUsefulLinks(cpy);
-    }
-  });
-
+const Footer = ({ className }) => {
   return (
     <>
-      <Divider />
-      <div className="flex flex-col justify-between p-3 md:p-12  grayscale relative z-[2] md:flex-row" id="footer">
-        <div className="w-full">
-          <div className="flex flex-col justify-center items-center w-full xl:w-10/12 md:pl-24 md:items-center md:justify-start scale-[0.7] relative md:bottom-14">
-            <div className="flex justify-start items-center">
-              <a href="https://sliitfoss.org" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/foss-logo.svg" className="w-[6.6rem] h-[6.6rem] mx-6" />
+      <div className="divider" />
+      <footer
+        className={twMerge(`flex w-full justify-center  z-50`, className)}
+        style={{
+          boxShadow: "0px -40px 100px var(--background)"
+        }}
+      >
+        <div className="w-full max-w-body mx-0 flex flex-col-reverse md:flex-row items-center sm:items-start justify-between pt-16 pb-24 px-8 lg:px-24">
+          <div className="flex flex-col items-center md:items-start gap-y-5 col-start-1">
+            <FOSS />
+            <p className="md:w-[320px] px-2 sm:px-0 text-sm text-center md:text-left text-gray-500 opacity-80 font-consolas">
+              Welcome to SLIIT FOSS community. We&apos;re a group of volunteers who believe in the usage of Free/Open
+              Source Software (FOSS)
+            </p>
+            <div className="font-semibold text-[20px] font-cabinet">CONNECT WITH US</div>
+            <div className="flex space-x-3 flex-shrink-0 -ml-0.5">
+              <a href={facebook} target="_blank" className="icon-hover" rel="noreferrer" aria-label="Facebook">
+                <AiFillFacebook className="h-5 w-5" />
               </a>
-              <a href="https://www.facebook.com/sliit.fcsc/" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/fcsc-logo.png" className="w-32 h-32 mx-6 filter brightness-125" />
+              <a href={instagram} target="_blank" className="icon-hover" rel="noreferrer" aria-label="Instagram">
+                <AiFillInstagram className="h-[1.292rem] w-[1.292rem] -translate-y-[0.01rem]" />
               </a>
-            </div>
-            <div className="flex justify-start items-center">
-              <a
-                href="https://community.mozilla.org/en/groups/mozilla-campus-club-of-sliit/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  src="/assets/images/club-logos/mozilla-logo.png"
-                  className="w-[6.1rem] h-[6.1rem] mx-6 mr-10 mb-3 filter brightness-115"
-                />
+              <a href={twitter} target="_blank" className="icon-hover" rel="noreferrer" aria-label="Twitter">
+                <AiOutlineTwitter className="h-[1.48rem] w-[1.48rem] -translate-y-[0.10rem]" />
               </a>
-              <a href="https://wif-web.web.app" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/wif-logo.png" className="w-28 h-28 ml-4 mx-6 relative sm:mb-4" />
+              <a href={linkedIn} target="_blank" className="icon-hover" rel="noreferrer" aria-label="LinkedIn">
+                <AiFillLinkedin className="h-5 w-5" />
               </a>
-            </div>
-            <div className="flex justify-start items-center">
-              <a href="https://www.facebook.com/csnesc/" target="_blank" rel="noreferrer">
-                <img
-                  src="/assets/images/club-logos/csne-logo.png"
-                  className="w-[7.2rem] h-[7.2rem] mx-0 ml-4 sm:ml-0 mr-12 mb-3 filter brightness-115"
-                />
-              </a>
-              <a href="https://www.facebook.com/sliit.cscs/" target="_blank" rel="noreferrer">
-                <img src="/assets/images/club-logos/cs-logo.png" className="w-20 h-22 ml-4 mx-6 relative mb-8" />
+              <a href={youTube} target="_blank" className="icon-hover" rel="noreferrer" aria-label="YouTube">
+                <AiFillYoutube className="h-[1.36rem] w-[1.36rem] -translate-y-[0.06rem]" />
               </a>
             </div>
           </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center w-full mt-6 md:justify-start md:items-center ">
-          <h1 className="mb-8 text-2xl font-semibold text-white">Contact</h1>
-          <a
-            className="mb-8 text-nav-links-unselected hover:text-primary transition duration-300"
-            href="mailto:sllitfoss@gmail.com"
-            target="_blank"
-            rel="noreferrer"
-          >
-            sllitfoss@gmail.com
-          </a>
-          <div className="flex justify-start mb-8">
-            {socialLinks.map((link) => (
-              <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
-                <img
-                  src={`/assets/images/social/${link.icon}.svg`}
-                  className="w-5 h-5 mx-2 fill-current hover:brightness-200 transition duration-300"
-                ></img>
-              </a>
-            ))}
+          <div className="flex flex-col items-center md:items-end -translate-y-1.5 mb-5 gap-8 md:gap-10">
+            <Bashaway />
+            <div className="flex flex-col items-center md:items-end gap-3">
+              {usefulLinks.map((link, index) => {
+                return (
+                  <a
+                    key={`useful-link-${index}`}
+                    href={link.url}
+                    target="_blank"
+                    className="text-sm text-gray-500 opacity-80 font-consolas hover:underline"
+                    rel="noreferrer"
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+            </div>
           </div>
-          <h1 className="mb-4 text-2xl font-semibold text-white">Visit Us On</h1>
-          <a
-            className="mb-2 text-nav-links-unselected hover:text-primary transition duration-300"
-            href="https://sliitfoss.org"
-            target="_blank"
-            rel="noreferrer"
-          >
-            sllitfoss.org
-          </a>
         </div>
-        <div className="flex flex-col items-center justify-end w-full mt-6 md:justify-start  md:pr-0 ">
-          <h1 className="mb-6 text-2xl font-semibold text-white">Useful Links</h1>
-          {usefulLinks.map((link) => (
-            <span
-              className="mb-3 text-nav-links-unselected hover:text-primary cursor-pointer transition duration-300"
-              key={link.url}
-              onClick={() => {
-                if (link.target === "_blank") {
-                  window.open(link.url, link.target);
-                } else {
-                  navigate(link.url);
-                }
-              }}
-            >
-              {link.name}
-            </span>
-          ))}
-        </div>
-      </div>
-      <Divider />
-      <div className="flex flex-col justify-start px-10 pt-5 pb-6 bg-black md:flex-row md:justify-between text-nav-links-unselected md:px-24">
-        <span className="text-center md:text-left">Copyright © 2022 SLIIT FOSS Community</span>
-        <div className="flex items-center justify-center mt-4 md:justify-start md:mt-0">
-          <span className="mr-3 md:mr-8">Visit us On</span>
-          <a href="https://github.com/sliit-foss" target="_blank" rel="noreferrer">
-            <img
-              src={`/assets/images/social/github.svg`}
-              className="w-5 h-5 mb-0.5 hover:brightness-200 transition duration-300"
-            ></img>
-          </a>
-        </div>
-      </div>
+      </footer>
     </>
   );
 };

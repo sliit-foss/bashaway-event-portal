@@ -1,0 +1,9 @@
+@layer utilities {
+    .icon-hover {
+      @apply transition-colors duration-medium hover:text-black/70;
+    }
+    .link {
+        @apply hover:opacity-70 transition-all duration-medium;
+    }
+  }
+  

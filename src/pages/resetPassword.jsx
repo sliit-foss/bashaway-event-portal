@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import { Button, Input } from "@/components/common";
-import { default as Layout } from "@/components/layout";
+import { Button, Input, toast } from "@/components/common";
+import { useTitle } from "@/hooks";
 import { useResetPasswordMutation } from "@/store/api";
 
 const ResetPassword = () => {
@@ -20,32 +19,30 @@ const ResetPassword = () => {
     })
       .unwrap()
       .then(() => {
-        toast.success("Password reset successfully!", {
-          autoClose: 3500
-        });
+        toast({ title: "Password reset successfully!" });
         setTimeout(() => {
           navigate("/login");
         }, 3500);
       });
   };
 
+  useTitle("Reset Password | Bashaway");
+
   return (
-    <Layout title="Reset Password | Bashaway">
-      <div className="w-full min-h-screen flex flex-col justify-center items-center px-6 sm:px-16">
-        <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
-          <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
-            <img src="./assets/images/resetPassword.svg" className="w-9/12" />
-          </div>
-          <div className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6">
-            <span className="text-left text-gray-light text-3xl md:text-4xl">Reset Your Password</span>
-            <form className="flex flex-col items-end" onSubmit={handleReset}>
-              <Input placeholder="New Password" type="password" name="password" className="my-8 p-4" required />
-              <Button className="h-11 w-[165px] mt-6">Reset Password</Button>
-            </form>
-          </div>
+    <div className="w-full flex flex-col justify-center items-center px-6 sm:px-16">
+      <div className="w-full flex flex-col md:flex-row justify-center items-center md:items-start lg:items-center pt-14">
+        <div className="w-full md:w-1/2 mb-12 md:mb-0 flex justify-center items-center">
+          <img src="./assets/images/resetPassword.svg" className="w-9/12" />
+        </div>
+        <div className="flex flex-col w-full md:w-1/2 mr-0 md:mr-6">
+          <span className="text-left text-gray-light text-3xl md:text-4xl">Reset Your Password</span>
+          <form className="flex flex-col items-end" onSubmit={handleReset}>
+            <Input placeholder="New Password" type="password" name="password" className="my-8 p-4" required />
+            <Button className="h-11 w-[165px] mt-6">Reset Password</Button>
+          </form>
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

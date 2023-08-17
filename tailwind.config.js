@@ -1,5 +1,8 @@
+import flowbite from "flowbite/plugin";
+import animate from "tailwindcss-animate";
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -64,15 +67,28 @@ module.exports = {
           to: { height: 0 }
         }
       },
+      maxWidth: {
+        body: "1680px",
+        form: "800px"
+      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out"
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        consolas: ["Consolas", "monospace"],
         poppins: ["Poppins", "sans-serif"]
+      },
+      screens: {
+        xs: "400px",
+        xsm: "450px"
+      },
+      transitionDuration: {
+        medium: "300ms",
+        long: "500ms"
       }
     }
   },
-  plugins: [require("flowbite/plugin"), require("tailwindcss-animate")]
+  plugins: [flowbite, animate]
 };

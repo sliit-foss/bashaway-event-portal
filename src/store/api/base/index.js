@@ -1,6 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { toast } from "react-toastify";
 import { Mutex } from "async-mutex";
+import { toast } from "@/components";
 import { mutationHelper } from "./mutation-helper";
 
 export * from "./mutation-helper";
@@ -49,7 +49,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     }
   }
   if (result.error && result.error.data.message !== "Unauthorized") {
-    toast.error(result.error.data.message);
+    toast({
+      variant: "destructive",
+      title: result.error.data.message
+    });
   }
   return result;
 };

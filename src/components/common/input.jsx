@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import { EyeIcon, EyeOff } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+
+const eyeIconClasses = "cursor-pointer text-black/40 hover:text-black/60 transition-all duration-medium";
 
 const Input = ({ ...props }) => {
   const [localType, setLocalType] = useState(props.type || "text");
   return (
-    <div className={`${props.wrapperclasses || ""} w-full relative`}>
+    <div className={twMerge("w-full relative", props.wrapperclasses)}>
       <input
         {...props}
         className={twMerge(
-          `w-full h-14 sm:h-16 bg-transparent border-[1px] focus:border-primary outline-none rounded-md text-gray-100 p-4 text-base font-normal hover:text-white transition duration-300 ${props.className}`,
+          `w-full h-14 sm:h-16 bg-transparent border-2 bg-white border-black/40 focus:border-black outline-none !focus:outline-none !ring-0 !focus:ring-0 rounded-md text-black p-4 text-base font-normal transition duration-300`,
           props.className
         )}
         type={localType}
@@ -21,15 +23,9 @@ const Input = ({ ...props }) => {
           }`}
         >
           {localType === "password" ? (
-            <BsFillEyeFill
-              className="w-[1.8rem] h-[1.8rem] text-gray-100 cursor-pointer"
-              onClick={() => setLocalType("text")}
-            />
+            <EyeIcon className={eyeIconClasses} onClick={() => setLocalType("text")} />
           ) : (
-            <BsFillEyeSlashFill
-              className="w-[1.8rem] h-[1.8rem] text-gray-100 cursor-pointer"
-              onClick={() => setLocalType("password")}
-            />
+            <EyeOff className={eyeIconClasses} onClick={() => setLocalType("password")} />
           )}
         </div>
       )}
