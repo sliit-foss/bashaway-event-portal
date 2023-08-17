@@ -1,5 +1,5 @@
 import { IoStar } from "react-icons/io5";
-import moment from "moment";
+import { default as moment } from "moment";
 import { downloadFile } from "@/utils";
 
 const Submission = ({ submission }) => {
@@ -37,9 +37,7 @@ const Submission = ({ submission }) => {
         <div className="flex mt-4 ml-6 items-center md:justify-end mr-8 sm:ml-6 sm:mt-4 md:col-span-2 md:mt-0 md:ml-0 ">
           <span
             className=" px-6 py-2 font-semibold sm:text-xl focus:outline-none focus:ring focus:ring-offset-1 cursor-pointer bg-white text-black rounded-md hover:bg-primary hover:text-white focus:ring-black focus:ring-opacity-20 transition-all duration-300"
-            onClick={() => {
-              downloadFile(submission.link);
-            }}
+            onClick={() => downloadFile(submission.link)}
           >
             Download
           </span>
