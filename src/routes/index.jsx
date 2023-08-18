@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { useAuth, useRedirect } from "@/hooks";
 import {
   ChangePassword,
   ForgotPassword,
@@ -15,11 +14,7 @@ import {
 } from "@/pages";
 
 const AnimatedRoutes = () => {
-  useAuth();
-  useRedirect();
-
   const location = useLocation();
-
   return (
     <AnimatePresence>
       <Routes location={location}>

@@ -3,6 +3,7 @@ import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { useBreakpoint } from "@/hooks";
+import { whitelistedPaths } from "@/hooks/auth";
 import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@/icons";
 import { useAuthUserQuery, useLogoutMutation } from "@/store/api";
 import { Button, Skeleton } from "..";
@@ -95,7 +96,7 @@ const Header = ({ className }) => {
                 : "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
             )}
           >
-            {!["/login", "/register"].includes(location.pathname) &&
+            {!whitelistedPaths.includes(location.pathname.split("/")[1]) &&
               internalNavLinks.map((section, index) => (
                 <span
                   key={index}

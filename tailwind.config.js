@@ -69,7 +69,7 @@ export default {
       },
       maxWidth: {
         body: "1680px",
-        form: "800px"
+        form: "700px"
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

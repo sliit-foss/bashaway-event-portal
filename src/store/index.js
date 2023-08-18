@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { authApi, questionApi, submissionApi, userApi } from "./api";
+import { authApi, questionApi, settingApi, submissionApi, userApi } from "./api";
 import { default as rootReducer } from "./reducers";
 
 export function makeStore() {
@@ -9,6 +9,7 @@ export function makeStore() {
       ...rootReducer,
       [authApi.reducerPath]: authApi.reducer,
       [questionApi.reducerPath]: questionApi.reducer,
+      [settingApi.reducerPath]: settingApi.reducer,
       [submissionApi.reducerPath]: submissionApi.reducer,
       [userApi.reducerPath]: userApi.reducer
     }),
@@ -16,6 +17,7 @@ export function makeStore() {
       const middleware = getDefaultMiddleware({ serializableCheck: false })
         .concat(authApi.middleware)
         .concat(questionApi.middleware)
+        .concat(settingApi.middleware)
         .concat(submissionApi.middleware)
         .concat(userApi.middleware);
       return middleware;

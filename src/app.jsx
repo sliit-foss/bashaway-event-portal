@@ -2,11 +2,13 @@ import { Provider } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Footer, Header, Loader, Toaster, TooltipProvider } from "@/components";
+import { useAuth } from "@/hooks";
+import { default as AnimatedRoutes } from "@/routes";
 import { store } from "@/store";
-import { default as AnimatedRoutes } from "./routes";
 
 const App = () => {
   const location = useLocation();
+  const completed = useAuth();
   return (
     <Provider store={store}>
       <TooltipProvider>
@@ -25,6 +27,11 @@ const App = () => {
           <Footer />
           <Loader />
           <Toaster />
+          <div
+            className={`fixed inset-0 h-screen w-full bg-white z-50 transition-all duration-long ${
+              completed ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          />
         </main>
       </TooltipProvider>
     </Provider>
