@@ -15,10 +15,8 @@ const ForgotPassword = () => {
     })
       .unwrap()
       .then(() => {
+        navigate("/");
         toast({ title: "An email has been sent with a link to reset your password" });
-        setTimeout(() => {
-          navigate("/");
-        }, 3500);
       });
   };
 

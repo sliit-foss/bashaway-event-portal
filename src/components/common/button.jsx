@@ -1,12 +1,28 @@
 import { RotatingLines } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import { cva } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
-const Button = ({ children, loading, className, ...props }) => {
+const buttonVariants = cva(
+  "group flex justify-center items-center cursor-pointer rounded-full px-[1.15rem] py-[0.4rem] font-semibold outline-none transition-all duration-medium gap-2 splash",
+  {
+    variants: {
+      variant: {
+        primary: "bg-black text-white",
+        secondary: "text-black bg-white border border-black/20 after:bg-black/[0.15]"
+      }
+    },
+    defaultVariants: {
+      variant: "primary"
+    }
+  }
+);
+
+const Button = ({ variant = "primary", children, loading, className, ...props }) => {
   return (
     <button
       className={twMerge(
-        "group flex justify-center items-center cursor-pointer rounded-full px-[1.15rem] py-[0.4rem] bg-black text-white font-semibold outline-none transition-all duration-medium splash gap-2",
+        buttonVariants({ variant }),
         className,
         loading || props.disabled ? "opacity-80 pointer-events-none" : ""
       )}

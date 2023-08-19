@@ -1,50 +1,22 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { startCase } from "lodash";
-import { Button, Input, toast } from "@/components/common";
+import { Badge, Button, Caption, Input, Title, toast } from "@/components/common";
 import { default as Terms } from "@/components/register/terms";
 import { useTitle } from "@/hooks";
 import { useRegisterMutation } from "@/store/api";
 import { getRegexPatternFromKey } from "@/utils";
 
-const steps = [
-  {
-    name: "Team",
-    gradientColor1: "#7928CA",
-    gradientColor2: "#4700DE"
-  },
-  {
-    name: "1st Member",
-    gradientColor1: "#007CF0",
-    gradientColor2: "#00DFD8"
-  },
-  {
-    name: "2nd Member",
-    gradientColor1: "#007CF0",
-    gradientColor2: "#00DFD8"
-  },
-  {
-    name: "3rd Member",
-    gradientColor1: "#7928CA",
-    gradientColor2: "#4700DE"
-  },
-  {
-    name: "4th Member",
-    gradientColor1: "#7928CA",
-    gradientColor2: "#4700DE"
-  }
-];
+const steps = ["Team Details", "Member 01", "Member 02", "Member 03", "Member 04"];
 
 const Register = () => {
-  const totalSteps = 5;
-
   const [step, setStep] = useState(1);
 
   const [modalVisibility, setModalVisibility] = useState(false);
 
   const navigate = useNavigate();
 
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
 
   const [formData, setFormData] = useState(
     [1, 2, 3, 4, 5].reduce((acc, curr, index) => {
@@ -69,7 +41,7 @@ const Register = () => {
 
   const handleSubmit = async (e, isConfirmation) => {
     e?.preventDefault();
-    if (step === totalSteps) {
+    if (step === steps.length) {
       if (isConfirmation) {
         await register({
           name: formData[1].name,
@@ -82,10 +54,8 @@ const Register = () => {
         })
           .unwrap()
           .then((res) => {
+            navigate("/login");
             toast({ title: res.message });
-            setTimeout(() => {
-              navigate("/login");
-            }, 3500);
           });
       } else {
         setModalVisibility(true);
@@ -106,143 +76,133 @@ const Register = () => {
   useTitle("Register | Bashaway");
 
   return (
-    <div className="w-full flex flex-col justify-center items-center p-8 md:p-12">
-      <div className="w-full flex flex-col justify-center items-center lg:items-center pt-14">
-        <div className="w-full md:w-3/4 xl:w-1/2 flex flex-wrap justify-evenly items-center mb-12">
-          {steps.map((list, index) => {
-            return (
-              <div key={index} className="w-2/12 grow">
-                <div className="w-full mb-10">
-                  <div
-                    className={`relative flex justify-center items-center h-1`}
-                    style={{
-                      backgroundImage: `linear-gradient(to right, ${
-                        step >= index + 1 ? list.gradientColor1 : "#888888"
-                      }, #888888)`
-                    }}
-                  >
-                    <div
-                      className="absolute w-6 md:w-10 h-6 md:h-10 rounded-full left-0"
-                      style={{
-                        backgroundImage: `linear-gradient(to right, ${
-                          step >= index + 1 ? list.gradientColor1 : "#888888"
-                        }, ${step >= index + 1 ? list.gradientColor2 : "#888888"})`
-                      }}
-                    ></div>
-                  </div>
-                </div>
-                <div className="flex justify-start items-center">
-                  <span className="hidden md:block text-sm text-white text-left font-semibold">{list.name}</span>
-                  <span className="hidden md:block text-red-500 text-sm ml-2">{index <= 1 ? "*" : ""}</span>
-                </div>
-              </div>
-            );
-          })}
+    <>
+      <form
+        className={`w-full max-w-form min-h-[70vh] flex flex-col justify-center items-center gap-5`}
+        onSubmit={handleSubmit}
+      >
+        <div className="flex flex-col items-center gap-3 md:gap-2 mb-6 pointer-events-none">
+          <Title>Register your team</Title>
+          <Badge className="min-w-[130px]">{steps[step - 1]}</Badge>
         </div>
-        <div className="flex flex-col w-full md:w-3/4 xl:w-1/2">
-          <form className="flex flex-col items-end" onSubmit={handleSubmit}>
-            {Object.keys(formData).reduce((acc, _, index, arr) => {
-              acc = [
-                ...acc,
-                ...Object.keys(formData[arr[index]]).map((key, i) => {
-                  const show = index + 1 === step;
-                  const required =
-                    show &&
-                    (step <= 2 ||
-                      Object.keys(formData[step]).find((memberKey) => {
-                        return formData[step][memberKey] !== "";
-                      }));
-                  const elementKey = key === "password" ? key : `${key}-${index},${i}`;
-                  return (
-                    <div
-                      key={elementKey}
-                      className={`w-full ${
-                        key === "password" ? "md:flex justify-between items-center" : "flex flex-col"
+        <div className={`w-full mb-10 relative flex justify-between items-center mt-3 h-1 bg-[#cccccc]`}>
+          {steps.map((_, index) => (
+            <div
+              key={index}
+              className={`relative z-50 w-5 h-5 md:w-6 md:h-6 rounded-full transition-all duration-medium ${
+                step > index ? "bg-black" : "bg-[#cccccc]"
+              }`}
+            />
+          ))}
+          <div
+            className="absolute h-full left-0 bg-black transition-all duration-medium"
+            style={{
+              width: `calc(0% + ${25 * (step - 1)}%)`
+            }}
+          />
+        </div>
+        <div className="w-full flex flex-col items-end">
+          {Object.keys(formData).reduce((acc, _, index, arr) => {
+            acc = [
+              ...acc,
+              ...Object.keys(formData[arr[index]]).map((key, i) => {
+                const show = index + 1 === step;
+                const required =
+                  show &&
+                  (step <= 2 || Object.keys(formData[step]).find((memberKey) => formData[step][memberKey] !== ""));
+                const elementKey = key === "password" ? key : `${key}-${index},${i}`;
+                return (
+                  <div
+                    key={elementKey}
+                    className={`w-full ${
+                      key === "password" ? "md:flex justify-between items-center" : "flex flex-col"
+                    }`}
+                  >
+                    <Input
+                      id={elementKey}
+                      placeholder={`${key === "name" && step === 1 ? "Team Name" : startCase(key)}${
+                        required ? " *" : ""
                       }`}
-                    >
+                      type={key === "password" || key === "email" ? key : "text"}
+                      pattern={getRegexPatternFromKey(key).regex}
+                      title={getRegexPatternFromKey(key).title}
+                      name={key}
+                      className={`p-4 my-2.5 transition duration-300 ${
+                        show ? "opacity-100 block" : "opacity-0 hidden"
+                      }`}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          [step]: {
+                            ...formData[step],
+                            [key]: e.target.value
+                          }
+                        });
+                        if (key === "password") checkPasswordMatch(e, "confirm-password");
+                      }}
+                      required={required}
+                      wrapperclasses={key === "password" ? "w-full md:w-11/12 md:mr-2" : "w-full"}
+                    />
+                    {key === "password" && (
                       <Input
-                        id={elementKey}
-                        placeholder={`${key === "name" && step === 1 ? "Team Name" : startCase(key)}${
-                          required ? " *" : ""
-                        }`}
-                        type={key === "password" || key === "email" ? key : "text"}
+                        id="confirm-password"
+                        placeholder="Confirm Password *"
+                        type="password"
                         pattern={getRegexPatternFromKey(key).regex}
                         title={getRegexPatternFromKey(key).title}
                         name={key}
-                        className={`p-4 my-4 transition duration-300 ${
-                          show ? "opacity-100 block" : "opacity-0 hidden"
-                        }`}
-                        onChange={(e) => {
-                          setFormData({
-                            ...formData,
-                            [step]: {
-                              ...formData[step],
-                              [key]: e.target.value
-                            }
-                          });
-                          if (key === "password") {
-                            checkPasswordMatch(e, "confirm-password");
-                          }
-                        }}
+                        className={`transition duration-300 ${show ? "opacity-100 block" : "opacity-0 hidden"}`}
                         required={required}
-                        wrapperclasses={key === "password" ? "w-full md:w-11/12 md:mr-2" : "w-full"}
+                        wrapperclasses="w-full md:w-11/12 md:ml-2"
+                        onChange={(e) => {
+                          if (e.target.value === "") {
+                            e.target.setCustomValidity("Please fill out this field.");
+                            return;
+                          }
+                          checkPasswordMatch(e, elementKey);
+                        }}
                       />
-                      {key === "password" && (
-                        <Input
-                          id="confirm-password"
-                          placeholder="Confirm Password *"
-                          type="password"
-                          pattern={getRegexPatternFromKey(key).regex}
-                          title={getRegexPatternFromKey(key).title}
-                          name={key}
-                          className={`p-4 my-4 mt-8 md:mt-4 transition duration-300 ${
-                            show ? "opacity-100 block" : "opacity-0 hidden"
-                          }`}
-                          required={required}
-                          wrapperclasses="w-full md:w-11/12 md:ml-2"
-                          onChange={(e) => {
-                            if (e.target.value === "") {
-                              e.target.setCustomValidity("Please fill out this field.");
-                              return;
-                            }
-                            checkPasswordMatch(e, elementKey);
-                          }}
-                        />
-                      )}
-                    </div>
-                  );
-                })
-              ];
-              return acc;
-            }, [])}
-            <span className="text-gray-light mt-6">
-              * From 2<sup>nd</sup> member onwards please fill all fields or leave all fields empty
-            </span>
-            <div className="flex">
-              {step !== 1 && (
-                <Button
-                  className="w-[110px] sm:w-[165px] h-10 sm:h-11 mt-10 text-black mr-5"
-                  type="button"
-                  onClick={() => {
-                    setStep(step - 1);
-                  }}
-                >
-                  Back
-                </Button>
-              )}
+                    )}
+                  </div>
+                );
+              })
+            ];
+            return acc;
+          }, [])}
+          <span className="w-full text-center text-black/40 mt-4 mb-6">
+            * From 2<sup>nd</sup> member onwards please fill all fields or leave all fields empty
+          </span>
+          <div className="w-full flex gap-4">
+            {step !== 1 && (
               <Button
-                className="w-[110px] sm:w-[165px] h-10 sm:h-11 mt-10 text-black"
-                type="submit"
-                data-modal-toggle="terms-and-conditions"
+                className="w-full h-14 sm:h-16 text-[20px]"
+                type="button"
+                onClick={() => {
+                  setStep(step - 1);
+                }}
               >
-                {step === totalSteps ? "Register" : "Next"}
+                Back
               </Button>
-            </div>
-          </form>
-          <Terms show={modalVisibility} setShow={setModalVisibility} onConfirm={handleSubmit} />
+            )}
+            <Button
+              className="w-full h-14 sm:h-16 text-[20px]"
+              type="submit"
+              data-modal-toggle="terms-and-conditions"
+              loading={isLoading}
+            >
+              {step === steps.length ? "Register" : "Next"}
+            </Button>
+          </div>
         </div>
-      </div>
-    </div>
+        <span>
+          <Caption className="text-black/40 mr-1.5">Already have an account?</Caption>
+          <Link to="/login">
+            <Caption className="link">Login here</Caption>
+          </Link>
+        </span>
+      </form>
+      <Terms open={modalVisibility} setOpen={setModalVisibility} onConfirm={handleSubmit} />
+    </>
   );
 };
 

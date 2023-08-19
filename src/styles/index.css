@@ -79,6 +79,10 @@
   }
   body {
     @apply bg-background text-foreground;
+    margin-right: 0px !important;
+  }
+  body:not(.anything) {
+    margin-right: 0px !important;
   }
   .markdown * {
     all: revert;

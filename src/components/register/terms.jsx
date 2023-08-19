@@ -1,41 +1,44 @@
-import { Button, Modal } from "flowbite-react";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  Button
+} from "@/components/common";
 
-const Terms = ({ show, setShow, onConfirm }) => {
+const Terms = ({ open, setOpen, onConfirm }) => {
   return (
-    <Modal
-      show={show}
-      onClose={() => {
-        setShow(false);
+    <AlertDialog
+      open={open}
+      onOpenChange={(open) => {
+        if (!open) setOpen(false);
       }}
     >
-      <Modal.Header color="white">Confirm Participation</Modal.Header>
-      <Modal.Body>
-        <div className="space-y-6">
-          <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Confirm Participation</AlertDialogTitle>
+          <AlertDialogDescription>
             My team and I hereby conform to the rules and regulations of the competition as well as give our consent for
             the software created and uploaded to this website to be made open source and publicly available.
-          </p>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() => {
-            setShow(false);
-            onConfirm(null, true);
-          }}
-        >
-          Agree & Continue
-        </Button>
-        <Button
-          color="gray"
-          onClick={() => {
-            setShow(false);
-          }}
-        >
-          Decline
-        </Button>
-      </Modal.Footer>
-    </Modal>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <Button
+            onClick={() => {
+              setOpen(false);
+              onConfirm(null, true);
+            }}
+          >
+            Agree & Continue
+          </Button>
+          <Button variant="secondary" onClick={() => setOpen(false)}>
+            Decline
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

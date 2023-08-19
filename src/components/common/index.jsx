@@ -1,10 +1,11 @@
-export * from "./buttons";
+export * from "./alert-dialog";
 export * from "./typography";
 export * from "./toast";
 export * from "./tooltip";
 
 export { default as AnimatedSwitcher } from "./animated-switcher";
-export { default as Background } from "./background";
+export { default as Badge } from "./badges";
+export { default as Button } from "./button";
 export { default as Input } from "./input";
 export { default as Loader } from "./loader";
 export { default as Filters } from "./filters";

@@ -20,10 +20,8 @@ const ResetPassword = () => {
     })
       .unwrap()
       .then(() => {
+        navigate("/login");
         toast({ title: "Password reset successfully!" });
-        setTimeout(() => {
-          navigate("/login");
-        }, 3500);
       });
   };
 

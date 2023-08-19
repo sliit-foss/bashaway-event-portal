@@ -17,10 +17,8 @@ const ChangePassword = () => {
     })
       .unwrap()
       .then(() => {
+        navigate("/profile");
         toast({ title: "Password changed successfully" });
-        setTimeout(() => {
-          navigate("/profile");
-        }, 3500);
       });
   };
 
