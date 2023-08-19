@@ -1,11 +1,12 @@
 import { Scroll } from "lucide-react";
+import { isEmpty } from "lodash";
 import { AnimatedSwitcher, Badge, BodyText3, Headline, Skeleton } from "@/components/common";
 
 export const ProfileCard = ({ member }) => {
   return (
     <div className="group h-full w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl">
       <AnimatedSwitcher
-        show={!!member}
+        show={!isEmpty(member)}
         component={
           <div className="w-full h-full flex flex-col p-5 gap-4 rounded-2xl transition-all duration-medium card-red cursor-default">
             <Headline className="transition-all duration-medium card-red-title font-bold leading-[1.75rem]">

@@ -13,11 +13,11 @@ const ProfileHeader = ({ team }) => {
             {team?.name}
           </span>
           <div className="flex flex-col md:flex-row gap-4 md:gap-3 my-4 cursor-default">
-            <Badge className="border flex justify-center items-center gap-1.5 card-red-badge">
+            <Badge className="normal-case border flex justify-center items-center gap-1.5 card-red-badge">
               {team?.email}
               <Mail className="translate-y-[-0.025rem]" size={14} />
             </Badge>
-            <Badge className="border flex justify-center self-center items-center gap-1 card-red-badge">
+            <Badge className="normal-case border flex justify-center self-center items-center gap-1 card-red-badge">
               {team?.university}
               <GraduationCap className="translate-y-[-0.075rem]" size={16} />
             </Badge>
