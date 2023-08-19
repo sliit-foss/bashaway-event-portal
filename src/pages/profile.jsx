@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BreadCrumbs, Button, toast } from "@/components/common";
 import { ProfileCard, ProfileHeader } from "@/components/profile";
 import { useTitle } from "@/hooks";
@@ -11,25 +11,6 @@ const Profile = () => {
   const [updateProfile] = useUpdateProfileMutation();
 
   const [formData, setFormData] = useState(user);
-
-  useEffect(() => {
-    const userData = { ...user };
-    if (userData.members) {
-      const memberCount = userData.members.length;
-      for (let i = 0; i < 4 - memberCount; i++) {
-        userData.members = [
-          ...userData.members,
-          {
-            name: "",
-            email: "",
-            phone: "",
-            academic_year: ""
-          }
-        ];
-      }
-    }
-    setFormData(userData);
-  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
