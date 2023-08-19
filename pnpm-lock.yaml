@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  react-loading-skeleton@3.3.1:
+    hash: 52x5vj6r56omziw4aqhgmk2gqm
+    path: patches/react-loading-skeleton@3.3.1.patch
+
 dependencies:
   '@azure/storage-blob':
     specifier: 12.15.0
@@ -64,7 +69,7 @@ dependencies:
     version: 5.3.4(@babel/core@7.22.9)(react-dom@18.0.0)(react@18.0.0)
   react-loading-skeleton:
     specifier: 3.3.1
-    version: 3.3.1(react@18.0.0)
+    version: 3.3.1(patch_hash=52x5vj6r56omziw4aqhgmk2gqm)(react@18.0.0)
   react-markdown:
     specifier: 8.0.3
     version: 8.0.3(@types/react@18.0.28)(react@18.0.0)
@@ -4077,13 +4082,14 @@ packages:
       - '@babel/core'
     dev: false
 
-  /react-loading-skeleton@3.3.1(react@18.0.0):
+  /react-loading-skeleton@3.3.1(patch_hash=52x5vj6r56omziw4aqhgmk2gqm)(react@18.0.0):
     resolution: {integrity: sha512-NilqqwMh2v9omN7LteiDloEVpFyMIa0VGqF+ukqp0ncVlYu1sKYbYGX9JEl+GtOT9TKsh04zCHAbavnQ2USldA==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
       react: 18.0.0
     dev: false
+    patched: true
 
   /react-markdown@8.0.3(@types/react@18.0.28)(react@18.0.0):
     resolution: {integrity: sha512-We36SfqaKoVNpN1QqsZwWSv/OZt5J15LNgTLWynwAN5b265hrQrsjMtlRNwUvS+YyR3yDM8HpTNc4pK9H/Gc0A==}

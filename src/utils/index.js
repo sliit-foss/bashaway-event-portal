@@ -1,4 +1,5 @@
-import jwt_decode from "jwt-decode";
+export * from "./colors";
+export * from "./jwt";
 
 export const getRegexPatternFromKey = (key) => {
   if (key === "password")
@@ -30,12 +31,4 @@ export const downloadFile = (url) => {
       a.click();
     });
   });
-};
-
-export const authUser = () => {
-  const token = localStorage.getItem("access_token");
-  if (token) {
-    return jwt_decode(token);
-  }
-  return null;
 };

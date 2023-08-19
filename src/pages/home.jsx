@@ -1,67 +1,53 @@
 import { useState } from "react";
-import { Pagination } from "flowbite-react";
-import { Filters, NoRecords, Sorts } from "@/components/common";
-import { Question, Timer } from "@/components/home";
-import { questionFilters, questionSorts } from "@/filters";
+import { AnimatedSwitcher, Filters, NoRecords, Pagination, Sorts } from "@/components/common";
+import { Question, QuestionGridSkeleton } from "@/components/home";
+import { computeFilterQuery, computeSortQuery, questionFilters, questionSorts } from "@/filters";
 import { useTitle } from "@/hooks";
 import { useGetQuestionsQuery } from "@/store/api";
 
-const openingDate = new Date(2022, 9, 1, 9, 0, 0).getTime();
+const gridStyles = "w-full h-full grid grid-cols-1 lg:grid-cols-2 justify-start items-center gap-5";
 
 const Home = () => {
   const [page, setPage] = useState(1);
-  const [filters, setFilters] = useState("");
-  const [sorts, setSorts] = useState("");
+  const [filters, setFilters] = useState(computeFilterQuery(questionFilters));
+  const [sorts, setSorts] = useState(computeSortQuery(questionSorts));
 
-  const { data: questions } = useGetQuestionsQuery({ filters, sorts, page });
+  const { data: questions, isFetching, isError } = useGetQuestionsQuery({ filters, sorts, page });
 
   useTitle("Home | Bashaway");
 
   return (
-    <div className="w-full flex flex-col justify-center items-center">
-      {Date.now() >= openingDate ? (
-        questions && (
-          <>
-            <div className="w-10/12 flex flex-col justify-center items-start mt-24 mb-5">
-              <Filters filters={questionFilters} setFilterQuery={setFilters} />
-              <Sorts sorts={questionSorts} setSortQuery={setSorts} />
-            </div>
-            <div className="w-10/12 min-h-screen flex flex-col justify-between items-center mb-16">
-              <div className="w-full h-full flex flex-col justify-start items-center gap-y-6">
-                {questions.data?.docs?.length > 0 ? (
-                  questions.data?.docs?.map((question) => {
-                    return (
-                      <div key={`question-list-${question.id}`} className="w-full flex justify-center items-center">
-                        <Question question={question} />
-                      </div>
-                    );
-                  })
-                ) : (
-                  <NoRecords text="No Questions Found" className="mt-12" />
-                )}
+    <>
+      <div className="w-full flex flex-col justify-center items-center gap-6 mb-8">
+        <Filters filters={questionFilters} setFilterQuery={setFilters} />
+        <Sorts sorts={questionSorts} setSortQuery={setSorts} />
+      </div>
+      <div className="w-full min-h-[60vh] flex flex-col gap-12 justify-between items-center">
+        <AnimatedSwitcher
+          show={isFetching || isError}
+          component={<QuestionGridSkeleton className={gridStyles} />}
+          alternateComponent={
+            questions?.data?.docs?.length ? (
+              <div className={gridStyles}>
+                {questions?.data?.docs?.map((question) => (
+                  <Question key={`question-list-${question.id}`} question={question} />
+                ))}
               </div>
-              <div className="w-full flex justify-end items-center mt-4 md:mt-0">
-                <Pagination
-                  currentPage={page}
-                  onPageChange={(newPage) => {
-                    setPage(newPage);
-                  }}
-                  showIcons={true}
-                  totalPages={questions.data?.totalPages}
-                />
-              </div>
-            </div>
-          </>
-        )
-      ) : (
-        <>
-          <span className="text-gray-light text-center text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-12 font-semibold">
-            Competition Starts In
-          </span>
-          <Timer />
-        </>
-      )}
-    </div>
+            ) : (
+              <NoRecords text="No challenges have been uploaded yet" className="mt-12" />
+            )
+          }
+        />
+        <div className="w-full flex justify-end items-center mt-4 md:mt-0">
+          <Pagination
+            currentPage={page}
+            onPageChange={(newPage) => setPage(newPage)}
+            showIcons={true}
+            totalPages={questions?.data?.totalPages}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

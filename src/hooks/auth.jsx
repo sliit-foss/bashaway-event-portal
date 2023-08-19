@@ -12,6 +12,8 @@ const useAuth = () => {
   useEffect(() => {
     if (!localStorage.getItem("access_token") && !whitelistedPaths.includes(location.pathname.split("/")[1])) {
       navigate("/login");
+    } else if (["/login", "/register"].includes(location.pathname) && localStorage.getItem("access_token")) {
+      navigate("/");
     }
     setCompleted(true);
   }, [location]);

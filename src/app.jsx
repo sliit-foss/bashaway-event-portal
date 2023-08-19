@@ -12,27 +12,25 @@ const App = () => {
   return (
     <Provider store={store}>
       <TooltipProvider>
-        <main className="w-full flex flex-col items-center min-h-screen mx-auto relative z-50">
-          <Header />
-          <motion.div
-            key={location.pathname}
-            className="w-full relative z-[5] font-inter overflow-x-hidden pt-[calc(70px+64px)] xs:pt-[calc(90px+96px)] pb-24"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0.3 } }}
-            transition={{ duration: 0.3 }}
-          >
-            <AnimatedRoutes />
-          </motion.div>
-          <Footer />
-          <Loader />
-          <Toaster />
-          <div
-            className={`fixed inset-0 h-screen w-full bg-white z-50 transition-all duration-long ${
-              completed ? "opacity-0 pointer-events-none" : "opacity-100"
-            }`}
-          />
-        </main>
+        <Header />
+        <motion.main
+          key={location.pathname}
+          className="w-full max-w-body mx-auto px-8 lg:px-24 flex flex-col items-center relative z-[5] font-inter overflow-x-hidden pt-[calc(70px+64px)] xs:pt-[calc(90px+72px)] pb-24"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.3 } }}
+          transition={{ duration: 0.3 }}
+        >
+          <AnimatedRoutes />
+        </motion.main>
+        <Footer />
+        <Loader />
+        <Toaster />
+        <div
+          className={`fixed inset-0 h-screen w-full bg-white z-50 transition-all duration-long ${
+            completed ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        />
       </TooltipProvider>
     </Provider>
   );

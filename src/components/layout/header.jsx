@@ -2,11 +2,11 @@ import { useState } from "react";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { AnimatedSwitcher, Button, Skeleton } from "@/components/common";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
 import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@/icons";
 import { useAuthUserQuery, useLogoutMutation } from "@/store/api";
-import { Button, Skeleton } from "..";
 
 const internalNavLinks = [
   {
@@ -52,7 +52,7 @@ const Header = ({ className }) => {
   return (
     <header
       className={twMerge(
-        `w-full min-h-[70px] xs:min-h-[90px] backdrop-blur-md fixed z-[200] transition-all duration-long`,
+        `w-full min-h-[70px] xs:min-h-[90px] backdrop-blur-md fixed z-[200] transition-all duration-long border-b`,
         className,
         mobileNavOpen && !breakpoints["xl"] ? "h-screen bg-white" : "h-[70px] xs:h-[90px] bg-white/80"
       )}
@@ -78,13 +78,15 @@ const Header = ({ className }) => {
         </div>
         <div className={twMerge("absolute inset-0 xl:relative")}>
           <div className="w-full min-h-[70px] xs:min-h-[90px] xl:!min-h-0 flex justify-end items-center px-8 lg:px-24 relative z-50">
-            <RxHamburgerMenu
-              className={twMerge(mobileNavIconStyles, mobileNavOpen ? "opacity-0 pointer-events-none" : "opacity-100")}
-              onClick={setMobileNavOpen.bind(this, true)}
-            />
-            <RxCross1
-              className={twMerge(mobileNavIconStyles, mobileNavOpen ? "opacity-100" : "opacity-0 pointer-events-none")}
-              onClick={setMobileNavOpen.bind(this, false)}
+            <AnimatedSwitcher
+              show={!mobileNavOpen && !breakpoints["xl"]}
+              className="flex justify-center items-center h-full w-full"
+              component={
+                <RxHamburgerMenu className={twMerge(mobileNavIconStyles)} onClick={setMobileNavOpen.bind(this, true)} />
+              }
+              alternateComponent={
+                <RxCross1 className={twMerge(mobileNavIconStyles)} onClick={setMobileNavOpen.bind(this, false)} />
+              }
             />
           </div>
           <div

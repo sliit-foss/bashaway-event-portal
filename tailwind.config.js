@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       colors: {
-        "border": "hsl(var(--border))",
+        "border": "var(--border)",
         "input": "hsl(var(--input))",
         "ring": "hsl(var(--ring))",
         "background": "hsl(var(--background))",
@@ -69,7 +69,7 @@ export default {
       },
       maxWidth: {
         body: "1680px",
-        form: "700px"
+        form: "600px"
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

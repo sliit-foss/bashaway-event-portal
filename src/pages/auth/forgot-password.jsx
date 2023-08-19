@@ -25,7 +25,7 @@ const ForgotPassword = () => {
   useTitle("Reset Password | Bashaway");
 
   return (
-    <div className="w-full min-h-[70vh] flex flex-col justify-center items-center px-6 sm:px-16">
+    <div className="w-full min-h-[70vh] flex flex-col justify-center items-center">
       <form className="w-full max-w-form flex flex-col items-center gap-5" onSubmit={handleForm}>
         <div className="flex flex-col items-center gap-3 md:gap-2 mb-6 pointer-events-none">
           <Title>Forgot Password?</Title>

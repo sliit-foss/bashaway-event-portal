@@ -6,7 +6,7 @@ export const questionApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getQuestions: builder.query({
-      query: ({ filters, sorts, page }) => `/api/questions?${filters}&${sorts}&page=${page}&limit=5`
+      query: ({ filters, sorts, page }) => `/api/questions?${filters}&${sorts}&page=${page}&limit=6`
     }),
     getQuestionById: builder.query({
       query: (id) => `/api/questions/${id}`

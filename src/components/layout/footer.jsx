@@ -19,7 +19,7 @@ const Footer = ({ className }) => {
     <>
       <div className="divider" />
       <footer
-        className={twMerge(`flex w-full justify-center  z-50`, className)}
+        className={twMerge(`bg-white flex w-full justify-center z-50`, className)}
         style={{
           boxShadow: "0px -40px 100px var(--background)"
         }}

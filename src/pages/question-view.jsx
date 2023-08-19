@@ -102,7 +102,7 @@ export default function QuestionView() {
               </div>
             </div>
             <div className="w-11/12 flex justify-start items-center my-6 pl-6">
-              <ReactMarkdown className="invert markdown">{question.description}</ReactMarkdown>
+              <ReactMarkdown className="markdown">{question.description}</ReactMarkdown>
             </div>
             <div className="w-10/12 flex mt-10 mb-4 ml-6 justify-start items-center">
               <Button
