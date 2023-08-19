@@ -6,15 +6,15 @@ import { store } from "@/store";
 import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
 
 const Profile = () => {
-  const { data: { data: user } = {} } = useAuthUserQuery();
+  const { data: { data: team } = {} } = useAuthUserQuery();
 
   const [updateProfile] = useUpdateProfileMutation();
 
-  const [formData, setFormData] = useState(user);
+  const [formData, setFormData] = useState(team);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateProfile(user._id, {
+    await updateProfile(team._id, {
       name: formData.name,
       university: formData.university,
       members: formData.members.filter((member) => !!member.name)
@@ -31,13 +31,13 @@ const Profile = () => {
   return (
     <>
       <BreadCrumbs breadcrumbs={["Home", "Profile"]} />
-      <ProfileHeader team={formData} />
+      <ProfileHeader team={team} />
       <Button to="/change-password" className="my-5 font-semibold">
         Change Password
       </Button>
       <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-start items-center gap-5 mt-6">
         {Array.from({ length: 4 }).map((_, index) => (
-          <ProfileCard key={`member-${index}`} member={formData?.members?.[index]} />
+          <ProfileCard key={`member-${index}`} member={team?.members?.[index]} />
         ))}
       </div>
     </>
