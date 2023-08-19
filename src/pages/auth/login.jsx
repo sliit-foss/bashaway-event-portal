@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Caption, Input, Subtitle, Title } from "@/components/common";
 import { useTitle } from "@/hooks";
-import { useLoginMutation } from "@/store/api";
+import { store } from "@/store";
+import { authApi, useLoginMutation } from "@/store/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ const Login = () => {
       password: e.target.password.value
     })
       .unwrap()
-      .then(() => navigate("/"));
+      .then((result) => {
+        store.dispatch(authApi.util.upsertQueryData("authUser", undefined, { data: result.data.user }));
+        navigate("/");
+      });
   };
 
   useTitle("Login | Bashaway");

@@ -5,6 +5,7 @@ export * from "./tooltip";
 
 export { default as AnimatedSwitcher } from "./animated-switcher";
 export { default as Badge } from "./badges";
+export { default as BreadCrumbs } from "./breadcrumbs";
 export { default as Button } from "./button";
 export { default as Input } from "./input";
 export { default as Loader } from "./loader";

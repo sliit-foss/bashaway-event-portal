@@ -5,16 +5,31 @@
   .link {
     @apply hover:opacity-70 transition-all duration-medium;
   }
-  .card-red {
+  .card-red-bg {
     background: linear-gradient(180deg, rgba(255, 0, 0, 0.06) 0%, rgba(255, 0, 0, 0.04) 100%);
-    @apply group-hover:filter hover:brightness-200;
-    @apply [&>h2]:text-[#680000];
+  }
+  .card-red-title {
+    @apply text-[#680000];
+  }
+  .card-red-body {
+    @apply text-[#66000099];
+  }
+  .card-red-border {
+    border: 2px solid rgba(255, 0, 0, 0.18);
+  }
+  .card-red-badge-text {
+    @apply text-[#C00];
+  }
+  .card-red-badge {
+    @apply card-red-bg card-red-badge-text card-red-border filter hover:brightness-200;
+  }
+  .card-red {
+    @apply card-red-bg [&>h2]:card-red-title group-hover:filter hover:brightness-200;
     > div > span {
-      @apply text-[#C00];
-      border: 2px solid rgba(255, 0, 0, 0.18);
+      @apply card-red-badge-text card-red-border;
     }
     > .markdown {
-      @apply text-[#66000099];
+      @apply card-red-body;
       > p {
         all: unset;
       }
@@ -22,8 +37,7 @@
   }
   .card-blue {
     background: linear-gradient(180deg, rgba(68, 0, 255, 0.06) 0%, rgba(68, 0, 255, 0.04) 100%);
-    @apply group-hover:filter hover:brightness-200;
-    @apply [&>h2]:text-[#3500CC];
+    @apply group-hover:filter hover:brightness-200 [&>h2]:text-[#3500CC];
     > div > span {
       @apply text-[#3500CC];
       border: 2px solid rgba(68, 0, 255, 0.18);

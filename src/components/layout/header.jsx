@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
+import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { AnimatedSwitcher, Button, Skeleton } from "@/components/common";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
 import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@/icons";
-import { useAuthUserQuery, useLogoutMutation } from "@/store/api";
+import { authApi, useAuthUserQuery, useLogoutMutation } from "@/store/api";
 
 const internalNavLinks = [
   {
@@ -33,19 +34,22 @@ const Header = ({ className }) => {
 
   const location = useLocation();
 
+  const dispatch = useDispatch();
+
   const [logout] = useLogoutMutation();
 
-  const { isLoading, isError } = useAuthUserQuery();
+  const { data, isLoading, isError } = useAuthUserQuery();
 
   const onNavItemClick = (section) => {
     if (!breakpoints["xl"]) setMobileNavOpen(false);
     navigate(section.path);
   };
 
-  const onLogoutClick = () => {
-    logout().finally(() => {
-      localStorage.clear();
-    });
+  const onLogoutClick = async () => {
+    logout();
+    localStorage.clear();
+    dispatch(authApi.util.resetApiState());
+    if (!breakpoints["xl"]) setMobileNavOpen(false);
     navigate("/login");
   };
 
@@ -122,7 +126,7 @@ const Header = ({ className }) => {
               </a>
               <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] before:group-hover:w-[1.45rem] xl:before:group-hover:w-[0.75rem] translate-y-[-0.1rem]" />
             </div>
-            {isLoading ? (
+            {!data && isLoading ? (
               <Skeleton containerClassName="w-48 xl:w-24 h-[2.2rem]" className="rounded-full" />
             ) : isError ? (
               <Button to={location.pathname === "/login" ? "/register" : "/login"} className={buttonStyles}>

@@ -12,7 +12,6 @@ export const authApi = createApi({
       transformResponse: (response) => {
         localStorage.setItem("access_token", response.data.access_token);
         localStorage.setItem("refresh_token", response.data.refresh_token);
-        authApi.util.updateQueryData("authUser", () => response.data.user);
         return response;
       }
     }),
