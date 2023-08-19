@@ -1,10 +1,11 @@
 import { GraduationCap, Mail } from "lucide-react";
+import { isEmpty } from "lodash";
 import { AnimatedSwitcher, Badge, Skeleton } from "@/components/common";
 
 const ProfileHeader = ({ team }) => {
   return (
     <AnimatedSwitcher
-      show={team}
+      show={!isEmpty(team)}
       className="w-full flex flex-col justify-center items-center"
       component={
         <>
