@@ -1,6 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 import { toast } from "@/components";
+import { authUser } from "@/utils";
 import { mutationHelper } from "./mutation-helper";
 
 export * from "./mutation-helper";
@@ -9,11 +10,11 @@ const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BASHAWAY_BE_URL,
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers) => {
     headers.set("authorization", `Bearer ${localStorage.getItem("access_token")}`);
-    const authUser = getState().authApi.authUser;
-    if (authUser) {
-      headers.set("x-user-email", authUser.email);
+    const user = authUser();
+    if (user) {
+      headers.set("x-user-email", user.email);
     }
     return headers;
   }
