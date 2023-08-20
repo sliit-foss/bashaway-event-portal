@@ -7,7 +7,7 @@ import {
   Login,
   NotFound,
   Profile,
-  QuestionView,
+  QuestionDetails,
   Register,
   ResetPassword,
   Submissions
@@ -21,7 +21,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/questions/:id" element={<QuestionView />} />
+        <Route path="/questions/:id" element={<QuestionDetails />} />
         <Route path="/questions/:id/submissions" element={<Submissions />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:code" element={<ResetPassword />} />

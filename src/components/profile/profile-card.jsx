@@ -4,7 +4,7 @@ import { AnimatedSwitcher, Badge, BodyText3, Headline, Skeleton } from "@/compon
 
 export const ProfileCard = ({ member }) => {
   return (
-    <div className="group h-full w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl">
+    <div className="group w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl">
       <AnimatedSwitcher
         show={!isEmpty(member)}
         component={

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BreadCrumbs, Button, toast } from "@/components/common";
 import { ProfileCard, ProfileHeader } from "@/components/profile";
-import { useTitle } from "@/hooks";
+import { useEffectOnce, useTitle } from "@/hooks";
 import { store } from "@/store";
 import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
 
@@ -28,6 +28,10 @@ const Profile = () => {
 
   useTitle("Profile | Bashaway");
 
+  useEffectOnce(() => {
+    window.scroll({ top: 0, behavior: "smooth" });
+  });
+
   return (
     <>
       <BreadCrumbs breadcrumbs={["Home", "Profile"]} />
@@ -35,7 +39,7 @@ const Profile = () => {
       <Button to="/change-password" className="my-5 font-semibold">
         Change Password
       </Button>
-      <div className="w-full h-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-start items-center gap-5 mt-6">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-start items-center gap-5 mt-6">
         {Array.from({ length: 4 }).map((_, index) => (
           <ProfileCard key={`member-${index}`} member={team?.members?.[index]} />
         ))}
