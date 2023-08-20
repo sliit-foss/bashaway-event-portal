@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useEffect } from "react";
 import { Plus } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { useSelector } from "react-redux";
@@ -9,7 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { AnimatedSwitcher, BreadCrumbs, Button, Skeleton, Subheadline, Subtitle, toast } from "@/components/common";
 import { ActionButtons, SubmissionCount } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
-import { uploadFile } from "@/services";
+import { tracker, uploadFile } from "@/services";
 import { useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
 import { challengeColor } from "@/utils";
 
@@ -26,7 +27,7 @@ export default function QuestionDetails() {
     )
   );
 
-  const { data: { data: question = questionFromStore } = {}, refetch } = useGetQuestionByIdQuery(id);
+  const { data: { data: question = questionFromStore } = {}, refetch, isSuccess } = useGetQuestionByIdQuery(id);
 
   const [addSubmission] = useAddSubmissionMutation();
 
@@ -60,6 +61,15 @@ export default function QuestionDetails() {
   useEffectOnce(() => {
     window.scroll({ top: 0, behavior: "smooth" });
   });
+
+  useEffect(() => {
+    if (isSuccess && question?._id)
+      tracker.page("challenge_view", {
+        challenge_id: question?._id,
+        challenge_name: question?.name,
+        challenge_difficulty: question?.difficulty
+      });
+  }, [question, isSuccess]);
 
   return (
     <>

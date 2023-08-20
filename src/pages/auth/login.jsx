@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Caption, Input, Subtitle, Title } from "@/components/common";
 import { useTitle } from "@/hooks";
+import { tracker } from "@/services";
 import { store } from "@/store";
 import { authApi, useLoginMutation } from "@/store/api";
 
@@ -11,6 +12,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    tracker.event("login", { team_email: e.target.email.value });
     await login({
       email: e.target.email.value,
       password: e.target.password.value
