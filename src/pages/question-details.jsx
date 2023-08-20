@@ -110,7 +110,7 @@ export default function QuestionDetails() {
           document.getElementById("file-upload").click();
         }}
       >
-        <Plus />
+        <Plus strokeWidth="2.5" />
         Add Submission
       </Button>
       <input id="file-upload" type="file" className="hidden" onChange={onFileChange} />

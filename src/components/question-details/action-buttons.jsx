@@ -12,7 +12,7 @@ const ActionButtons = ({ question, className, buttonClassName }) => {
       </Button>
       <Button
         className={buttonClassName}
-        disabled={!question?.total_submissions}
+        disabled={!question}
         onClick={() => navigate(`/questions/${question._id}/submissions`)}
       >
         View submissions
