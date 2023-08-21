@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
@@ -17,6 +17,8 @@ import { challengeColor } from "@/utils";
 export default function QuestionDetails() {
   const { id } = useParams();
 
+  const [uploading, setUploading] = useState(false);
+
   const questionFromStore = useSelector(
     createSelector(
       (store) => store.questionApi.queries,
@@ -29,26 +31,25 @@ export default function QuestionDetails() {
 
   const { data: { data: question = questionFromStore } = {}, refetch, isSuccess } = useGetQuestionByIdQuery(id);
 
-  const [addSubmission] = useAddSubmissionMutation();
+  const [addSubmission, { isLoading }] = useAddSubmissionMutation();
 
-  const onFileChange = (e) => {
+  const onFileChange = async (e) => {
     if (!isEmpty(e.target.files)) {
-      uploadFile(e.target.files[0])
-        .then((url) => {
-          addSubmission({
-            question: id,
-            link: url
-          })
-            .unwrap()
-            .then(() => {
-              toast({ title: "Submission added successfully" });
-              refetch();
-            });
-        })
-        .catch((e) => {
-          console.error(`Submission failed - message: `, e.message);
-          toast({ variant: "destructive", title: "Submission upload failed" });
-        });
+      setUploading(true);
+      try {
+        const url = await uploadFile(e.target.files[0]);
+        await addSubmission({ question: id, link: url })
+          .unwrap()
+          .then(() => {
+            toast({ title: "Submission added successfully" });
+            refetch();
+          });
+      } catch (e) {
+        console.error(`Submission failed - message: `, e.message);
+        toast({ variant: "destructive", title: "Submission upload failed" });
+      } finally {
+        setUploading(false);
+      }
     }
   };
 
@@ -93,7 +94,7 @@ export default function QuestionDetails() {
                 <Subtitle>{question?.max_score}PT</Subtitle>
                 <Subtitle>{question?.constraints?.join(", ")}</Subtitle>
               </div>
-              <ActionButtons question={question} />
+              <ActionButtons question={question} loading={uploading || isLoading} />
             </div>
           }
           alternateComponent={

@@ -1,11 +1,11 @@
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { Button } from "@/components/common";
+import { AnimatedSwitcher, Button } from "@/components/common";
 import { useGetSettingsQuery } from "@/store/api";
 import { downloadFile } from "@/utils";
 
-const ActionButtons = ({ question, className, buttonClassName }) => {
+const ActionButtons = ({ loading = false, question, className, buttonClassName }) => {
   const { data: { data: settings } = {}, isLoading } = useGetSettingsQuery();
 
   const navigate = useNavigate();
@@ -14,9 +14,15 @@ const ActionButtons = ({ question, className, buttonClassName }) => {
       <Button
         className={twMerge("py-2 md:py-1.5", buttonClassName)}
         disabled={isLoading || new Date(settings?.submission_deadline) < new Date()}
+        loading={loading}
         onClick={() => document.getElementById("file-upload").click()}
       >
-        <Plus strokeWidth="2.5" />
+        <AnimatedSwitcher
+          show={!loading}
+          className="w-auto h-auto"
+          component={<Plus strokeWidth="2.5" />}
+          alternateComponent={null}
+        />
         Add Submission
       </Button>
       <Button
