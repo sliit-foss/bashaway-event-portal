@@ -1,14 +1,14 @@
 import { useMemo } from "react";
 import { useEffect } from "react";
-import { Plus } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createSelector } from "@reduxjs/toolkit";
 import { isEmpty, startCase } from "lodash";
 import { twMerge } from "tailwind-merge";
-import { AnimatedSwitcher, BreadCrumbs, Button, Skeleton, Subheadline, Subtitle, toast } from "@/components/common";
-import { ActionButtons, SubmissionCount } from "@/components/question-details";
+import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, Subheadline, Subtitle, toast } from "@/components/common";
+import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { tracker, uploadFile } from "@/services";
 import { useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
@@ -30,8 +30,6 @@ export default function QuestionDetails() {
   const { data: { data: question = questionFromStore } = {}, refetch, isSuccess } = useGetQuestionByIdQuery(id);
 
   const [addSubmission] = useAddSubmissionMutation();
-
-  const submissionsDisabled = Date.now() > new Date(2022, 9, 1, 15, 0, 0).getTime();
 
   const onFileChange = (e) => {
     if (!isEmpty(e.target.files)) {
@@ -79,13 +77,13 @@ export default function QuestionDetails() {
           show={!isEmpty(question)}
           className="cursor-default"
           component={
-            <div
-              className={twMerge(
-                "w-full flex flex-col p-5 gap-6 rounded-2xl transition-all duration-medium",
-                cardStyles
-              )}
-            >
-              <SubmissionCount question={question} />
+            <div className={twMerge("w-full flex flex-col p-5 gap-6 rounded-2xl", cardStyles)}>
+              <Badge className="normal-case border flex justify-center self-start items-center gap-1.5">
+                {!isEmpty(question) ? question?.total_submissions : <Skeleton className="w-1.5 h-2" shade="dark" />}{" "}
+                {question?.total_submissions === 1 ? "team " : "teams "}
+                submitted
+                <CheckCircle2 size={16} />
+              </Badge>
               <Subheadline className="transition-all duration-medium">{question?.name}</Subheadline>
               <ReactMarkdown className="markdown [&>p]:font-semibold line-clamp-3">
                 {question?.description}
@@ -100,29 +98,25 @@ export default function QuestionDetails() {
           }
           alternateComponent={
             <Skeleton containerClassName="flex" className="flex flex-col p-5 gap-6 rounded-2xl">
-              <SubmissionCount question={question} className="z-50" />
-              <Skeleton className="w-3/4 md:w-1/2 h-[1.5rem] mt-1.5" shade="dark" />
-              <Skeleton containerClassName=" mt-2" className="w-full h-[1.1rem] mb-[0.12rem]" count={3} shade="dark" />
-              <div className="flex flex-wrap gap-3 [&>span]:border-2 [&>span]:border-black/10 [&>span]:px-3 [&>span]:py-2 [&>span]:rounded-lg z-50">
-                <Skeleton className="w-[2.25rem] h-6 rounded-sm" shade="dark" />
-                <Skeleton className="w-[2.25rem] h-6 rounded-sm" shade="dark" />
-                <Skeleton className="w-[2.25rem] h-6 rounded-sm" shade="dark" />
-              </div>
+              <Skeleton className="w-[167px] h-[2.1rem] rounded-full" shade="dark" />
+              <Skeleton className="w-3/4 md:w-1/2 h-[1.1em] lg:h-[1.35rem] mt-1.5" shade="dark" />
+              <Skeleton
+                containerClassName=" mt-2"
+                className="w-full h-[0.98rem] sm:h-[1.05rem] lg:h-[1.13rem] mt-[0.05rem] mb-[0.1rem]"
+                count={3}
+                shade="dark"
+              />
+              <Skeleton
+                containerClassName="flex flex-wrap gap-1.5 mt-[0.1rem]"
+                className="w-[4rem] h-[2.6rem] mb-[0.08rem] rounded-[7px] z-50"
+                count={3}
+                shade="dark"
+              />
               <ActionButtons question={question} className="z-50" buttonClassName="py-2.5" />
             </Skeleton>
           }
         />
       </div>
-      <Button
-        className="px-6 text-[20px] mt-12"
-        disabled={submissionsDisabled}
-        onClick={() => {
-          document.getElementById("file-upload").click();
-        }}
-      >
-        <Plus strokeWidth="2.5" />
-        Add Submission
-      </Button>
       <input id="file-upload" type="file" className="hidden" onChange={onFileChange} />
     </>
   );
