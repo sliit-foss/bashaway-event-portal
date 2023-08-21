@@ -1,4 +1,5 @@
 import { Watch } from "react-loader-spinner";
+import { Button } from "@/components";
 import { useTitle } from "@/hooks";
 
 const NotFound = () => {
@@ -16,6 +17,9 @@ const NotFound = () => {
         visible={true}
       />
       <h1 className="text-black text-6xl font-bold mt-10">404</h1>
+      <Button to="/" className="px-6 py-2 text-[20px] mt-10">
+        Back to Home
+      </Button>
     </div>
   );
 };

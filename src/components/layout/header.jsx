@@ -65,7 +65,7 @@ const Header = ({ className }) => {
         <div
           className={twMerge(
             "grid place-content-start grid-flow-col items-center space-x-[20px] sm:space-x-[30px] transition-all duration-medium",
-            mobileNavOpen && !breakpoints["xl"] ? "opacity-0" : "opacity-100 pointer-events-none"
+            !breakpoints["xl"] ? (mobileNavOpen ? "opacity-0" : "opacity-100 pointer-events-none") : ""
           )}
         >
           <Link
