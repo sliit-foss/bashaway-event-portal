@@ -42,7 +42,6 @@ const Home = () => {
           <Pagination
             currentPage={page}
             onPageChange={(newPage) => setPage(newPage)}
-            showIcons={true}
             totalPages={questions?.data?.totalPages}
           />
         </div>

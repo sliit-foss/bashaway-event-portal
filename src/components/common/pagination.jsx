@@ -7,6 +7,7 @@ const Pagination = (props) => {
       nextLabel=""
       previousLabel=""
       totalPages={props.totalPages ?? 1}
+      showIcons={true}
       onPageChange={(newPage) => {
         props.onPageChange(newPage);
         setTimeout(() => {

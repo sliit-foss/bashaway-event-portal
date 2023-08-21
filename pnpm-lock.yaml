@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   react-loading-skeleton@3.3.1:
-    hash: 52x5vj6r56omziw4aqhgmk2gqm
+    hash: qsdv3g4pd4v5gxcsksyyrgf5ci
     path: patches/react-loading-skeleton@3.3.1.patch
 
 dependencies:
@@ -55,9 +55,9 @@ dependencies:
   lucide-react:
     specifier: 0.263.1
     version: 0.263.1(react@18.0.0)
-  moment:
-    specifier: 2.29.4
-    version: 2.29.4
+  moment-timezone:
+    specifier: 0.5.43
+    version: 0.5.43
   react:
     specifier: 18.0.0
     version: 18.0.0
@@ -75,7 +75,7 @@ dependencies:
     version: 5.3.4(@babel/core@7.22.9)(react-dom@18.0.0)(react@18.0.0)
   react-loading-skeleton:
     specifier: 3.3.1
-    version: 3.3.1(patch_hash=52x5vj6r56omziw4aqhgmk2gqm)(react@18.0.0)
+    version: 3.3.1(patch_hash=qsdv3g4pd4v5gxcsksyyrgf5ci)(react@18.0.0)
   react-markdown:
     specifier: 8.0.3
     version: 8.0.3(@types/react@18.0.28)(react@18.0.0)
@@ -329,7 +329,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.22.9
       '@babel/helper-validator-option': 7.22.5
-      browserslist: 4.21.9
+      browserslist: 4.21.10
       lru-cache: 5.1.1
       semver: 6.3.1
     dev: false
@@ -383,7 +383,7 @@ packages:
       '@babel/core': ^7.4.0 || ^8.0.0-0 <8.0.0
     dependencies:
       '@babel/core': 7.22.9
-      '@babel/helper-compilation-targets': 7.22.9(@babel/core@7.22.9)
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4(supports-color@5.5.0)
       lodash.debounce: 4.0.8
@@ -413,7 +413,7 @@ packages:
     resolution: {integrity: sha512-aBiH1NKMG0H2cGZqspNvsaBe6wNGjbJjuLy29aU+eDZjSbbN53BaxlpB02xm9v34pLTZ1nIQPFYn2qMZoa5BQQ==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
     dev: false
 
   /@babel/helper-module-imports@7.22.5:
@@ -439,7 +439,7 @@ packages:
     resolution: {integrity: sha512-HBwaojN0xFRx4yIvpwGqxiV2tUfl7401jlok564NgB9EHS1y6QT17FmKWm4ztqjeVdXLuC4fSvHc5ePpQjoTbw==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
     dev: false
 
   /@babel/helper-plugin-utils@7.22.5:
@@ -480,7 +480,7 @@ packages:
     resolution: {integrity: sha512-tK14r66JZKiC43p8Ki33yLBVJKlQDFoA8GYN67lWCDCqoL6EMMSuM9b+Iff2jHaM/RRFYl7K+iiru7hbRqNx8Q==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
     dev: false
 
   /@babel/helper-split-export-declaration@7.22.6:
@@ -621,7 +621,7 @@ packages:
     dependencies:
       '@babel/compat-data': 7.22.9
       '@babel/core': 7.22.9
-      '@babel/helper-compilation-targets': 7.22.9(@babel/core@7.22.9)
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.22.9)
       '@babel/plugin-transform-parameters': 7.22.5(@babel/core@7.22.9)
@@ -954,7 +954,7 @@ packages:
     dependencies:
       '@babel/core': 7.22.9
       '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-compilation-targets': 7.22.9(@babel/core@7.22.9)
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-environment-visitor': 7.22.5
       '@babel/helper-function-name': 7.22.5
       '@babel/helper-optimise-call-expression': 7.22.5
@@ -1067,7 +1067,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.22.9
-      '@babel/helper-compilation-targets': 7.22.9(@babel/core@7.22.9)
+      '@babel/helper-compilation-targets': 7.22.10
       '@babel/helper-function-name': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
     dev: false
@@ -1335,7 +1335,7 @@ packages:
       '@babel/helper-module-imports': 7.22.5
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-jsx': 7.22.5(@babel/core@7.22.9)
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
     dev: false
 
   /@babel/plugin-transform-regenerator@7.22.10(@babel/core@7.22.9):
@@ -6707,7 +6707,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@babel/traverse': 7.22.8(supports-color@5.5.0)
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
       invariant: 2.2.4
       metro-symbolicate: 0.76.7
       nullthrows: 1.1.1
@@ -6723,7 +6723,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@babel/traverse': 7.22.8(supports-color@5.5.0)
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
       invariant: 2.2.4
       metro-symbolicate: 0.76.8
       nullthrows: 1.1.1
@@ -6784,7 +6784,7 @@ packages:
       '@babel/core': 7.22.9
       '@babel/generator': 7.22.9
       '@babel/parser': 7.22.7
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
       babel-preset-fbjs: 3.4.0(@babel/core@7.22.9)
       metro: 0.76.7
       metro-babel-transformer: 0.76.7
@@ -6811,7 +6811,7 @@ packages:
       '@babel/parser': 7.22.7
       '@babel/template': 7.22.5
       '@babel/traverse': 7.22.8(supports-color@5.5.0)
-      '@babel/types': 7.22.5
+      '@babel/types': 7.22.10
       accepts: 1.3.8
       async: 3.2.4
       chalk: 4.1.2
@@ -7101,6 +7101,12 @@ packages:
     hasBin: true
     dependencies:
       minimist: 1.2.8
+    dev: false
+
+  /moment-timezone@0.5.43:
+    resolution: {integrity: sha512-72j3aNyuIsDxdF1i7CEgV2FfxM1r6aaqJyLB2vwb33mXYyoyLly+F1zbWqhA3/bVIoJ4szlUoMbUnVdid32NUQ==}
+    dependencies:
+      moment: 2.29.4
     dev: false
 
   /moment@2.29.4:
@@ -7747,7 +7753,7 @@ packages:
       - '@babel/core'
     dev: false
 
-  /react-loading-skeleton@3.3.1(patch_hash=52x5vj6r56omziw4aqhgmk2gqm)(react@18.0.0):
+  /react-loading-skeleton@3.3.1(patch_hash=qsdv3g4pd4v5gxcsksyyrgf5ci)(react@18.0.0):
     resolution: {integrity: sha512-NilqqwMh2v9omN7LteiDloEVpFyMIa0VGqF+ukqp0ncVlYu1sKYbYGX9JEl+GtOT9TKsh04zCHAbavnQ2USldA==}
     peerDependencies:
       react: '>=16.8.0'

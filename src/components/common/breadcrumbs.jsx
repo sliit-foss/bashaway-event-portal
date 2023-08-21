@@ -5,7 +5,7 @@ import { Badge } from "@/components/common";
 
 const Breadcrumbs = ({ breadcrumbs }) => {
   return (
-    <div className="w-full flex flex-wrap items-center gap-2.5 cursor-default">
+    <div className="w-full flex flex-wrap items-center gap-2.5 gap-y-4 cursor-default">
       {breadcrumbs.map((breadcrumb, index) => (
         <Fragment key={index}>
           <Link to={breadcrumb.path ?? "/"} className={index === breadcrumbs.length - 1 ? "pointer-events-none" : ""}>

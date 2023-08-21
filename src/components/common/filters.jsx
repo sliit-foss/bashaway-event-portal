@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { SearchIcon } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { Dropdown, Input } from "@/components";
 import { computeFilterQuery } from "@/filters";
 
-const Filters = ({ filters, setFilterQuery }) => {
+const Filters = ({ filters, setFilterQuery, styles = {} }) => {
   const [filtersLocalState, setFiltersLocalState] = useState(filters);
 
   useEffect(() => {
@@ -20,12 +21,12 @@ const Filters = ({ filters, setFilterQuery }) => {
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row justify-start items-center gap-6">
+    <div className={twMerge("w-full flex flex-col md:flex-row justify-start items-center gap-6", styles.root)}>
       {filtersLocalState.map((filter, index) => {
         return (
           <div
             key={`filter-${filter.key}-${index}`}
-            className="w-full md:w-1/2 h-full flex flex-col justify-center items-start"
+            className={twMerge("w-full md:w-1/2 h-full flex flex-col justify-center items-start", styles.filter)}
           >
             {filter.options ? (
               <Dropdown
@@ -33,13 +34,13 @@ const Filters = ({ filters, setFilterQuery }) => {
                 label={filter.label}
                 filterkey={filter.key}
                 options={filter.options}
-                className="h-12 sm:h-14 font-medium text-black/70"
+                className={twMerge("h-12 sm:h-14 font-medium text-black/70", styles.input)}
                 onChange={onFilterChange}
               />
             ) : (
               <Input
                 variant="secondary"
-                className="h-12 sm:h-14 font-medium"
+                className={twMerge("h-12 sm:h-14 font-medium", styles.input)}
                 value={filter.value}
                 placeholder={`Search by ${filter.label?.toLowerCase()}`}
                 name={filter.key}

@@ -6,7 +6,7 @@ import { twMerge } from "tailwind-merge";
 import { computeSortQuery } from "@/filters";
 import { useBreakpoint } from "@/hooks";
 
-const Sorts = ({ sorts, setSortQuery }) => {
+const Sorts = ({ sorts, setSortQuery, styles = {} }) => {
   const [sortLocalState, setSortLocalState] = useState(sorts);
 
   useEffect(() => {
@@ -25,9 +25,14 @@ const Sorts = ({ sorts, setSortQuery }) => {
   };
 
   return (
-    <div className="w-full flex justify-start items-center gap-6 mt-3 mb-2">
+    <div className={twMerge("w-full flex justify-start items-center gap-6 mt-3 mb-2", styles.root)}>
       {sortLocalState.map((sort, index) => (
-        <Sort key={`sort-${sort.key}-${index}`} sort={sort} onSortChange={onSortChange} className="w-1/2 md:w-1/4" />
+        <Sort
+          key={`sort-${sort.key}-${index}`}
+          sort={sort}
+          onSortChange={onSortChange}
+          className={twMerge("w-1/2 md:w-1/4", styles.sort)}
+        />
       ))}
     </div>
   );
