@@ -64,7 +64,7 @@ export default function QuestionDetails() {
 
   useEffect(() => {
     if (isSuccess && question?._id)
-      tracker.page("challenge_view", {
+      tracker.event("challenge_view", {
         challenge_id: question?._id,
         challenge_name: question?.name,
         challenge_difficulty: question?.difficulty
