@@ -20,16 +20,15 @@ jobs:
     steps:
       - name: Checkout repository 🛎️
         uses: actions/checkout@v3
-      
-      - name: Create .env from secrets
-        run: |
-          echo ${{ secrets.SECRETS_STAGING }} > .env
 
       - name: Build 🏗️
         uses: ./.github/actions/build
         env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+          VITE_BASHAWAY_BE_URL: ${{ secrets.STAGING_BASHAWAY_BE_URL }}
+          VITE_FIREBASE_CONFIG: ${{ secrets.STAGING_FIREBASE_CONFIG }}
+          VITE_AZURE_SAS_TOKEN: ${{ secrets.STAGING_AZURE_SAS_TOKEN }}
+          VITE_AZURE_STORAGE_ACCOUNT: ${{ secrets.STAGING_AZURE_STORAGE_ACCOUNT }}
+          VITE_APP_ENV: staging
 
       - name: Upload build files 📤
         uses: sliit-foss/actions/preview-deployments/postbuild@main

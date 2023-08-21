@@ -1,11 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "react-toastify/dist/ReactToastify.css";
-import App from "./app";
-import "./styles/index.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import { BrowserRouter } from "react-router-dom";
+import { default as App } from "@/app";
+import "@/styles/index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const Root = () => {
+  let basename = "/";
+
+  const matchPreviewDeployment = window.location.pathname.match(/preview\/pr-\d+/);
+
+  if (matchPreviewDeployment) {
+    basename += matchPreviewDeployment[0];
+  }
+
+  return (
+    <React.StrictMode>
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Root />);

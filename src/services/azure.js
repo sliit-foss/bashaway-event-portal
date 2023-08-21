@@ -1,4 +1,4 @@
-import store from "@/store";
+import { authUser } from "@/utils";
 import { BlobServiceClient } from "@azure/storage-blob";
 
 const blobServiceClient = new BlobServiceClient(
@@ -8,7 +8,7 @@ const containerClient = blobServiceClient.getContainerClient(`answers-${import.m
 
 export const uploadFile = async (file) => {
   const blockBlobClient = containerClient.getBlockBlobClient(
-    `${store.getState().user?.name}/${new Date().toLocaleString()}/${file.name}`
+    `${authUser()?.name}/${new Date().toLocaleString()}/${file.name}`
   );
   await blockBlobClient.uploadBrowserData(file);
   return blockBlobClient.url;

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { MdArrowDropDownCircle, MdOutlineCircle } from "react-icons/md";
+import { ArrowDown01, ArrowDown10, ArrowUpDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { startCase } from "lodash";
+import { twMerge } from "tailwind-merge";
+import { computeSortQuery } from "@/filters";
+import { useBreakpoint } from "@/hooks";
 
-const Sorts = ({ sorts, setSortQuery }) => {
+const Sorts = ({ sorts, setSortQuery, styles = {} }) => {
   const [sortLocalState, setSortLocalState] = useState(sorts);
 
   useEffect(() => {
-    const query = sortLocalState.reduce((acc, curr) => {
-      if (curr.direction !== 0) {
-        acc += `sort[${curr.key}]=${curr.direction}&`;
-      }
-      return acc;
-    }, "");
-    setSortQuery(query);
+    setSortQuery(computeSortQuery(sortLocalState));
   }, [sortLocalState]);
 
   const onSortChange = (key, direction) => {
@@ -26,29 +25,27 @@ const Sorts = ({ sorts, setSortQuery }) => {
   };
 
   return (
-    <div className="w-full mt-4">
-      <div className="w-full flex justify-start items-center gap-6">
-        {sortLocalState.map((sort, index) => {
-          return (
-            <div
-              key={`sort-${sort.key}-${index}`}
-              className="w-1/2 md:w-1/4 h-full flex flex-col justify-center items-start"
-            >
-              <Sort sort={sort} onSortChange={onSortChange} />
-            </div>
-          );
-        })}
-      </div>
+    <div className={twMerge("w-full flex justify-start items-center gap-6 mt-3 mb-2", styles.root)}>
+      {sortLocalState.map((sort, index) => (
+        <Sort
+          key={`sort-${sort.key}-${index}`}
+          sort={sort}
+          onSortChange={onSortChange}
+          className={twMerge("w-1/2 md:w-1/4", styles.sort)}
+        />
+      ))}
     </div>
   );
 };
 
-const Sort = ({ sort, onSortChange }) => {
+const Sort = ({ sort, onSortChange, className }) => {
   const [directionLocalState, setDirectionLocalState] = useState(sort.direction);
 
   useEffect(() => {
     onSortChange(sort.key, directionLocalState);
   }, [directionLocalState]);
+
+  const { md } = useBreakpoint();
 
   const setSortOrder = () => {
     if (directionLocalState === 0) {
@@ -61,17 +58,35 @@ const Sort = ({ sort, onSortChange }) => {
   };
 
   return (
-    <div className="w-full h-full flex justify-start items-center">
-      <div className="text-2xl text-white mr-2 cursor-pointer" onClick={setSortOrder}>
-        {directionLocalState === 0 ? (
-          <MdOutlineCircle />
-        ) : (
-          <MdArrowDropDownCircle
-            className={`text-primary transform ${directionLocalState === 1 ? "" : "rotate-180"}`}
-          />
+    <div
+      className={twMerge("w-full h-full flex justify-start items-center cursor-pointer group", className)}
+      onClick={setSortOrder}
+    >
+      <div
+        className={twMerge(
+          "text-2xl mr-2 transition-all duration-medium p-1 rounded-sm text-black/60 group-hover:text-black/90",
+          directionLocalState === 0 ? "bg-white" : "bg-black/10"
         )}
+      >
+        <motion.div
+          key={`${sort.key}-${directionLocalState}`}
+          initial={{ opacity: 0, translateY: -5 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          exit={{ opacity: 0, translateY: 5, transition: { duration: 0.3 } }}
+          transition={{ duration: 0.3 }}
+        >
+          {directionLocalState === 0 ? (
+            <ArrowUpDown size={16} />
+          ) : directionLocalState === 1 ? (
+            <ArrowDown01 size={16} />
+          ) : (
+            <ArrowDown10 size={16} />
+          )}
+        </motion.div>
       </div>
-      <span className="text-md text-white font-semibold">{sort.label}</span>
+      <span className="text-md text-black/70 group-hover:text-black/90 font-semibold transition-all duration-150">
+        {md ? sort.label : startCase(sort.label.replace("Sort by", ""))}
+      </span>
     </div>
   );
 };
