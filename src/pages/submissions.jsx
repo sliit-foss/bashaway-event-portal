@@ -14,6 +14,8 @@ const Submissions = () => {
   const [filters, setFilters] = useState(computeFilterQuery(submissionFilters));
   const [sorts, setSorts] = useState(computeSortQuery(submissionSorts));
 
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(-1);
+
   const {
     data: submissions,
     isFetching,
@@ -57,8 +59,14 @@ const Submissions = () => {
             alternateComponent={
               submissions?.data?.docs?.length ? (
                 <>
-                  {submissions?.data?.docs?.map((submission) => (
-                    <Submission key={`submission-${submission._id}`} submission={submission} />
+                  {submissions?.data?.docs?.map((submission, index) => (
+                    <Submission
+                      key={`submission-${submission._id}`}
+                      submission={submission}
+                      onMouseEnter={() => setHoveredCardIndex(index)}
+                      onMouseLeave={() => setHoveredCardIndex(-1)}
+                      highlight={index === 0 && hoveredCardIndex === -1}
+                    />
                   ))}
                 </>
               ) : (

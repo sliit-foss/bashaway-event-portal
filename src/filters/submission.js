@@ -19,7 +19,7 @@ export const submissionSorts = [
   {
     key: "created_at",
     label: "Sort by upload time",
-    direction: 0
+    direction: -1
   },
   {
     key: "score",
