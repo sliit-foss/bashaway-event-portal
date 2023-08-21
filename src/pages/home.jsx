@@ -38,7 +38,7 @@ const Home = () => {
             )
           }
         />
-        <div className="w-full flex justify-end items-center mt-4 md:mt-0">
+        <div className="w-full flex justify-center items-center mt-6 mb-2">
           <Pagination
             currentPage={page}
             onPageChange={(newPage) => setPage(newPage)}
