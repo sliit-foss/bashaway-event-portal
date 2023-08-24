@@ -1,7 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/common";
 import { scorekeeperRepositoryLink } from "@/constants";
-import { downloadFile } from "@/utils";
 
 export const Actions = ({ submission, className, buttonClassName }) => (
   <div className={twMerge("w-full md:w-auto flex flex-col md:flex-row justify-end gap-3 mt-1", className)}>
@@ -15,13 +14,6 @@ export const Actions = ({ submission, className, buttonClassName }) => (
         View Results
       </Button>
     </a>
-    <Button
-      className={twMerge("w-full md:w-auto self-start md:self-center", buttonClassName)}
-      onClick={() => downloadFile(submission?.link)}
-      disabled={!submission}
-    >
-      Download
-    </Button>
   </div>
 );
 
