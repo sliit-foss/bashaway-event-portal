@@ -3,7 +3,10 @@ import ReactDOM from "react-dom/client";
 import "react-loading-skeleton/dist/skeleton.css";
 import { BrowserRouter } from "react-router-dom";
 import { default as App } from "@/app";
+import initializeTracing from "@/services/sentry";
 import "@/styles/index.css";
+
+initializeTracing();
 
 const Root = () => {
   let basename = "/";

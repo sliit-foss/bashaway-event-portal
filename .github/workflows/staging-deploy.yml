@@ -19,6 +19,7 @@ jobs:
           VITE_FIREBASE_CONFIG: ${{ secrets.STAGING_FIREBASE_CONFIG }}
           VITE_AZURE_SAS_TOKEN: ${{ secrets.STAGING_AZURE_SAS_TOKEN }}
           VITE_AZURE_STORAGE_ACCOUNT: ${{ secrets.STAGING_AZURE_STORAGE_ACCOUNT }}
+          VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           VITE_APP_ENV: staging
       
       - name: Fix base URL 🔧
