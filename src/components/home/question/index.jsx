@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { startCase } from "lodash";
 import { twMerge } from "tailwind-merge";
 import { challengeColor } from "@/utils";
-import { Subheadline, Subtitle } from "../..";
+import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
 
 export { default as QuestionGridSkeleton } from "./skeleton";
 
@@ -32,12 +32,12 @@ export const Question = ({ question }) => {
           cardStyles
         )}
       >
-        <Subheadline className="transition-all duration-medium">{question.name}</Subheadline>
+        <Body3 className="font-bold transition-all duration-medium">{question.name}</Body3>
         <ReactMarkdown className="markdown [&>p]:font-semibold line-clamp-3">{cleanedDescription}</ReactMarkdown>
         <div className="flex flex-wrap gap-3 [&>span]:px-3 [&>span]:py-2 [&>span]:rounded-lg [&>span]:transition-all [&>span]:duration-medium">
-          <Subtitle>{startCase(question.difficulty.toLowerCase())}</Subtitle>
-          <Subtitle>{question.max_score}PT</Subtitle>
-          <Subtitle>{question.constraints?.join(", ")}</Subtitle>
+          <Footnote>{startCase(question.difficulty.toLowerCase())}</Footnote>
+          <Footnote>{question.max_score}PT</Footnote>
+          <Footnote>{question.constraints?.join(", ")}</Footnote>
         </div>
       </div>
     </Link>

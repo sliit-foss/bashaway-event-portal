@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import { BreadCrumbs, Button, toast } from "@/components/common";
 import { ProfileCard, ProfileHeader } from "@/components/profile";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { store } from "@/store";
 import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
+import { BreadCrumbs, Button, toast } from "@sliit-foss/bashaway-ui/components";
 
 const Profile = () => {
   const { data: { data: team } = {} } = useAuthUserQuery();

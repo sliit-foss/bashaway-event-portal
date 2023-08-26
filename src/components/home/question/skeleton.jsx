@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/common";
+import { Skeleton } from "@sliit-foss/bashaway-ui/components";
 
 const QuestionGridSkeleton = ({ className }) => {
   return (

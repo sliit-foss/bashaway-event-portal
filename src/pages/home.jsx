@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { AnimatedSwitcher, Filters, NoRecords, Pagination, Sorts } from "@/components/common";
 import { Question, QuestionGridSkeleton } from "@/components/home";
-import { computeFilterQuery, computeSortQuery, questionFilters, questionSorts } from "@/filters";
+import { questionFilters, questionSorts } from "@/filters";
 import { useTitle } from "@/hooks";
 import { useGetQuestionsQuery } from "@/store/api";
+import { AnimatedSwitcher, Filters, NoRecords, Pagination, Sorts } from "@sliit-foss/bashaway-ui/components";
+import { computeFilterQuery, computeSortQuery } from "@sliit-foss/bashaway-ui/utils";
 
 const gridStyles = "w-full h-full grid grid-cols-1 lg:grid-cols-2 justify-start items-center gap-5";
 

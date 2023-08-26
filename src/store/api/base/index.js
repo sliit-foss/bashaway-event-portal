@@ -1,7 +1,7 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
-import { toast } from "@/components";
 import { authUser } from "@/utils";
+import { toast } from "@sliit-foss/bashaway-ui";
 import { mutationHelper } from "./mutation-helper";
 
 export * from "./mutation-helper";

@@ -1,6 +1,6 @@
 import { GraduationCap, Mail } from "lucide-react";
 import { isEmpty } from "lodash";
-import { AnimatedSwitcher, Badge, Skeleton } from "@/components/common";
+import { AnimatedSwitcher, Badge, Skeleton } from "@sliit-foss/bashaway-ui/components";
 
 const ProfileHeader = ({ team }) => {
   return (

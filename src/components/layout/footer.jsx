@@ -1,16 +1,16 @@
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
-import { facebook, instagram, linkedIn, twitter, youTube } from "@/constants";
-import { Bashaway, FOSS } from "@/icons";
+import { facebook, instagram, linkedIn, repositoryLink, sliitFossMainWebsite, twitter, youTube } from "@/constants";
+import { Bashaway, FOSS } from "@sliit-foss/bashaway-ui/icons";
 
 const usefulLinks = [
   {
     name: "Visit Us",
-    url: "https://sliitfoss.org"
+    url: sliitFossMainWebsite
   },
   {
     name: "Source Code",
-    url: "https://github.com/sliit-foss/bashaway-event-portal"
+    url: repositoryLink
   }
 ];
 

@@ -3,11 +3,12 @@ import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { AnimatedSwitcher, Button, Skeleton } from "@/components/common";
+import { leaderboardURL } from "@/constants";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
-import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@/icons";
 import { authApi, useAuthUserQuery, useLogoutMutation } from "@/store/api";
+import { AnimatedSwitcher, Button, Skeleton } from "@sliit-foss/bashaway-ui/components";
+import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@sliit-foss/bashaway-ui/icons";
 
 const internalNavLinks = [
   {
@@ -112,7 +113,7 @@ const Header = ({ className }) => {
                   {section.name}
                 </span>
               ))}
-            <a href="https://leaderboard.bashaway.sliitfoss.org" target="_blank" className="link" rel="noreferrer">
+            <a href={leaderboardURL} target="_blank" className="link" rel="noreferrer">
               Leaderboard
             </a>
             <div className="group flex gap-1.5 items-center">
