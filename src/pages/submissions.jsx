@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Submission, SubmissionListSkeleton } from "@/components/submissions";
-import { computeFilterQuery, computeSortQuery, submissionFilters, submissionSorts } from "@/filters";
+import { submissionFilters, submissionSorts } from "@/filters";
 import { useTitle } from "@/hooks";
 import { useGetMySubmissionsQuery } from "@/store/api";
 import { authUser } from "@/utils";
@@ -14,6 +14,7 @@ import {
   Sorts
 } from "@sliit-foss/bashaway-ui/components";
 import { Body2 } from "@sliit-foss/bashaway-ui/typography";
+import { computeFilterQuery, computeSortQuery } from "@sliit-foss/bashaway-ui/utils";
 
 const Submissions = () => {
   const { id: questionId } = useParams();
