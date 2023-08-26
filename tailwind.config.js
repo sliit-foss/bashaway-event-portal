@@ -1,10 +1,14 @@
-import flowbite from "flowbite/plugin";
 import animate from "tailwindcss-animate";
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  important: true,
   darkMode: ["class"],
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}", "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "node_modules/@sliit-foss/bashaway-ui/**/*.{js,jsx,ts,tsx}"
+  ],
   theme: {
     container: {
       center: true,
@@ -90,5 +94,5 @@ export default {
       }
     }
   },
-  plugins: [flowbite, animate]
+  plugins: [animate]
 };

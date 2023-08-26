@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/common";
+import { Skeleton } from "@sliit-foss/bashaway-ui/components";
 import { Actions } from "./actions";
 
 const SubmissionListSkeleton = () => {

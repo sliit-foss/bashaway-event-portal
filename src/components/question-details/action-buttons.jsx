@@ -1,9 +1,9 @@
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { AnimatedSwitcher, Button } from "@/components/common";
 import { useGetSettingsQuery } from "@/store/api";
 import { downloadFile } from "@/utils";
+import { AnimatedSwitcher, Button } from "@sliit-foss/bashaway-ui/components";
 
 const ActionButtons = ({ loading = false, question, className, buttonClassName }) => {
   const { data: { data: settings } = {}, isLoading } = useGetSettingsQuery();

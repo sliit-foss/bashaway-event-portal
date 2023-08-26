@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { startCase } from "lodash";
-import { Badge, Button, Caption, Input, Title, toast } from "@/components/common";
 import { default as Terms } from "@/components/register/terms";
 import { useTitle } from "@/hooks";
 import { useRegisterMutation } from "@/store/api";
 import { getRegexPatternFromKey } from "@/utils";
+import { Badge, Button, Input, toast } from "@sliit-foss/bashaway-ui/components";
+import { Caption, Title } from "@sliit-foss/bashaway-ui/typography";
 
 const steps = ["Team Details", "Member 01", "Member 02", "Member 03", "Member 04"];
 

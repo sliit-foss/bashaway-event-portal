@@ -1,11 +1,11 @@
 import { Provider } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Footer, Header, Loader, Toaster, TooltipProvider } from "@/components";
+import { Footer, Header } from "@/components";
 import { useAuth } from "@/hooks";
-import { ErrorBoundary } from "@/pages/error-boundary";
 import { default as AnimatedRoutes } from "@/routes";
 import { store } from "@/store";
+import { ErrorBoundary, Loader, Toaster, TooltipProvider } from "@sliit-foss/bashaway-ui/components";
 
 const App = () => {
   const location = useLocation();

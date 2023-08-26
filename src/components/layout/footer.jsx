@@ -1,7 +1,7 @@
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
 import { facebook, instagram, linkedIn, repositoryLink, sliitFossMainWebsite, twitter, youTube } from "@/constants";
-import { Bashaway, FOSS } from "@/icons";
+import { Bashaway, FOSS } from "@sliit-foss/bashaway-ui/icons";
 
 const usefulLinks = [
   {

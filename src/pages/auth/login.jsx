@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Caption, Input, Subtitle, Title } from "@/components/common";
 import { useTitle } from "@/hooks";
 import { tracker } from "@/services";
 import { store } from "@/store";
 import { authApi, useLoginMutation } from "@/store/api";
+import { Button, Input } from "@sliit-foss/bashaway-ui/components";
+import { Caption, Footnote, Title } from "@sliit-foss/bashaway-ui/typography";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Login = () => {
       <form className="w-full max-w-form flex flex-col items-center gap-5" onSubmit={handleLogin}>
         <div className="flex flex-col items-center gap-3 md:gap-2 mb-6 pointer-events-none">
           <Title>Welcome back</Title>
-          <Subtitle>Please enter your details to continue</Subtitle>
+          <Footnote>Please enter your details to continue</Footnote>
         </div>
         <Input placeholder="Email" type="email" name="email" required />
         <Input placeholder="Password" type="password" name="password" required />

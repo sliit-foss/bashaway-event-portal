@@ -7,12 +7,13 @@ import { useParams } from "react-router-dom";
 import { createSelector } from "@reduxjs/toolkit";
 import { isEmpty, startCase } from "lodash";
 import { twMerge } from "tailwind-merge";
-import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, Subheadline, Subtitle, toast } from "@/components/common";
 import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { tracker, uploadFile } from "@/services";
 import { useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
 import { challengeColor } from "@/utils";
+import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, toast } from "@sliit-foss/bashaway-ui/components";
+import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
 
 export default function QuestionDetails() {
   const { id } = useParams();
@@ -85,14 +86,14 @@ export default function QuestionDetails() {
                 submitted
                 <CheckCircle2 size={16} />
               </Badge>
-              <Subheadline className="transition-all duration-medium">{question?.name}</Subheadline>
+              <Body3 className="font-bold transition-all duration-medium">{question?.name}</Body3>
               <ReactMarkdown className="markdown [&>p]:font-semibold line-clamp-3">
                 {question?.description}
               </ReactMarkdown>
               <div className="flex flex-wrap gap-3 [&>span]:px-3 [&>span]:py-2 [&>span]:rounded-lg [&>span]:transition-all [&>span]:duration-medium">
-                <Subtitle>{startCase(question?.difficulty?.toLowerCase())}</Subtitle>
-                <Subtitle>{question?.max_score}PT</Subtitle>
-                <Subtitle>{question?.constraints?.join(", ")}</Subtitle>
+                <Footnote>{startCase(question?.difficulty?.toLowerCase())}</Footnote>
+                <Footnote>{question?.max_score}PT</Footnote>
+                <Footnote>{question?.constraints?.join(", ")}</Footnote>
               </div>
               <ActionButtons question={question} loading={uploading || isLoading} />
             </div>

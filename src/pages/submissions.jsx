@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { AnimatedSwitcher, BodyText2, BreadCrumbs, Filters, NoRecords, Pagination, Sorts } from "@/components/common";
 import { Submission, SubmissionListSkeleton } from "@/components/submissions";
 import { computeFilterQuery, computeSortQuery, submissionFilters, submissionSorts } from "@/filters";
 import { useTitle } from "@/hooks";
 import { useGetMySubmissionsQuery } from "@/store/api";
 import { authUser } from "@/utils";
+import {
+  AnimatedSwitcher,
+  BreadCrumbs,
+  Filters,
+  NoRecords,
+  Pagination,
+  Sorts
+} from "@sliit-foss/bashaway-ui/components";
+import { Body2 } from "@sliit-foss/bashaway-ui/typography";
 
 const Submissions = () => {
   const { id: questionId } = useParams();
@@ -37,7 +45,7 @@ const Submissions = () => {
         ]}
       />
       <div className="w-full h-full min-h-[70vh] flex flex-col border py-7 px-5 md:px-7 rounded-3xl mt-12 lg:mt-8">
-        <BodyText2 className="text-[22px] font-medium">{authUser()?.name}&apos;s Submissions</BodyText2>
+        <Body2 className="text-[22px] font-medium">{authUser()?.name}&apos;s Submissions</Body2>
         <div className="divider !bg-black/10 mt-4 mb-7" />
         <div className="w-full flex flex-col md:flex-row gap-6">
           <Filters

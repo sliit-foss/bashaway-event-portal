@@ -13,39 +13,21 @@ dependencies:
   '@azure/storage-blob':
     specifier: 12.15.0
     version: 12.15.0
-  '@radix-ui/react-alert-dialog':
-    specifier: 1.0.4
-    version: 1.0.4(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
-  '@radix-ui/react-toast':
-    specifier: 1.1.4
-    version: 1.1.4(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
-  '@radix-ui/react-tooltip':
-    specifier: 1.0.6
-    version: 1.0.6(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
   '@reduxjs/toolkit':
     specifier: 1.9.5
     version: 1.9.5(react-redux@8.1.2)(react@18.0.0)
   '@sentry/react':
     specifier: 7.64.0
     version: 7.64.0(react@18.0.0)
+  '@sliit-foss/bashaway-ui':
+    specifier: 0.1.9
+    version: 0.1.9(@babel/core@7.22.9)(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-native@0.72.4)(redux@4.2.1)(tailwindcss@3.3.2)
   async-mutex:
     specifier: ^0.4.0
     version: 0.4.0
-  axios:
-    specifier: 1.4.0
-    version: 1.4.0
-  class-variance-authority:
-    specifier: 0.7.0
-    version: 0.7.0
   firebase:
     specifier: 10.2.0
     version: 10.2.0(react-native@0.72.4)
-  flowbite:
-    specifier: 1.7.0
-    version: 1.7.0
-  flowbite-react:
-    specifier: 0.5.0
-    version: 0.5.0(react-dom@18.0.0)(react@18.0.0)(tailwindcss@3.3.2)
   framer-motion:
     specifier: 10.14.0
     version: 10.14.0(react-dom@18.0.0)(react@18.0.0)
@@ -76,9 +58,6 @@ dependencies:
   react-loader-spinner:
     specifier: 5.3.4
     version: 5.3.4(@babel/core@7.22.9)(react-dom@18.0.0)(react@18.0.0)
-  react-loading-skeleton:
-    specifier: 3.3.1
-    version: 3.3.1(patch_hash=qsdv3g4pd4v5gxcsksyyrgf5ci)(react@18.0.0)
   react-markdown:
     specifier: 8.0.3
     version: 8.0.3(@types/react@18.0.28)(react@18.0.0)
@@ -86,14 +65,11 @@ dependencies:
     specifier: 8.1.2
     version: 8.1.2(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react-native@0.72.4)(react@18.0.0)(redux@4.2.1)
   react-router-dom:
-    specifier: 6.3.0
-    version: 6.3.0(react-dom@18.0.0)(react@18.0.0)
+    specifier: 6.14.0
+    version: 6.14.0(react-dom@18.0.0)(react@18.0.0)
   tailwind-merge:
     specifier: 1.13.2
     version: 1.13.2
-  uuid:
-    specifier: 9.0.0
-    version: 9.0.0
 
 devDependencies:
   '@commitlint/cli':
@@ -3628,6 +3604,11 @@ packages:
       reselect: 4.1.8
     dev: false
 
+  /@remix-run/router@1.7.0:
+    resolution: {integrity: sha512-Eu1V3kz3mV0wUpVTiFHuaT8UD1gj/0VnoFHQYX35xlslQUpe8CuYoKFn9d4WZFHm3yDywz6ALZuGdnUPKrNeAw==}
+    engines: {node: '>=14'}
+    dev: false
+
   /@sentry-internal/tracing@7.64.0:
     resolution: {integrity: sha512-1XE8W6ki7hHyBvX9hfirnGkKDBKNq3bDJyXS86E0bYVDl94nvbRM9BD9DHsCFetqYkVm1yDGEK+6aUVs4CztoQ==}
     engines: {node: '>=8'}
@@ -3779,6 +3760,35 @@ packages:
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
     dependencies:
       '@sinonjs/commons': 3.0.0
+    dev: false
+
+  /@sliit-foss/bashaway-ui@0.1.9(@babel/core@7.22.9)(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-native@0.72.4)(redux@4.2.1)(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-Qa5WekvpMi0lqwWxla3YINKOtsfwbk0lOHzEGt+zt+vqxnZqCdWkspM9agwfmNvD8k/oR4CuSsNSRPUWktsevQ==}
+    dependencies:
+      '@radix-ui/react-alert-dialog': 1.0.4(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
+      '@radix-ui/react-toast': 1.1.4(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
+      '@radix-ui/react-tooltip': 1.0.6(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react@18.0.0)
+      class-variance-authority: 0.7.0
+      flowbite-react: 0.5.0(react-dom@18.0.0)(react@18.0.0)(tailwindcss@3.3.2)
+      framer-motion: 10.14.0(react-dom@18.0.0)(react@18.0.0)
+      lodash: 4.17.21
+      lucide-react: 0.263.1(react@18.0.0)
+      react: 18.0.0
+      react-dom: 18.0.0(react@18.0.0)
+      react-icons: 4.10.1(react@18.0.0)
+      react-loader-spinner: 5.3.4(@babel/core@7.22.9)(react-dom@18.0.0)(react@18.0.0)
+      react-loading-skeleton: 3.3.1(patch_hash=qsdv3g4pd4v5gxcsksyyrgf5ci)(react@18.0.0)
+      react-redux: 8.1.2(@types/react-dom@18.0.11)(@types/react@18.0.28)(react-dom@18.0.0)(react-native@0.72.4)(react@18.0.0)(redux@4.2.1)
+      react-router-dom: 6.14.0(react-dom@18.0.0)(react@18.0.0)
+      tailwind-merge: 1.13.2
+      uuid: 9.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@types/react'
+      - '@types/react-dom'
+      - react-native
+      - redux
+      - tailwindcss
     dev: false
 
   /@trivago/prettier-plugin-sort-imports@4.1.1(prettier@2.8.8):
@@ -4216,16 +4226,6 @@ packages:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
     dev: true
-
-  /axios@1.4.0:
-    resolution: {integrity: sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==}
-    dependencies:
-      follow-redirects: 1.15.2
-      form-data: 4.0.0
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-    dev: false
 
   /babel-core@7.0.0-bridge.0(@babel/core@7.22.9):
     resolution: {integrity: sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==}
@@ -5468,16 +5468,6 @@ packages:
       mini-svg-data-uri: 1.4.4
     dev: false
 
-  /follow-redirects@1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
-
   /for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -5764,12 +5754,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       source-map: 0.7.4
-    dev: false
-
-  /history@5.3.0:
-    resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
-    dependencies:
-      '@babel/runtime': 7.22.6
     dev: false
 
   /hoist-non-react-statics@3.3.2:
@@ -7267,6 +7251,7 @@ packages:
 
   /mini-svg-data-uri@1.4.4:
     resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
     dev: false
 
   /minimatch@3.1.2:
@@ -7862,6 +7847,7 @@ packages:
 
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+    dev: true
 
   /punycode@2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
@@ -8140,24 +8126,26 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.0.28)(react@18.0.0)
     dev: false
 
-  /react-router-dom@6.3.0(react-dom@18.0.0)(react@18.0.0):
-    resolution: {integrity: sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==}
+  /react-router-dom@6.14.0(react-dom@18.0.0)(react@18.0.0):
+    resolution: {integrity: sha512-YEwlApKwzMMMbGbhh+Q7MsloTldcwMgHxUY/1g0uA62+B1hZo2jsybCWIDCL8zvIDB1FA0pBKY9chHbZHt+2dQ==}
+    engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
     dependencies:
-      history: 5.3.0
+      '@remix-run/router': 1.7.0
       react: 18.0.0
       react-dom: 18.0.0(react@18.0.0)
-      react-router: 6.3.0(react@18.0.0)
+      react-router: 6.14.0(react@18.0.0)
     dev: false
 
-  /react-router@6.3.0(react@18.0.0):
-    resolution: {integrity: sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==}
+  /react-router@6.14.0(react@18.0.0):
+    resolution: {integrity: sha512-OD+vkrcGbvlwkspUFDgMzsu1RXwdjNh83YgG/28lBnDzgslhCgxIqoExLlxsfTpIygp7fc+Hd3esloNwzkm2xA==}
+    engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
     dependencies:
-      history: 5.3.0
+      '@remix-run/router': 1.7.0
       react: 18.0.0
     dev: false
 
@@ -9310,10 +9298,12 @@ packages:
 
   /uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
     dev: false
 
   /uuid@9.0.0:
     resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
+    hasBin: true
     dev: false
 
   /uvu@0.5.6:

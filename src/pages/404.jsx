@@ -1,6 +1,6 @@
 import { Watch } from "react-loader-spinner";
-import { Button } from "@/components";
 import { useTitle } from "@/hooks";
+import { Button } from "@sliit-foss/bashaway-ui/components";
 
 const NotFound = () => {
   useTitle("404 | Bashaway");

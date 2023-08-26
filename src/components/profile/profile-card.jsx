@@ -1,6 +1,7 @@
 import { Scroll } from "lucide-react";
 import { isEmpty } from "lodash";
-import { AnimatedSwitcher, Badge, BodyText3, Skeleton } from "@/components/common";
+import { AnimatedSwitcher, Badge, Skeleton } from "@sliit-foss/bashaway-ui/components";
+import { Callout } from "@sliit-foss/bashaway-ui/typography";
 
 export const ProfileCard = ({ member }) => {
   return (
@@ -13,8 +14,8 @@ export const ProfileCard = ({ member }) => {
               {member?.name}
             </span>
             <span className="flex flex-col">
-              <BodyText3 className="card-red-body text-start font-medium">{member?.email}</BodyText3>
-              <BodyText3 className="card-red-body text-start">{member?.phone}</BodyText3>
+              <Callout className="card-red-body text-start font-medium">{member?.email}</Callout>
+              <Callout className="card-red-body text-start">{member?.phone}</Callout>
             </span>
             <Badge className="border flex self-start justify-center items-center gap-1.5 card-red-badge">
               Year {member?.academic_year}

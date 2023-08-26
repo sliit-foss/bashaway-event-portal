@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Caption, Input, Subtitle, Title, toast } from "@/components/common";
 import { useTitle } from "@/hooks";
 import { useChangePasswordMutation } from "@/store/api";
 import { getRegexPatternFromKey } from "@/utils";
+import { Button, Input, toast } from "@sliit-foss/bashaway-ui/components";
+import { Caption, Footnote, Title } from "@sliit-foss/bashaway-ui/typography";
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -29,9 +30,9 @@ const ChangePassword = () => {
       <form className="w-full max-w-form flex flex-col items-center gap-5" onSubmit={handleChange}>
         <div className="flex flex-col items-center gap-3 md:gap-2 mb-6 pointer-events-none">
           <Title>Change Password</Title>
-          <Subtitle className="lg:text-center">
+          <Footnote className="lg:text-center">
             Please enter your old and new password. This will invalidate the previous password.
-          </Subtitle>
+          </Footnote>
         </div>
         <Input placeholder="Old Password" type="password" name="old_password" className="p-4" required />
         <Input

@@ -6,7 +6,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   Button
-} from "@/components/common";
+} from "@sliit-foss/bashaway-ui/components";
 
 const Terms = ({ open, setOpen, onConfirm }) => {
   return (

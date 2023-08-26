@@ -1,7 +1,7 @@
 import { FileUp } from "lucide-react";
 import { default as moment } from "moment-timezone";
 import { twMerge } from "tailwind-merge";
-import { BodyText3, Subtitle } from "@/components/common";
+import { Callout, Footnote } from "@sliit-foss/bashaway-ui/typography";
 import { Actions } from "./actions";
 
 const Submission = ({ submission, highlight = false, ...props }) => {
@@ -22,23 +22,23 @@ const Submission = ({ submission, highlight = false, ...props }) => {
             className={twMerge("opacity-90", highlight ? "card-red-title" : "group-hover:card-red-title")}
             size={22}
           />
-          <BodyText3
+          <Callout
             className={twMerge(
               "font-medium uppercase lg:text-[18px] text-black/90",
               highlight ? "card-red-title" : "group-hover:card-red-title"
             )}
           >
             {moment(submission.created_at).tz("Asia/Colombo").format("DD MMM YYYY hh:mm A")} IST{" "}
-          </BodyText3>
+          </Callout>
         </div>
-        <Subtitle
+        <Footnote
           className={twMerge(
             "font-medium text-black/40 mt-0.5 transition-all duration-medium",
             highlight ? "card-red-body" : "group-hover:card-red-body"
           )}
         >
           {submission?.score} PTS {submission.graded_by || submission.automatically_graded ? "(Graded)" : ""}{" "}
-        </Subtitle>
+        </Footnote>
       </div>
       <Actions submission={submission} buttonClassName="py-[5px] sm:py-1.5" />
     </div>
