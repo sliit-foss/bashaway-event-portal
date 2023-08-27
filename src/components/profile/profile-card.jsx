@@ -1,7 +1,9 @@
 import { Scroll } from "lucide-react";
 import { isEmpty } from "lodash";
+import { twMerge } from "tailwind-merge";
 import { store } from "@/store";
 import { toggleAddMemberDialog } from "@/store/reducers/ui/profile";
+import { isSafari } from "@/utils";
 import { AnimatedSwitcher, Badge, Button, Skeleton } from "@sliit-foss/bashaway-ui/components";
 import { Callout } from "@sliit-foss/bashaway-ui/typography";
 
@@ -9,7 +11,12 @@ const openAddMemberDialog = () => store.dispatch(toggleAddMemberDialog(true));
 
 export const ProfileCard = ({ member, loading }) => {
   return (
-    <div className="group w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl">
+    <div
+      className={twMerge(
+        "group w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl",
+        !isSafari ? "h-full " : ""
+      )}
+    >
       <AnimatedSwitcher
         show={!loading}
         component={

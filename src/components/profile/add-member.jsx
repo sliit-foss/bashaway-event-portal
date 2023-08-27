@@ -25,20 +25,23 @@ const AddMemberDialog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await updateProfile(team._id, {
-      members: [
-        ...team.members,
-        {
-          name: e.target.name.value,
-          email: e.target.email.value,
-          phone: e.target.phone.value,
-          academic_year: e.target.academic_year.value
-        }
-      ]
+    await updateProfile({
+      id: team._id,
+      data: {
+        members: [
+          ...team.members,
+          {
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            academic_year: e.target.academic_year.value
+          }
+        ]
+      }
     })
       .unwrap()
       .then((data) => {
-        store.dispatch(authApi.util.upsertQueryData("authUser", undefined, { data }));
+        store.dispatch(authApi.util.upsertQueryData("authUser", undefined, { data: data?.data }));
         close();
         toast({ title: "Member added successfully" });
       });
@@ -56,21 +59,29 @@ const AddMemberDialog = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Add teammate</AlertDialogTitle>
           </AlertDialogHeader>
-          <Input placeholder="Name *" name="name" required />
-          <Input placeholder="Email *" type="email" name="email" required />
+          <Input placeholder="Name *" name="name" required className="sm:h-14" />
+          <Input placeholder="Email *" type="email" name="email" required className="sm:h-14" />
           <Input
             placeholder="Mobile *"
             name="phone"
             pattern={getRegexPatternFromKey("phone").regex}
             title={getRegexPatternFromKey("phone").title}
             required
+            className="sm:h-14"
           />
-          <Input placeholder="Academic year *" name="academic_year" required />
+          <Input
+            placeholder="Academic year *"
+            name="academic_year"
+            pattern={getRegexPatternFromKey("academic_year").regex}
+            title={getRegexPatternFromKey("academic_year").title}
+            required
+            className="sm:h-14"
+          />
           <AlertDialogFooter className="mt-4">
             <Button type="submit" loading={isLoading}>
               Add
             </Button>
-            <Button variant="secondary" onClick={close}>
+            <Button variant="secondary" type="button" onClick={close}>
               Cancel
             </Button>
           </AlertDialogFooter>
