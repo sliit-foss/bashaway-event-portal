@@ -32,3 +32,5 @@ export const downloadFile = (url) => {
     });
   });
 };
+
+export const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);

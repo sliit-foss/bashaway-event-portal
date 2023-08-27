@@ -6,9 +6,10 @@ import { twMerge } from "tailwind-merge";
 import { leaderboardURL } from "@/constants";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
+import { BashawayPortal } from "@/icons";
 import { authApi, useAuthUserQuery, useLogoutMutation } from "@/store/api";
 import { AnimatedSwitcher, Button, Skeleton } from "@sliit-foss/bashaway-ui/components";
-import { Bashaway, BashawayPortal, FOSS, Link as LinkIcon, Times } from "@sliit-foss/bashaway-ui/icons";
+import { Bashaway, FOSS, Link as LinkIcon, Times } from "@sliit-foss/bashaway-ui/icons";
 
 const internalNavLinks = [
   {

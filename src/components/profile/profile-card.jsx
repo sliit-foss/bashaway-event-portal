@@ -1,27 +1,48 @@
 import { Scroll } from "lucide-react";
 import { isEmpty } from "lodash";
-import { AnimatedSwitcher, Badge, Skeleton } from "@sliit-foss/bashaway-ui/components";
+import { twMerge } from "tailwind-merge";
+import { store } from "@/store";
+import { toggleAddMemberDialog } from "@/store/reducers/ui/profile";
+import { isSafari } from "@/utils";
+import { AnimatedSwitcher, Badge, Button, Skeleton } from "@sliit-foss/bashaway-ui/components";
 import { Callout } from "@sliit-foss/bashaway-ui/typography";
 
-export const ProfileCard = ({ member }) => {
+const openAddMemberDialog = () => store.dispatch(toggleAddMemberDialog(true));
+
+export const ProfileCard = ({ member, loading }) => {
   return (
-    <div className="group w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl">
+    <div
+      className={twMerge(
+        "group w-full animated-border text-border from-black/20 to-border p-5 rounded-3xl",
+        !isSafari ? "h-full " : ""
+      )}
+    >
       <AnimatedSwitcher
-        show={!isEmpty(member)}
+        show={!loading}
         component={
-          <div className="w-full h-full flex flex-col p-5 gap-4 rounded-2xl transition-all duration-medium card-red cursor-default">
-            <span className="text-[23px] md:text-[25px] lg:text-[26px] text-start transition-all duration-medium card-red-title font-bold leading-[1.75rem]">
-              {member?.name}
-            </span>
-            <span className="flex flex-col">
-              <Callout className="card-red-body text-start font-medium">{member?.email}</Callout>
-              <Callout className="card-red-body text-start">{member?.phone}</Callout>
-            </span>
-            <Badge className="border flex self-start justify-center items-center gap-1.5 card-red-badge">
-              Year {member?.academic_year}
-              <Scroll className="translate-y-[-0.025rem]" size={14} />
-            </Badge>
-          </div>
+          <AnimatedSwitcher
+            show={!isEmpty(member)}
+            component={
+              <div className="w-full h-full flex flex-col p-5 gap-4 rounded-2xl transition-all duration-medium card-red cursor-default">
+                <span className="text-[23px] md:text-[25px] lg:text-[26px] text-start transition-all duration-medium card-red-title filter group-hover:brightness-150 font-bold leading-[1.75rem]">
+                  {member?.name}
+                </span>
+                <span className="flex flex-col filter group-hover:brightness-125 transition-all duration-medium">
+                  <Callout className="card-red-body text-start font-medium">{member?.email}</Callout>
+                  <Callout className="card-red-body text-start">{member?.phone}</Callout>
+                </span>
+                <Badge className="border flex self-start justify-center items-center gap-1.5 card-red-badge">
+                  Year {member?.academic_year}
+                  <Scroll className="translate-y-[-0.025rem]" size={14} />
+                </Badge>
+              </div>
+            }
+            alternateComponent={
+              <div className="w-full h-full min-h-[193px] flex flex-col justify-center items-center p-5 rounded-2xl bg-gray-100">
+                <Button onClick={openAddMemberDialog}>Add</Button>
+              </div>
+            }
+          />
         }
         alternateComponent={
           <Skeleton containerClassName="flex" className="flex flex-col p-5 gap-6 rounded-2xl">
