@@ -17,10 +17,10 @@ export const ProfileCard = ({ member, loading }) => {
             show={!isEmpty(member)}
             component={
               <div className="w-full h-full flex flex-col p-5 gap-4 rounded-2xl transition-all duration-medium card-red cursor-default">
-                <span className="text-[23px] md:text-[25px] lg:text-[26px] text-start transition-all duration-medium card-red-title font-bold leading-[1.75rem]">
+                <span className="text-[23px] md:text-[25px] lg:text-[26px] text-start transition-all duration-medium card-red-title filter group-hover:brightness-150 font-bold leading-[1.75rem]">
                   {member?.name}
                 </span>
-                <span className="flex flex-col">
+                <span className="flex flex-col filter group-hover:brightness-125 transition-all duration-medium">
                   <Callout className="card-red-body text-start font-medium">{member?.email}</Callout>
                   <Callout className="card-red-body text-start">{member?.phone}</Callout>
                 </span>
