@@ -14,14 +14,14 @@ import {
   toast
 } from "@sliit-foss/bashaway-ui/components";
 
+const close = () => store.dispatch(toggleAddMemberDialog(false));
+
 const AddMemberDialog = () => {
   const { showAddMemberDialog: open } = useSelector((store) => store.ui.profile);
 
   const { data: { data: team } = {} } = useAuthUserQuery();
 
   const [updateProfile, { isLoading }] = useUpdateProfileMutation();
-
-  const close = () => store.dispatch(toggleAddMemberDialog(false));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
