@@ -17,7 +17,7 @@ import {
 const close = () => store.dispatch(toggleAddMemberDialog(false));
 
 const AddMemberDialog = () => {
-  const { showAddMemberDialog: open } = useSelector((store) => store.ui.profile);
+  const open = useSelector((store) => store.ui.profile.showAddMemberDialog);
 
   const { data: { data: team } = {} } = useAuthUserQuery();
 
