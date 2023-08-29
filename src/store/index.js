@@ -4,7 +4,7 @@ import { default as rootReducer } from "./reducers";
 
 export function makeStore() {
   return configureStore({
-    devTools: process.env.NODE_ENV !== "production",
+    devTools: import.meta.env.VITE_APP_ENV !== "production",
     reducer: combineReducers({
       ...rootReducer,
       [authApi.reducerPath]: authApi.reducer,
