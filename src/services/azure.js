@@ -13,5 +13,5 @@ export const uploadFile = async (file) => {
     `${authUser()?.name}/${new Date().toISOString()}/${file.name}`
   );
   await blockBlobClient.uploadBrowserData(file);
-  return blockBlobClient.url;
+  return blockBlobClient.url?.split("?")[0];
 };
