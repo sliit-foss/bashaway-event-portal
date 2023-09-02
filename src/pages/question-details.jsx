@@ -10,7 +10,8 @@ import { twMerge } from "tailwind-merge";
 import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { tracker, uploadFile } from "@/services";
-import { useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
+import { store } from "@/store";
+import { submissionApi, useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
 import { challengeColor } from "@/utils";
 import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, toast } from "@sliit-foss/bashaway-ui/components";
 import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
@@ -44,6 +45,7 @@ export default function QuestionDetails() {
           .then(() => {
             toast({ title: "Submission added successfully" });
             refetch();
+            store.dispatch(submissionApi.util.resetApiState());
             document.getElementById("file-upload").value = "";
           });
       } catch (e) {
