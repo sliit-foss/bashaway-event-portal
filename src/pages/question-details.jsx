@@ -44,6 +44,7 @@ export default function QuestionDetails() {
           .then(() => {
             toast({ title: "Submission added successfully" });
             refetch();
+            document.getElementById("file-upload").value = "";
           });
       } catch (e) {
         console.error(`Submission failed - message: `, e.message);
