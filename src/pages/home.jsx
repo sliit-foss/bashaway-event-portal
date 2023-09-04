@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { MotionScreen } from "react-motion-layout";
 import { Question, QuestionGridSkeleton } from "@/components/home";
 import { questionFilters, questionSorts } from "@/filters";
 import { useTitle } from "@/hooks";
@@ -24,21 +25,23 @@ const Home = () => {
         <Sorts sorts={questionSorts} setSortQuery={setSorts} />
       </div>
       <div className="w-full min-h-[60vh] flex flex-col gap-12 justify-between items-center">
-        <AnimatedSwitcher
-          show={isFetching || isError}
-          component={<QuestionGridSkeleton className={gridStyles} />}
-          alternateComponent={
-            questions?.data?.docs?.length ? (
-              <div className={gridStyles}>
-                {questions?.data?.docs?.map((question) => (
-                  <Question key={`question-list-${question.id}`} question={question} />
-                ))}
-              </div>
-            ) : (
-              <NoRecords text="No challenges have been uploaded yet" className="mt-12" />
-            )
-          }
-        />
+        <MotionScreen>
+          <AnimatedSwitcher
+            show={isFetching || isError}
+            component={<QuestionGridSkeleton className={gridStyles} />}
+            alternateComponent={
+              questions?.data?.docs?.length ? (
+                <div className={gridStyles}>
+                  {questions?.data?.docs?.map((question) => (
+                    <Question key={`question-list-${question.id}`} question={question} />
+                  ))}
+                </div>
+              ) : (
+                <NoRecords text="No challenges have been uploaded yet" className="mt-12" />
+              )
+            }
+          />
+        </MotionScreen>
         <div className="w-full flex justify-center items-center mt-6 mb-2">
           <Pagination
             currentPage={page}
