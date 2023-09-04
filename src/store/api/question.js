@@ -1,4 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
+import { createSelector } from "@reduxjs/toolkit";
 import baseQuery from "./base";
 
 export const questionApi = createApi({
@@ -13,5 +14,15 @@ export const questionApi = createApi({
     })
   })
 });
+
+export const selectQuestionById = (id) =>
+  createSelector(
+    ({ questionApi }) => questionApi.queries,
+    (queries) =>
+      Object.values(queries)
+        .filter((q) => q.endpointName === "getQuestions")
+        ?.sort((a, b) => b?.fulfilledTimeStamp - a.fulfilledTimeStamp)?.[0]
+        ?.data?.data?.docs?.filter((q) => q?._id === id)?.[0]
+  );
 
 export const { useGetQuestionsQuery, useLazyGetQuestionsQuery, useGetQuestionByIdQuery } = questionApi;

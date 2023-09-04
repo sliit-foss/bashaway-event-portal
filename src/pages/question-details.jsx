@@ -4,14 +4,13 @@ import { CheckCircle2 } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createSelector } from "@reduxjs/toolkit";
 import { isEmpty, startCase } from "lodash";
 import { twMerge } from "tailwind-merge";
 import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { tracker, uploadFile } from "@/services";
 import { store } from "@/store";
-import { submissionApi, useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
+import { selectQuestionById, submissionApi, useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
 import { challengeColor } from "@/utils";
 import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, toast } from "@sliit-foss/bashaway-ui/components";
 import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
@@ -21,15 +20,7 @@ export default function QuestionDetails() {
 
   const [uploading, setUploading] = useState(false);
 
-  const questionFromStore = useSelector(
-    createSelector(
-      (store) => store.questionApi.queries,
-      (queries) =>
-        Object.values(queries)
-          ?.sort((a, b) => b?.fulfilledTimeStamp - a.fulfilledTimeStamp)?.[0]
-          ?.data?.data?.docs?.filter((q) => q?._id === id)?.[0]
-    )
-  );
+  const questionFromStore = useSelector(selectQuestionById(id));
 
   const { data: { data: question = questionFromStore } = {}, refetch, isSuccess } = useGetQuestionByIdQuery(id);
 
