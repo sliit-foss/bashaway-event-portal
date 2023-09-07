@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { default as Lottie } from "react-lottie";
+import { twMerge } from "tailwind-merge";
 import { Question, QuestionGridSkeleton } from "@/components/home";
 import { questionFilters, questionSorts } from "@/filters";
-import { useTitle } from "@/hooks";
+import { useBreakpoint, useTitle } from "@/hooks";
 import { useGetQuestionsQuery } from "@/store/api";
 import { AnimatedSwitcher, Filters, NoRecords, Pagination, Sorts } from "@sliit-foss/bashaway-ui/components";
 import { computeFilterQuery, computeSortQuery } from "@sliit-foss/bashaway-ui/utils";
+import { default as teamwork } from "../../public/assets/animations/teamwork.json";
 
 const gridStyles = "w-full h-full grid grid-cols-1 lg:grid-cols-2 justify-start items-center gap-5";
 
@@ -14,6 +17,8 @@ const Home = () => {
   const [sorts, setSorts] = useState(computeSortQuery(questionSorts));
 
   const { data: questions, isFetching, isError } = useGetQuestionsQuery({ filters, sorts, page });
+
+  const { xs, sm } = useBreakpoint();
 
   useTitle("Home | Bashaway");
 
@@ -27,6 +32,7 @@ const Home = () => {
         <AnimatedSwitcher
           show={isFetching || isError}
           component={<QuestionGridSkeleton className={gridStyles} />}
+          className={twMerge("grow flex flex-col", !questions?.data?.docs?.length && "justify-center")}
           alternateComponent={
             questions?.data?.docs?.length ? (
               <div className={gridStyles}>
@@ -35,7 +41,21 @@ const Home = () => {
                 ))}
               </div>
             ) : (
-              <NoRecords text="No challenges have been uploaded yet" className="mt-12" />
+              <>
+                <Lottie
+                  options={{
+                    loop: true,
+                    autoplay: true,
+                    animationData: teamwork,
+                    rendererSettings: {
+                      preserveAspectRatio: "xMidYMid slice"
+                    }
+                  }}
+                  height={200}
+                  width={sm ? 400 : xs ? 300 : 250}
+                />
+                <NoRecords text="Something's Cooking!" className="mt-12 text-center" />
+              </>
             )
           }
         />
