@@ -32,7 +32,10 @@ const Home = () => {
         <AnimatedSwitcher
           show={isFetching || isError}
           component={<QuestionGridSkeleton className={gridStyles} />}
-          className={twMerge("grow flex flex-col", !questions?.data?.docs?.length && "justify-center")}
+          className={twMerge(
+            "grow flex flex-col",
+            !questions?.data?.docs?.length && "justify-center pointer-events-none"
+          )}
           alternateComponent={
             questions?.data?.docs?.length ? (
               <div className={gridStyles}>
