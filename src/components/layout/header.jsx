@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { RiWhatsappFill } from "react-icons/ri";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { leaderboardURL } from "@/constants";
+import { leaderboardURL, ruleLink, whatsappLink } from "@/constants";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
 import { BashawayPortal } from "@/icons";
@@ -97,7 +98,7 @@ const Header = ({ className }) => {
           </div>
           <div
             className={twMerge(
-              `h-full xl:bg-transparent xl:h-auto flex flex-col xl:flex-row justify-center items-center gap-[1.575rem] cursor-pointer font-semibold text-2xl xl:text-base`,
+              `h-full xl:bg-transparent xl:h-auto flex flex-col xl:flex-row justify-center items-center gap-[1.5rem] xlm:gap-[1.575rem] cursor-pointer font-semibold text-2xl xl:text-base`,
               !breakpoints["xl"] ? "transition-all duration-medium" : "",
               mobileNavOpen && !breakpoints["xl"]
                 ? "opacity-100 delay-150 pb-[70px] xs:pb-[90px]"
@@ -118,12 +119,16 @@ const Header = ({ className }) => {
               Leaderboard
             </a>
             <div className="group flex gap-1.5 items-center">
-              <a
-                href="https://bashaway.sliitfoss.org#rules"
-                target="_blank"
-                className="link ml-8 xl:ml-0"
-                rel="noreferrer"
-              >
+              <a href={whatsappLink} target="_blank" className="link ml-3 xl:ml-0" rel="noreferrer">
+                Join
+              </a>
+              <RiWhatsappFill
+                className="transition-colors duration-medium group-hover:text-black/70 ml-0.5 xl:ml-0 transform scale-125 xl:scale-100 translate-y-[1px] xl:translate-y-0"
+                size={18}
+              />
+            </div>
+            <div className="group flex gap-1.5 items-center">
+              <a href={ruleLink} target="_blank" className="link ml-8 xl:ml-0" rel="noreferrer">
                 Rules & Regulations
               </a>
               <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] before:group-hover:w-[1.45rem] xl:before:group-hover:w-[0.75rem] translate-y-[-0.1rem]" />

@@ -83,7 +83,8 @@ export default {
       },
       screens: {
         xs: "400px",
-        xsm: "450px"
+        xsm: "450px",
+        xlm: "1320px"
       },
       transitionDuration: {
         medium: "300ms",
