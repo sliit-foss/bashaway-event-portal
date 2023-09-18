@@ -25,4 +25,30 @@ export const selectQuestionById = (id) =>
         ?.data?.data?.docs?.filter((q) => q?._id === id)?.[0]
   );
 
+export const updateQuestionStateById = (store, id, payload) => {
+  Object.values(store.getState().questionApi.queries).forEach(({ endpointName, originalArgs, data }) => {
+    if (endpointName === "getQuestions") {
+      store.dispatch(
+        questionApi.util.upsertQueryData("getQuestions", originalArgs, {
+          ...data,
+          data: {
+            ...data.data,
+            docs: data?.data?.docs?.map((q) => {
+              if (q?._id === id) return { ...q, ...payload };
+              return q;
+            })
+          }
+        })
+      );
+    } else if (endpointName === "getQuestionById" && originalArgs === id) {
+      store.dispatch(
+        questionApi.util.upsertQueryData("getQuestionById", originalArgs, {
+          ...data,
+          data: { ...data.data, ...payload }
+        })
+      );
+    }
+  });
+};
+
 export const { useGetQuestionsQuery, useLazyGetQuestionsQuery, useGetQuestionByIdQuery } = questionApi;
