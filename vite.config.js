@@ -7,7 +7,7 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
     build: {
-      sourcemap: true
+      sourcemap: process.env.VITE_APP_ENV !== "local"
     },
     plugins: [
       react(),
