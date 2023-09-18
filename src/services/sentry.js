@@ -9,8 +9,9 @@ export const initializeTracing = () => {
           maskAllText: false,
           maskAllInputs: false,
           blockAllMedia: false,
-          networkRequestHeaders: ["x-user-email"],
-          networkResponseHeaders: ["x-correlation-id"],
+          networkCaptureBodies: true,
+          networkRequestHeaders: ["X-User-Email"],
+          networkResponseHeaders: ["X-Correlation-Id"],
           networkDetailAllowUrls: [import.meta.env.VITE_BASHAWAY_BE_URL]
         })
       ],
