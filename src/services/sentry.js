@@ -9,7 +9,8 @@ export const initializeTracing = () => {
           maskAllText: false,
           maskAllInputs: false,
           networkRequestHeaders: ["x-user-email"],
-          networkResponseHeaders: ["x-correlation-id"]
+          networkResponseHeaders: ["x-correlation-id"],
+          networkDetailAllowUrls: [window.location.origin]
         })
       ],
       environment: import.meta.env.VITE_APP_ENV,
