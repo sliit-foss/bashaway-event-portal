@@ -11,7 +11,7 @@ export const initializeTracing = () => {
           blockAllMedia: false,
           networkRequestHeaders: ["x-user-email"],
           networkResponseHeaders: ["x-correlation-id"],
-          networkDetailAllowUrls: [window.location.origin]
+          networkDetailAllowUrls: [import.meta.env.VITE_BASHAWAY_BE_URL]
         })
       ],
       environment: import.meta.env.VITE_APP_ENV,
