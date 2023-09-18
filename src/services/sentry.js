@@ -8,6 +8,7 @@ export const initializeTracing = () => {
         new Sentry.Replay({
           maskAllText: false,
           maskAllInputs: false,
+          blockAllMedia: false,
           networkRequestHeaders: ["x-user-email"],
           networkResponseHeaders: ["x-correlation-id"],
           networkDetailAllowUrls: [window.location.origin]
