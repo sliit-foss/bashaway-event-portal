@@ -6,6 +6,9 @@ import { sentryVitePlugin } from "@sentry/vite-plugin";
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
+    build: {
+      sourcemap: true
+    },
     plugins: [
       react(),
       sentryVitePlugin({
