@@ -54,6 +54,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       variant: "destructive",
       title: result.error.data?.message ?? "Just patching things up. This'll be over in a jiffy!"
     });
+    result.error = result.error.data?.message ?? result.error.message ?? result.error;
   }
   return result;
 };
