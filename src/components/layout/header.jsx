@@ -48,6 +48,11 @@ const Header = ({ className }) => {
     navigate(section.path);
   };
 
+  const onLoginOrRegisterClick = () => {
+    navigate(location.pathname === "/login" ? "/register" : "/login");
+    if (!breakpoints["xl"]) setMobileNavOpen(false);
+  };
+
   const onLogoutClick = async () => {
     logout();
     localStorage.clear();
@@ -136,7 +141,7 @@ const Header = ({ className }) => {
             {!data && isLoading ? (
               <Skeleton containerClassName="w-48 xl:w-24 h-[2.2rem]" className="rounded-full" />
             ) : isError ? (
-              <Button to={location.pathname === "/login" ? "/register" : "/login"} className={buttonStyles}>
+              <Button onClick={onLoginOrRegisterClick} className={buttonStyles}>
                 {location.pathname === "/login" ? "Register" : "Login"}
               </Button>
             ) : (
