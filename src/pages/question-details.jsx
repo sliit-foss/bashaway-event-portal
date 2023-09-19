@@ -10,7 +10,13 @@ import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
 import { tracker, uploadFile } from "@/services";
 import { store } from "@/store";
-import { selectQuestionById, submissionApi, useAddSubmissionMutation, useGetQuestionByIdQuery } from "@/store/api";
+import {
+  selectQuestionById,
+  submissionApi,
+  updateQuestionStateById,
+  useAddSubmissionMutation,
+  useGetQuestionByIdQuery
+} from "@/store/api";
 import { challengeColor } from "@/utils";
 import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, toast } from "@sliit-foss/bashaway-ui/components";
 import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
@@ -22,7 +28,7 @@ export default function QuestionDetails() {
 
   const questionFromStore = useSelector(selectQuestionById(id));
 
-  const { data: { data: question = questionFromStore } = {}, refetch, isSuccess } = useGetQuestionByIdQuery(id);
+  const { data: { data: question = questionFromStore } = {}, isSuccess } = useGetQuestionByIdQuery(id);
 
   const [addSubmission, { isLoading }] = useAddSubmissionMutation();
 
@@ -40,12 +46,14 @@ export default function QuestionDetails() {
           .unwrap()
           .then(() => {
             toast({ title: "Submission added successfully" });
-            refetch();
+            updateQuestionStateById(store, id, {
+              total_submissions: !question.submitted ? question.total_submissions + 1 : question.total_submissions,
+              submitted: true
+            });
             store.dispatch(submissionApi.util.resetApiState());
             document.getElementById("file-upload").value = "";
           });
       } catch (e) {
-        console.error(`Submission failed - message: `, e.message);
         toast({ variant: "destructive", title: "Submission upload failed" });
       } finally {
         setUploading(false);
@@ -64,9 +72,9 @@ export default function QuestionDetails() {
   useEffect(() => {
     if (isSuccess && question?._id)
       tracker.event("challenge_view", {
-        challenge_id: question?._id,
-        challenge_name: question?.name,
-        challenge_difficulty: question?.difficulty
+        challenge_id: question._id,
+        challenge_name: question.name,
+        challenge_difficulty: question.difficulty
       });
   }, [question, isSuccess]);
 
