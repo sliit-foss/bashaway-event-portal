@@ -20,7 +20,7 @@ const Register = () => {
   const [register, { isLoading }] = useRegisterMutation();
 
   const [formData, setFormData] = useState(
-    [1, 2, 3, 4, 5].reduce((acc, curr, index) => {
+    [1, 2, 3, 4, 5].reduce((acc, _, index) => {
       if (index === 0) {
         acc[1] = {
           name: "",
@@ -45,10 +45,10 @@ const Register = () => {
     if (step === steps.length) {
       if (isConfirmation) {
         await register({
-          name: formData[1].name,
+          name: formData[1].name.trim(),
           email: formData[1].email,
-          password: formData[1].password,
-          university: formData[1].university,
+          password: formData[1].password.trim(),
+          university: formData[1].university.trim(),
           members: Object.values(formData)
             .slice(1)
             .filter((member) => !!member.name)
