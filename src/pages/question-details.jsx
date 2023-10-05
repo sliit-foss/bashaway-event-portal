@@ -37,8 +37,8 @@ export default function QuestionDetails() {
       setUploading(true);
       try {
         const file = e.target.files[0];
-        if (file.size > 104857600)
-          return toast({ variant: "destructive", title: "Submission size should be less than 100MB" });
+        if (file.size > 26214400)
+          return toast({ variant: "destructive", title: "Submission size should be less than 25MB" });
         if (!["zip"].includes(file.name?.split(".").pop()))
           return toast({ variant: "destructive", title: "Submission should be a zip archive" });
         const url = await uploadFile(file);
