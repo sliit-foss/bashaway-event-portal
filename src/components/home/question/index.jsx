@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { Link } from "react-router-dom";
-import { startCase } from "lodash";
+import { default as startCase } from "lodash/startCase";
 import { twMerge } from "tailwind-merge";
 import { challengeColor } from "@/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@sliit-foss/bashaway-ui/components";
