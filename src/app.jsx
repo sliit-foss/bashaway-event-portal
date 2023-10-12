@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Footer, Header } from "@/components";
+import { Footer, Header, IdentificationForm } from "@/components";
 import { useAuth } from "@/hooks";
 import { default as AnimatedRoutes } from "@/routes";
 import { store } from "@/store";
@@ -28,6 +28,7 @@ const App = () => {
           <Footer />
           <Loader />
           <Toaster />
+          <IdentificationForm />
           <div
             className={`fixed inset-0 h-screen w-full bg-white z-50 transition-all duration-long ${
               completed ? "opacity-0 pointer-events-none" : "opacity-100"
