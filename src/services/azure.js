@@ -30,5 +30,5 @@ export const uploadSubmission = async (file) => {
 };
 
 export const uploadIdCard = async (teamName, userName, file) => {
-  return uploadFile(genericContainerClient, file, `identification/${teamName}-${userName}/${file.name}`);
+  return uploadFile(genericContainerClient, file, `documents/${teamName}/${userName}-${file.name}`);
 };
