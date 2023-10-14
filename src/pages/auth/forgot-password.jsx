@@ -37,7 +37,7 @@ const ForgotPassword = () => {
         <Button className="w-full h-14 sm:h-16 text-[20px] mt-6" loading={isLoading}>
           Send
         </Button>
-        <span>
+        <span className="text-center">
           <Caption className="text-black/40 mr-1.5">Remembered your password?</Caption>
           <Link to="/login">
             <Caption className="link">Login</Caption>
