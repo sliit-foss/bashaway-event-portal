@@ -13,7 +13,7 @@
     "@azure/storage-blob": "12.15.0",
     "@reduxjs/toolkit": "1.9.5",
     "@sentry/react": "7.69.0",
-    "@sliit-foss/bashaway-ui": "0.7.3",
+    "@sliit-foss/bashaway-ui": "0.8.0",
     "async-mutex": "^0.4.0",
     "firebase": "10.2.0",
     "framer-motion": "10.14.0",

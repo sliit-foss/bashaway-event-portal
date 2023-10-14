@@ -21,7 +21,7 @@ const useIdentification = () => {
     ) {
       store.dispatch(toggleIdentificationForm(true));
     }
-  }, [settings]);
+  }, [settings, team]);
 };
 
 export default useIdentification;

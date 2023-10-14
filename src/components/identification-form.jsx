@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Paperclip } from "lucide-react";
 import { useSelector } from "react-redux";
+import { uploadIdCard } from "@/services";
 import { store } from "@/store";
 import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
 import { toggleIdentificationForm } from "@/store/reducers/ui/global";
@@ -38,12 +39,22 @@ const IdentificationForm = () => {
     if (team) setFormData(team.members);
   }, [team]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      formData.find(({ nic, meal_preference, gender }, index) => !nic || !idFiles[index] || !meal_preference || !gender)
+    ) {
+      return toast({ variant: "destructive", title: "Please make sure that all required fields are filled" });
+    }
+    const members = await Promise.all(
+      formData.map(async (member, index) => {
+        member["student_id_url"] = await uploadIdCard(team.name, member.name, idFiles[index]);
+        return member;
+      })
+    );
     await updateProfile({
       id: team._id,
-      data: {
-        members: formData
-      }
+      data: { members }
     })
       .unwrap()
       .then((data) => {
@@ -55,14 +66,14 @@ const IdentificationForm = () => {
 
   const onFileChange = (e, index) => {
     setIdFiles((prev) => {
-      const newFiles = JSON.parse(JSON.stringify(prev));
+      const newFiles = [...prev];
       newFiles[index] = e.target.files[0];
       return newFiles;
     });
   };
 
   const onChange = (e, index) => {
-    const newFormData = JSON.parse(JSON.stringify(formData));
+    const newFormData = [...formData];
     newFormData[index][e.target.name] = e.target.value;
     setFormData(newFormData);
   };
@@ -74,13 +85,16 @@ const IdentificationForm = () => {
         if (!open) close();
       }}
     >
-      <AlertDialogContent>
+      <AlertDialogContent
+        className="max-h-[100vh] overflow-y-auto z-[200]"
+        overlayClassName="bg-white/80 backdrop-blur-md z-[200]"
+      >
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <AlertDialogHeader>
             <AlertDialogTitle>Hello there!</AlertDialogTitle>
             <AlertDialogDescription>
-              Congratulations on being selected to the final round of Bashaway 2023. However, before you can continue to
-              use this platform to compete further, please fill in the following details.
+              Congratulations on making it to the final round of Bashaway 2023. However, before you can compete further,
+              please fill in the following details.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <Accordion type="single" collapsible>
@@ -88,22 +102,7 @@ const IdentificationForm = () => {
               <AccordionItem key={index} value={`member-${index}`}>
                 <AccordionTrigger>{member.name}</AccordionTrigger>
                 <AccordionContent containerClassName="flex flex-col gap-3">
-                  <Input
-                    placeholder="NIC *"
-                    name="nic"
-                    required
-                    className="sm:h-14"
-                    onChange={(e) => onChange(e, index)}
-                  />
                   <div className="flex flex-col md:flex-row gap-3">
-                    <Dropdown
-                      filterkey="gender"
-                      label="Gender *"
-                      options={gender.options}
-                      className="sm:h-14"
-                      value={formData[index].gender}
-                      onChange={(e) => onChange(e, index)}
-                    />
                     <Dropdown
                       filterkey="meal_preference"
                       label="Meal Preference *"
@@ -112,12 +111,27 @@ const IdentificationForm = () => {
                       value={formData[index].meal_preference}
                       onChange={(e) => onChange(e, index)}
                     />
+                    <Dropdown
+                      filterkey="gender"
+                      label="Gender *"
+                      options={gender.options}
+                      className="sm:h-14"
+                      contentClassName="max-h-[8.5rem] overflow-y-auto invisible-scroll"
+                      value={formData[index].gender}
+                      onChange={(e) => onChange(e, index)}
+                    />
                   </div>
+                  <Input
+                    placeholder="NIC *"
+                    name="nic"
+                    value={formData[index].nic}
+                    className="sm:h-14"
+                    onChange={(e) => onChange(e, index)}
+                  />
                   <Input
                     placeholder="University ID (both sides) *"
                     name="student_id_url"
                     value={idFiles[index] ? idFiles[index].name : formData.student_id_url}
-                    required
                     className="sm:h-14 cursor-pointer"
                     onClick={() => document.getElementById(`id-upload-${index}`).click()}
                     suffixIcon={<Paperclip className="text-gray-400 pointer-events-none" size={21} />}
