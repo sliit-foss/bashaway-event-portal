@@ -73,7 +73,7 @@ const IdentificationForm = () => {
   };
 
   const onChange = (e, index) => {
-    const newFormData = [...formData];
+    const newFormData = JSON.parse(JSON.stringify(formData));
     newFormData[index][e.target.name] = e.target.value;
     setFormData(newFormData);
   };
