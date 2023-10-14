@@ -93,7 +93,7 @@ const IdentificationForm = () => {
       }}
     >
       <AlertDialogContent
-        className="max-h-[100vh] overflow-y-auto z-[200]"
+        className="max-h-[90vh] overflow-y-auto z-[200]"
         overlayClassName="bg-white/80 backdrop-blur-md z-[200]"
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
