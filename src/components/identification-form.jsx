@@ -78,6 +78,8 @@ const IdentificationForm = () => {
     setFormData(newFormData);
   };
 
+  const partiallyFilled = team?.members?.some((m) => m.nic);
+
   return (
     <AlertDialog
       open={open}
@@ -93,11 +95,13 @@ const IdentificationForm = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Hello there!</AlertDialogTitle>
             <AlertDialogDescription>
-              Congratulations on making it to the final round of Bashaway 2023. However, before you can compete further,
-              please fill in the following details.
+              {partiallyFilled
+                ? `Looks like you've strengthened your battlion. Before we can allow your team to compete further please confirm the identity of your new members by filling what's missing below.`
+                : `Congratulations on making it to the final round of Bashaway 2023. However, before you can compete further,
+              please fill in the following details.`}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <Accordion type="single" collapsible>
+          <Accordion type="single" defaultValue={`member-${team?.members?.findIndex((m) => !m.nic)}`} collapsible>
             {formData?.map((member, index) => (
               <AccordionItem key={index} value={`member-${index}`}>
                 <AccordionTrigger>{member.name}</AccordionTrigger>
@@ -131,7 +135,7 @@ const IdentificationForm = () => {
                   <Input
                     placeholder="University ID (both sides) *"
                     name="student_id_url"
-                    value={idFiles[index] ? idFiles[index].name : formData.student_id_url}
+                    value={idFiles[index] ? idFiles[index].name : formData[index].student_id_url}
                     className="sm:h-14 cursor-pointer"
                     onClick={() => document.getElementById(`id-upload-${index}`).click()}
                     suffixIcon={<Paperclip className="text-gray-400 pointer-events-none" size={21} />}
