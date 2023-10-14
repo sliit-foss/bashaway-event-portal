@@ -13,6 +13,7 @@ const useIdentification = () => {
   useEffect(() => {
     if (
       team &&
+      team.role === "GROUP" &&
       settings?.round_breakpoint &&
       new Date() > new Date(settings?.round_breakpoint) &&
       !team.eliminated &&
