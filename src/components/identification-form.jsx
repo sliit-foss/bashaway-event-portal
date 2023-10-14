@@ -48,8 +48,9 @@ const IdentificationForm = () => {
     }
     const members = await Promise.all(
       formData.map(async (member, index) => {
-        member["student_id_url"] =
-          member["student_id_url"] || (await uploadIdCard(team.name, member.name, idFiles[index]));
+        if (idFiles[index]) {
+          member["student_id_url"] = await uploadIdCard(team.name, member.name, idFiles[index]);
+        }
         return member;
       })
     );
