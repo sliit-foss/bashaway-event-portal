@@ -34,6 +34,7 @@ const IdentificationForm = () => {
 
   const [formData, setFormData] = useState(team?.members);
   const [idFiles, setIdFiles] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (team) setFormData(team.members);
@@ -49,14 +50,13 @@ const IdentificationForm = () => {
     ) {
       return toast({ variant: "destructive", title: "Please make sure that all required fields are filled" });
     }
+    setIsUploading(true);
     const members = await Promise.all(
       formData.map(async (member, index) => {
-        if (idFiles[index]) {
-          member["student_id_url"] = await uploadIdCard(team.name, member.name, idFiles[index]);
-        }
+        if (idFiles[index]) member["student_id_url"] = await uploadIdCard(team.name, member.name, idFiles[index]);
         return member;
       })
-    );
+    ).finally(() => setIsUploading(false));
     await updateProfile({
       id: team._id,
       data: { members }
@@ -157,7 +157,7 @@ const IdentificationForm = () => {
             ))}
           </Accordion>
           <AlertDialogFooter className="mt-4">
-            <Button type="submit" loading={isLoading}>
+            <Button type="submit" loading={isLoading || isUploading}>
               Submit and continue
             </Button>
           </AlertDialogFooter>
