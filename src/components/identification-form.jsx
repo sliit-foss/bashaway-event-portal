@@ -42,7 +42,10 @@ const IdentificationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      formData.find(({ nic, meal_preference, gender }, index) => !nic || !idFiles[index] || !meal_preference || !gender)
+      formData.find(
+        ({ nic, meal_preference, gender, student_id_url }, index) =>
+          !nic || (!idFiles[index] && !student_id_url) || !meal_preference || !gender
+      )
     ) {
       return toast({ variant: "destructive", title: "Please make sure that all required fields are filled" });
     }
