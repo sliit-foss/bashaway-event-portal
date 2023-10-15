@@ -1,5 +1,5 @@
 import { Scroll } from "lucide-react";
-import { isEmpty } from "lodash";
+import { default as isEmpty } from "lodash/isEmpty";
 import { twMerge } from "tailwind-merge";
 import { store } from "@/store";
 import { toggleAddMemberDialog } from "@/store/reducers/ui/profile";

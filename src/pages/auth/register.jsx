@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { startCase } from "lodash";
+import { default as startCase } from "lodash/startCase";
 import { default as Terms } from "@/components/register/terms";
 import { useTitle } from "@/hooks";
 import { useRegisterMutation } from "@/store/api";

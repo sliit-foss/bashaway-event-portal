@@ -4,11 +4,12 @@ import { CheckCircle2 } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { isEmpty, startCase } from "lodash";
+import { default as isEmpty } from "lodash/isEmpty";
+import { default as startCase } from "lodash/startCase";
 import { twMerge } from "tailwind-merge";
 import { ActionButtons } from "@/components/question-details";
 import { useEffectOnce, useTitle } from "@/hooks";
-import { tracker, uploadFile } from "@/services";
+import { tracker, uploadSubmission } from "@/services";
 import { store } from "@/store";
 import {
   selectQuestionById,
@@ -41,7 +42,7 @@ export default function QuestionDetails() {
           return toast({ variant: "destructive", title: "Submission size should be less than 25MB" });
         if (!["zip"].includes(file.name?.split(".").pop()))
           return toast({ variant: "destructive", title: "Submission should be a zip archive" });
-        const url = await uploadFile(file);
+        const url = await uploadSubmission(file);
         await addSubmission({ question: id, link: url })
           .unwrap()
           .then(() => {

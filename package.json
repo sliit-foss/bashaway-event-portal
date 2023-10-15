@@ -1,6 +1,6 @@
 {
   "name": "bashaway-event-portal",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "vite",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build",
@@ -13,7 +13,7 @@
     "@azure/storage-blob": "12.15.0",
     "@reduxjs/toolkit": "1.9.5",
     "@sentry/react": "7.69.0",
-    "@sliit-foss/bashaway-ui": "0.5.4",
+    "@sliit-foss/bashaway-ui": "0.10.3",
     "async-mutex": "^0.4.0",
     "firebase": "10.2.0",
     "framer-motion": "10.14.0",
@@ -22,7 +22,6 @@
     "lucide-react": "0.263.1",
     "moment-timezone": "0.5.43",
     "react": "18.0.0",
-    "react-countdown": "2.3.5",
     "react-dom": "18.0.0",
     "react-icons": "4.10.1",
     "react-loader-spinner": "5.3.4",

@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { useIdentification } from "@/hooks";
 import {
   ChangePassword,
   ForgotPassword,
@@ -15,6 +16,7 @@ import {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
+  useIdentification();
   return (
     <AnimatePresence>
       <Routes location={location}>

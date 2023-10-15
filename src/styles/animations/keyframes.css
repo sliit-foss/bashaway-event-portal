@@ -1,0 +1,21 @@
+@media (max-width: 768px) {
+  @keyframes accordion-down {
+    from {
+      height: 0px;
+    }
+    to {
+      height: 276px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  @keyframes accordion-down {
+    from {
+      height: 0px;
+    }
+    to {
+      height: 208px;
+    }
+  }
+}
