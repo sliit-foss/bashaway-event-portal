@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { default as ReactMarkdown } from "react-markdown";
 import { useSelector } from "react-redux";
@@ -6,60 +6,18 @@ import { useParams } from "react-router-dom";
 import { default as isEmpty } from "lodash/isEmpty";
 import { default as startCase } from "lodash/startCase";
 import { twMerge } from "tailwind-merge";
-import { ActionButtons } from "@/components/challenge-details";
 import { useEffectOnce, useTitle } from "@/hooks";
-import { uploadSubmission } from "@/services";
-import { store } from "@/store";
-import {
-  selectEventById,
-  submissionApi,
-  updateEventStateById,
-  useAddSubmissionMutation,
-  useGetChallengeByIdQuery
-} from "@/store/api";
+import { selectEventById, useGetEventByIdQuery } from "@/store/api";
 import { challengeColor } from "@/utils";
-import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton, toast } from "@sliit-foss/bashaway-ui/components";
+import { AnimatedSwitcher, Badge, BreadCrumbs, Skeleton } from "@sliit-foss/bashaway-ui/components";
 import { Body3, Footnote } from "@sliit-foss/bashaway-ui/typography";
 
-export default function ChallengeDetails() {
-  const { challenge_id: challengeId } = useParams();
-
-  const [uploading, setUploading] = useState(false);
+export default function EventDetails() {
+  const { event_id: challengeId } = useParams();
 
   const challengeFromStore = useSelector(selectEventById(challengeId));
 
-  const { data: { data: challenge = challengeFromStore } = {} } = useGetChallengeByIdQuery(challengeId);
-
-  const [addSubmission, { isLoading }] = useAddSubmissionMutation();
-
-  const onFileChange = async (e) => {
-    if (!isEmpty(e.target.files)) {
-      setUploading(true);
-      try {
-        const file = e.target.files[0];
-        if (file.size > 26214400)
-          return toast({ variant: "destructive", title: "Submission size should be less than 25MB" });
-        if (!["zip"].includes(file.name?.split(".").pop()))
-          return toast({ variant: "destructive", title: "Submission should be a zip archive" });
-        const url = await uploadSubmission(file);
-        await addSubmission({ challenge: challengeId, link: url })
-          .unwrap()
-          .then(() => {
-            toast({ title: "Submission added successfully" });
-            updateEventStateById(store, challengeId, {
-              total_submissions: !challenge.submitted ? challenge.total_submissions + 1 : challenge.total_submissions,
-              submitted: true
-            });
-            store.dispatch(submissionApi.util.resetApiState());
-            document.getElementById("file-upload").value = "";
-          });
-      } catch (e) {
-        toast({ variant: "destructive", title: "Submission upload failed" });
-      } finally {
-        setUploading(false);
-      }
-    }
-  };
+  const { data: { data: challenge = challengeFromStore } = {} } = useGetEventByIdQuery(challengeId);
 
   useTitle("Challenge | Tech Events");
 
@@ -91,7 +49,6 @@ export default function ChallengeDetails() {
                 <Footnote>{challenge?.max_score}PT</Footnote>
                 {challenge?.constraints?.length && <Footnote>{challenge?.constraints?.join(", ")}</Footnote>}
               </div>
-              <ActionButtons challenge={challenge} loading={uploading || isLoading} />
             </div>
           }
           alternateComponent={
@@ -110,12 +67,10 @@ export default function ChallengeDetails() {
                 count={3}
                 shade="dark"
               />
-              <ActionButtons challenge={challenge} className="z-50" buttonClassName="py-2.5" />
             </Skeleton>
           }
         />
       </div>
-      <input id="file-upload" type="file" className="hidden" onChange={onFileChange} />
     </>
   );
 }

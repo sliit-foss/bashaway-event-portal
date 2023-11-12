@@ -21,7 +21,7 @@ const ForgotPassword = () => {
       });
   };
 
-  useTitle("Reset Password | Bashaway");
+  useTitle("Reset Password | Tech Events");
 
   return (
     <div className="w-full min-h-[70vh] flex flex-col justify-center items-center">

@@ -1,9 +1,10 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { useIdentification } from "@/hooks";
 import {
   ChallengeDetails,
+  Challenges,
   ChangePassword,
+  EventDetails,
   ForgotPassword,
   Home,
   Login,
@@ -16,15 +17,16 @@ import {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  useIdentification();
   return (
     <AnimatePresence>
       <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/challenges/:id" element={<ChallengeDetails />} />
-        <Route path="/challenges/:id/submissions" element={<Submissions />} />
+        <Route path="/events/:event_id" element={<EventDetails />} />
+        <Route path="/:event_id/challenges" element={<Challenges />} />
+        <Route path="/:event_id/challenges/:challenge_id" element={<ChallengeDetails />} />
+        <Route path="/:event_id/challenges/:challenge_id/submissions" element={<Submissions />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:code" element={<ResetPassword />} />
         <Route path="/change-password" element={<ChangePassword />} />

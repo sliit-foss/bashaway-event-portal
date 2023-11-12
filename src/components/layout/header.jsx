@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { RiWhatsappFill } from "react-icons/ri";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { leaderboardURL, ruleLink, whatsappLink } from "@/constants";
+import { cocLink, leaderboardURL } from "@/constants";
 import { useBreakpoint } from "@/hooks";
 import { whitelistedPaths } from "@/hooks/auth";
 import { BashawayPortal } from "@/icons";
@@ -13,10 +12,6 @@ import { AnimatedSwitcher, Button, Skeleton } from "@sliit-foss/bashaway-ui/comp
 import { Bashaway, FOSS, Link as LinkIcon, Times } from "@sliit-foss/bashaway-ui/icons";
 
 const internalNavLinks = [
-  {
-    name: "Home",
-    path: "/"
-  },
   {
     name: "Profile",
     path: "/profile"
@@ -27,6 +22,8 @@ const mobileNavIconStyles =
   "block xl:hidden absolute right-8 lg:right-24 h-[1.65rem] w-[1.65rem] cursor-pointer hover:text-black/70 transition-all duration-medium";
 
 const buttonStyles = "mt-1.5 xl:mt-0 px-8 xl:px-[1.15rem] pb-2.5 xl:pb-[0.4rem] min-w-[12rem] xl:min-w-[6rem]";
+
+const navLinkStyles = "hover:text-black/70 transition-all duration-medium";
 
 const Header = ({ className }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -45,7 +42,7 @@ const Header = ({ className }) => {
 
   const onNavItemClick = (section) => {
     if (!breakpoints["xl"]) setMobileNavOpen(false);
-    navigate(section.path);
+    navigate(section.path ?? section);
   };
 
   const onLoginOrRegisterClick = () => {
@@ -110,13 +107,12 @@ const Header = ({ className }) => {
                 : "opacity-0 pointer-events-none xl:opacity-100 xl:pointer-events-auto"
             )}
           >
+            <span onClick={() => onNavItemClick("/")} className={navLinkStyles}>
+              Home
+            </span>
             {!whitelistedPaths.includes(location.pathname.split("/")[1]) &&
               internalNavLinks.map((section, index) => (
-                <span
-                  key={index}
-                  onClick={() => onNavItemClick(section)}
-                  className="hover:text-black/70 transition-all duration-medium"
-                >
+                <span key={index} onClick={() => onNavItemClick(section)} className={navLinkStyles}>
                   {section.name}
                 </span>
               ))}
@@ -124,17 +120,8 @@ const Header = ({ className }) => {
               Leaderboard
             </a>
             <div className="group flex gap-1.5 items-center">
-              <a href={whatsappLink} target="_blank" className="link ml-3 xl:ml-0" rel="noreferrer">
-                Join
-              </a>
-              <RiWhatsappFill
-                className="transition-colors duration-medium group-hover:text-black/70 ml-0.5 xl:ml-0 transform scale-125 xl:scale-100 translate-y-[1px] xl:translate-y-0"
-                size={18}
-              />
-            </div>
-            <div className="group flex gap-1.5 items-center">
-              <a href={ruleLink} target="_blank" className="link ml-8 xl:ml-0" rel="noreferrer">
-                Rules & Regulations
+              <a href={cocLink} target="_blank" className="link ml-8 xl:ml-0" rel="noreferrer">
+                Code of Conduct
               </a>
               <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] before:group-hover:w-[1.45rem] xl:before:group-hover:w-[0.75rem] translate-y-[-0.1rem]" />
             </div>

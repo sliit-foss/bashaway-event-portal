@@ -7,3 +7,10 @@ export const challengeColor = (challenge) => {
     return "card-green";
   }
 };
+
+export const eventColor = (event) => {
+  if (event.settings.payments.enabled) {
+    return "card-blue";
+  }
+  return "card-green";
+};

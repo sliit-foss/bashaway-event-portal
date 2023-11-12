@@ -5,11 +5,12 @@ import { toast } from "@sliit-foss/bashaway-ui";
 import { mutationHelper } from "./mutation-helper";
 
 export * from "./mutation-helper";
+export * from "./query-helper";
 
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_BASHAWAY_BE_URL,
+  baseUrl: import.meta.env.VITE_CORE_BE_URL,
   prepareHeaders: (headers) => {
     headers.set("authorization", `Bearer ${localStorage.getItem("access_token")}`);
     const user = authUser();

@@ -23,7 +23,7 @@ const Login = () => {
       });
   };
 
-  useTitle("Login | Bashaway");
+  useTitle("Login | Tech Events");
 
   return (
     <div className="w-full min-h-[70vh] flex flex-col justify-center items-center">

@@ -6,7 +6,7 @@ import { BreadCrumbs, Button } from "@sliit-foss/bashaway-ui/components";
 const Profile = () => {
   const { data: { data: team } = {}, isLoading } = useAuthUserQuery();
 
-  useTitle("Profile | Bashaway");
+  useTitle("Profile | Tech Events");
 
   useEffectOnce(() => {
     window.scroll({ top: 0, behavior: "smooth" });

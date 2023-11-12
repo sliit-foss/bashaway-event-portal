@@ -17,7 +17,7 @@ import { Body2 } from "@sliit-foss/bashaway-ui/typography";
 import { computeFilterQuery, computeSortQuery } from "@sliit-foss/bashaway-ui/utils";
 
 const Submissions = () => {
-  const { id: challengeId } = useParams();
+  const { challenge_id: challengeId } = useParams();
 
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState(computeFilterQuery(submissionFilters));
@@ -31,7 +31,7 @@ const Submissions = () => {
     isError
   } = useGetMySubmissionsQuery({ filters: `filter[challenge]=${challengeId}&${filters}`, sorts, page });
 
-  useTitle("Submissions | Bashaway");
+  useTitle("Submissions | Tech Events");
 
   return (
     <>

@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  showLoader: false
+  showSurveyForm: false
 };
 
 export const slice = createSlice({
-  name: "global",
+  name: "event",
   initialState,
   reducers: {
-    toggleLoader(state, action) {
-      state.showLoader = action.payload;
+    toggleSurveyForm(state, action) {
+      state.showSurveyForm = action.payload;
     }
   }
 });
 
-export const { toggleLoader } = slice.actions;
+export const { toggleSurveyForm } = slice.actions;
 
 export default slice.reducer;

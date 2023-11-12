@@ -74,7 +74,7 @@ const Register = () => {
     }
   };
 
-  useTitle("Register | Bashaway");
+  useTitle("Register | Tech Events");
 
   return (
     <>

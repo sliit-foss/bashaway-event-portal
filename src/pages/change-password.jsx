@@ -23,7 +23,7 @@ const ChangePassword = () => {
       });
   };
 
-  useTitle("Change Password | Bashaway");
+  useTitle("Change Password | Tech Events");
 
   return (
     <div className="w-full min-h-[70vh] flex flex-col justify-center items-center">

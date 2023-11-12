@@ -3,7 +3,7 @@ import { useTitle } from "@/hooks";
 import { Button } from "@sliit-foss/bashaway-ui/components";
 
 const NotFound = () => {
-  useTitle("404 | Bashaway");
+  useTitle("404 | Tech Events");
   return (
     <div className="h-[80vh] w-screen flex flex-col justify-center items-center relative z-50">
       <Watch

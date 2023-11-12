@@ -1,19 +1,15 @@
 import { Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { useGetSettingsQuery } from "@/store/api";
 import { downloadFile } from "@/utils";
 import { AnimatedSwitcher, Button } from "@sliit-foss/bashaway-ui/components";
 
 const ActionButtons = ({ loading = false, challenge, className, buttonClassName }) => {
-  const { data: { data: settings } = {}, isLoading } = useGetSettingsQuery();
-
   const navigate = useNavigate();
   return (
     <div className={twMerge("flex flex-col md:flex-row gap-3 mt-1", className)}>
       <Button
         className={twMerge("py-2 md:py-1.5", buttonClassName)}
-        disabled={isLoading || new Date(settings?.submission_deadline) < new Date()}
         loading={loading}
         onClick={() => document.getElementById("file-upload").click()}
       >

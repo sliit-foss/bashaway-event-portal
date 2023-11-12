@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { uploadIdCard } from "@/services";
 import { store } from "@/store";
 import { authApi, useAuthUserQuery, useUpdateProfileMutation } from "@/store/api";
-import { toggleIdentificationForm } from "@/store/reducers/ui/global";
+import { toggleSurveyForm } from "@/store/reducers/ui/event";
 import {
   Accordion,
   AccordionContent,
@@ -23,10 +23,10 @@ import {
 } from "@sliit-foss/bashaway-ui/components";
 import { gender, mealPreference } from "@sliit-foss/bashaway-ui/constants";
 
-const close = () => store.dispatch(toggleIdentificationForm(false));
+const close = () => store.dispatch(toggleSurveyForm(false));
 
 const IdentificationForm = () => {
-  const open = useSelector((store) => store.ui.global.showIdentificationForm);
+  const open = useSelector((store) => store.ui.event.showSurveyForm);
 
   const { data: { data: team } = {} } = useAuthUserQuery();
 
