@@ -1,2 +1,2 @@
-export * from "./question";
+export * from "./challenge";
 export * from "./submission";

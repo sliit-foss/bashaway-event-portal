@@ -1,7 +1,7 @@
-export const challengeColor = (question) => {
-  if (question?.difficulty === "HARD" || question?.difficulty === "EXTREME") {
+export const challengeColor = (challenge) => {
+  if (challenge?.difficulty === "HARD" || challenge?.difficulty === "EXTREME") {
     return "card-red";
-  } else if (question?.difficulty === "MEDIUM") {
+  } else if (challenge?.difficulty === "MEDIUM") {
     return "card-blue";
   } else {
     return "card-green";

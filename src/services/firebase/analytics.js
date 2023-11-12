@@ -9,8 +9,8 @@ export const track = (name, params) => {
   setUserId(analytics, user?._id || "Anonymous");
   logEvent(analytics, name, {
     ...params,
-    team_name: user?.name || "N/A",
-    team_email: params.team_email ?? user?.email ?? "N/A",
+    name: user?.name || "N/A",
+    email: user?.email ?? "N/A",
     user_agent: navigator.userAgent,
     platform: navigator.platform
   });

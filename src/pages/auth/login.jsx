@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useTitle } from "@/hooks";
-import { tracker } from "@/services";
 import { store } from "@/store";
 import { authApi, useLoginMutation } from "@/store/api";
 import { Button, Input } from "@sliit-foss/bashaway-ui/components";
@@ -13,7 +12,6 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    tracker.event("login", { team_email: e.target.email.value });
     await login({
       email: e.target.email.value,
       password: e.target.password.value

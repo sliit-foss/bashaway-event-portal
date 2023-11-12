@@ -17,7 +17,7 @@ import { Body2 } from "@sliit-foss/bashaway-ui/typography";
 import { computeFilterQuery, computeSortQuery } from "@sliit-foss/bashaway-ui/utils";
 
 const Submissions = () => {
-  const { id: questionId } = useParams();
+  const { id: challengeId } = useParams();
 
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState(computeFilterQuery(submissionFilters));
@@ -29,7 +29,7 @@ const Submissions = () => {
     data: submissions,
     isFetching,
     isError
-  } = useGetMySubmissionsQuery({ filters: `filter[question]=${questionId}&${filters}`, sorts, page });
+  } = useGetMySubmissionsQuery({ filters: `filter[challenge]=${challengeId}&${filters}`, sorts, page });
 
   useTitle("Submissions | Bashaway");
 
@@ -40,7 +40,7 @@ const Submissions = () => {
           "Home",
           {
             label: "Challenge",
-            path: `/questions/${questionId}`
+            path: `/challenges/${challengeId}`
           },
           "Submissions"
         ]}

@@ -5,7 +5,7 @@ import { useGetSettingsQuery } from "@/store/api";
 import { downloadFile } from "@/utils";
 import { AnimatedSwitcher, Button } from "@sliit-foss/bashaway-ui/components";
 
-const ActionButtons = ({ loading = false, question, className, buttonClassName }) => {
+const ActionButtons = ({ loading = false, challenge, className, buttonClassName }) => {
   const { data: { data: settings } = {}, isLoading } = useGetSettingsQuery();
 
   const navigate = useNavigate();
@@ -28,16 +28,16 @@ const ActionButtons = ({ loading = false, question, className, buttonClassName }
       <Button
         variant="secondary"
         className={twMerge("bg-transparent", buttonClassName)}
-        onClick={() => downloadFile(question.codebase_url)}
-        disabled={!question}
+        onClick={() => downloadFile(challenge.codebase_url)}
+        disabled={!challenge}
       >
         Download codebase
       </Button>
       <Button
         variant="secondary"
         className={twMerge("bg-transparent", buttonClassName)}
-        disabled={!question}
-        onClick={() => navigate(`/questions/${question._id}/submissions`)}
+        disabled={!challenge}
+        onClick={() => navigate(`/challenges/${challenge._id}/submissions`)}
       >
         View submissions
       </Button>

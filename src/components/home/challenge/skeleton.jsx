@@ -1,6 +1,6 @@
 import { Skeleton } from "@sliit-foss/bashaway-ui/components";
 
-const QuestionGridSkeleton = ({ className }) => {
+const ChallengeGridSkeleton = ({ className }) => {
   return (
     <div className={className}>
       {Array.from({ length: 6 }).map((_, i) => (
@@ -32,4 +32,4 @@ const QuestionGridSkeleton = ({ className }) => {
   );
 };
 
-export default QuestionGridSkeleton;
+export default ChallengeGridSkeleton;

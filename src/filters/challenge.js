@@ -1,4 +1,4 @@
-export const questionFilters = [
+export const challengeFilters = [
   {
     key: "name",
     label: "Name"
@@ -27,7 +27,7 @@ export const questionFilters = [
   }
 ];
 
-export const questionSorts = [
+export const challengeSorts = [
   {
     key: "max_score",
     label: "Sort by points",
