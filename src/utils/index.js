@@ -1,4 +1,5 @@
 export * from "./colors";
+export * from "./image";
 export * from "./jwt";
 
 export const getRegexPatternFromKey = (key) => {
