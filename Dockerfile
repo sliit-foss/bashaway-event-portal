@@ -19,7 +19,7 @@ RUN pnpm run build
 # Stage 2: Serve the React application from Nginx
 FROM nginx:1.19.0-alpine
 
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy the Nginx configuration file
 COPY /nginx/nginx.conf /etc/nginx/conf.d/default.conf
