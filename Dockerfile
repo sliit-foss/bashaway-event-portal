@@ -10,7 +10,7 @@ COPY package*.json pnpm-lock.yaml ./
 
 COPY patches /app/patches
 
-RUN pnpm install
+RUN pnpm install --ignore-scripts
 
 COPY . .
 
