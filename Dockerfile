@@ -8,6 +8,8 @@ WORKDIR /app
 
 COPY package*.json pnpm-lock.yaml ./
 
+COPY patches /app/patches
+
 RUN pnpm install
 
 COPY . .
