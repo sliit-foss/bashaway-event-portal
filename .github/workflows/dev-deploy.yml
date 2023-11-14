@@ -1,0 +1,19 @@
+name: Dev Release
+run-name: Dev Build and deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-deploy:
+    name: Dev
+    uses: ./.github/workflows/deploy.yml
+    with:
+      tag: ghcr.io/${{ github.repository }}:${{ github.sha }}-${{ github.run_attempt }}-dev   
+    secrets: 
+      GCP_SA_KEY : ${{ secrets.DEV_GCP_SA_KEY }}
+    #   FRONTEND_URL: ${{ secrets.DEV_FRONTEND_URL }}
+    #   SERVER_URL: ${{ secrets.DEV_SERVER_URL }}
+    #   FIREBASE_CONFIG: ${{ secrets.DEV_FIREBASE_CONFIG }}
