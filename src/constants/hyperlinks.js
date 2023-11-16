@@ -1,8 +1,8 @@
 export const githubOrgLink = "https://github.com/gdgsrilanka";
-export const repositoryLink = "https://github.com/gdgsrilanka/techevents-portal";
 export const scorekeeperRepositoryLink = "https://github.com/gdgsrilanka/scorekeeper";
 export const gdgPageLink = "https://gdg.community.dev/gdg-sri-lanka";
-export const cocLink = "https://devfest.gdgsrilanka.org/coc";
+export const cocLink = "https://developers.google.com/events/gdd-europe/code-of-conduct";
+export const visitUsLink = "https://gdgsrilanka.org";
 
 export let leaderboardURL = "https://leaderboard.techevents.gdgsrilanka.org";
 
