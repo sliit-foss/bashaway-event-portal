@@ -1,7 +1,6 @@
 import { AiFillFacebook, AiFillInstagram, AiFillLinkedin, AiFillYoutube, AiOutlineTwitter } from "react-icons/ai";
 import { twMerge } from "tailwind-merge";
-import { facebook, gdgPageLink, instagram, linkedIn, repositoryLink, twitter, youTube } from "@/constants";
-import { Bashaway, FOSS } from "@sliit-foss/bashaway-ui/icons";
+import { cocLink, facebook, gdgPageLink, instagram, linkedIn, twitter, youTube } from "@/constants";
 
 const usefulLinks = [
   {
@@ -9,8 +8,8 @@ const usefulLinks = [
     url: gdgPageLink
   },
   {
-    name: "Source Code",
-    url: repositoryLink
+    name: "Code of Conduct",
+    url: cocLink
   }
 ];
 
@@ -26,11 +25,16 @@ const Footer = ({ className }) => {
       >
         <div className="w-full max-w-body mx-0 flex flex-col-reverse md:flex-row items-center sm:items-start justify-between pt-16 pb-24 px-8 lg:px-24">
           <div className="flex flex-col items-center md:items-start gap-y-5 col-start-1">
-            <FOSS />
-            <p className="md:w-[320px] px-2 sm:px-0 text-sm text-center md:text-left text-gray-500 opacity-80 font-consolas">
-              Welcome to the SLIIT FOSS Community. We&apos;re a group of volunteers who believe in the usage of Free and
-              Open Source Software (FOSS)
-            </p>
+            <div>
+              <p className="text-4xl font-semibold tracking-tight">
+                techevents.<span className="font-light text-gray-300">lk</span>
+              </p>
+              <p className="md:w-[320px] mt-2 px-2 sm:px-0 text-sm text-center md:text-left text-gray-500 opacity-80 font-consolas">
+                Powered By
+              </p>
+              <img src="/assets/images/gdglk-logo.png" alt="GDGLK Logo" className="mt-1 w-40" />
+            </div>
+
             <div className="font-semibold text-[20px] font-cabinet">CONNECT WITH US</div>
             <div className="flex space-x-3 flex-shrink-0 -ml-0.5">
               <a href={facebook} target="_blank" className="icon-hover" rel="noreferrer" aria-label="Facebook">
@@ -51,7 +55,6 @@ const Footer = ({ className }) => {
             </div>
           </div>
           <div className="flex flex-col items-center md:items-end -translate-y-1.5 mb-5 gap-8 md:gap-10">
-            <Bashaway />
             <div className="flex flex-col items-center md:items-end gap-3">
               {usefulLinks.map((link, index) => {
                 return (
