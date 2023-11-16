@@ -6,8 +6,7 @@
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=8192 vite build",
     "format": "prettier --write --cache \"**/*.{js,jsx,ts,tsx,md,mdx}\"",
     "lint": "eslint . --ext js,jsx,mdx --ignore-path .gitignore --fix --cache --report-unused-disable-directives",
-    "preview": "vite preview",
-    "prepare": "lefthook install"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@azure/storage-blob": "12.15.0",
