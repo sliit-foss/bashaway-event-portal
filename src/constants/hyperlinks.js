@@ -3,7 +3,7 @@ export const repositoryLink = "https://github.com/sliit-foss/bashaway-event-port
 export const scorekeeperRepositoryLink = "https://github.com/sliit-foss/scorekeeper";
 export const sliitFossMainWebsite = "https://sliitfoss.org";
 export const ruleLink = "https://bashaway.sliitfoss.org#rules";
-export const whatsappLink = "https://chat.whatsapp.com/JPJYJr4gRiTEMLpWmH1QXh";
+export const whatsappLink = "https://chat.whatsapp.com/LojVYgnlUETBZBH1z0K91k";
 
 export let leaderboardURL = "https://leaderboard.bashaway.sliitfoss.org";
 
