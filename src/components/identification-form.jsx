@@ -102,7 +102,7 @@ const IdentificationForm = () => {
             <AlertDialogDescription>
               {partiallyFilled
                 ? `Looks like you've strengthened your battlion. Before we can allow your team to compete further please confirm the identity of your new members by filling what's missing below.`
-                : `Congratulations on making it to the final round of Bashaway 2023. However, before you can compete further,
+                : `Congratulations on making it to the final round of Bashaway ${new Date().getFullYear()}. However, before you can compete further,
               please fill in the following details.`}
             </AlertDialogDescription>
           </AlertDialogHeader>
