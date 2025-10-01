@@ -11,7 +11,8 @@ import {
   QuestionDetails,
   Register,
   ResetPassword,
-  Submissions
+  Submissions,
+  TeamRegistered
 } from "@/pages";
 
 const AnimatedRoutes = () => {
@@ -23,6 +24,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/team-registered" element={<TeamRegistered />} />
         <Route path="/questions/:id" element={<QuestionDetails />} />
         <Route path="/questions/:id/submissions" element={<Submissions />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
