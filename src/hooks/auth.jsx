@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-export const whitelistedPaths = ["login", "register", "forgot-password", "reset-password"];
+export const whitelistedPaths = ["login", "register", "forgot-password", "reset-password", "team-registered"];
 
 const useAuth = () => {
   const navigate = useNavigate();
