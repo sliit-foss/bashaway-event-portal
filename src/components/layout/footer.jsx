@@ -65,7 +65,7 @@ const Footer = ({ className }) => {
                 <AiFillYoutube className="h-[1.36rem] w-[1.36rem] -translate-y-[0.06rem]" />
               </a>
               <a href={tiktok} target="_blank" className="icon-hover" rel="noreferrer" aria-label="TikTok">
-                <AiFillTikTok className="h-5 w-5 -translate-y-[0.06rem]" />
+                <AiFillTikTok className="h-5 w-5" />
               </a>
             </div>
           </div>
