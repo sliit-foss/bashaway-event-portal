@@ -41,7 +41,9 @@ const Header = ({ className }) => {
 
   const [logout] = useLogoutMutation();
 
-  const { data, isLoading, isError } = useAuthUserQuery();
+  const isLoggedIn = !!localStorage.getItem("access_token");
+
+  const { data, isLoading, isError } = useAuthUserQuery(undefined, { skip: !isLoggedIn });
 
   const onNavItemClick = (section) => {
     if (!breakpoints["xl"]) setMobileNavOpen(false);

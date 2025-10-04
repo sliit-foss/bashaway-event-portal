@@ -5,8 +5,10 @@ import { useAuthUserQuery, useGetSettingsQuery } from "@/store/api";
 import { toggleIdentificationForm } from "@/store/reducers/ui/global";
 
 const useIdentification = () => {
-  const { data: { data: settings } = {} } = useGetSettingsQuery();
-  const { data: { data: team } = {} } = useAuthUserQuery();
+  const isLoggedIn = !!localStorage.getItem("access_token");
+
+  const { data: { data: settings } = {} } = useGetSettingsQuery(undefined, { skip: !isLoggedIn });
+  const { data: { data: team } = {} } = useAuthUserQuery(undefined, { skip: !isLoggedIn });
 
   const open = useSelector((store) => store.ui.global.showIdentificationForm);
 
