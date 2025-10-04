@@ -43,7 +43,9 @@ const Header = ({ className }) => {
 
   const isLoggedIn = !!localStorage.getItem("access_token");
 
-  const { data, isLoading, isError } = useAuthUserQuery(undefined, { skip: !isLoggedIn });
+  const { isLoading, isError } = useAuthUserQuery(undefined, { skip: !isLoggedIn });
+
+  const isAuthenticated = isLoggedIn && !isError;
 
   const onNavItemClick = (section) => {
     if (!breakpoints["xl"]) setMobileNavOpen(false);
@@ -140,9 +142,9 @@ const Header = ({ className }) => {
               </a>
               <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] before:group-hover:w-[1.45rem] xl:before:group-hover:w-[0.75rem] translate-y-[-0.1rem]" />
             </div>
-            {!data && isLoading ? (
+            {isLoggedIn && isLoading ? (
               <Skeleton containerClassName="w-48 xl:w-24 h-[2.2rem]" className="rounded-full" />
-            ) : isError ? (
+            ) : !isAuthenticated ? (
               <Button onClick={onLoginOrRegisterClick} className={buttonStyles}>
                 {location.pathname === "/login" ? "Register" : "Login"}
               </Button>

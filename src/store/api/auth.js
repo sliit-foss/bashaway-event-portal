@@ -6,6 +6,7 @@ const { post } = mutationHelper;
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery,
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (data) => post(`/api/auth/login`, data),
@@ -26,12 +27,14 @@ export const authApi = createApi({
     }),
     authUser: builder.query({
       query: () => `/api/auth/current`,
+      providesTags: ["Auth"],
       extraOptions: {
         silent: true
       }
     }),
     logout: builder.mutation({
-      query: () => post(`/api/auth/logout`)
+      query: () => post(`/api/auth/logout`),
+      invalidatesTags: ["Auth"]
     })
   })
 });
