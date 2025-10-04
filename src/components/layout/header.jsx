@@ -58,9 +58,11 @@ const Header = ({ className }) => {
   };
 
   const onLogoutClick = async () => {
-    logout();
+    // Clear state first to prevent any refetches
     localStorage.clear();
     dispatch(authApi.util.resetApiState());
+    // Attempt logout API call (ignore if it fails due to expired token)
+    logout().catch(() => {});
     if (!breakpoints["xl"]) setMobileNavOpen(false);
     navigate("/login");
   };
