@@ -23,7 +23,7 @@
     "moment-timezone": "0.5.43",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-icons": "5.5.0",
+    "react-icons": "4.10.1",
     "react-loader-spinner": "5.3.4",
     "react-lottie": "1.2.3",
     "react-markdown": "8.0.3",
