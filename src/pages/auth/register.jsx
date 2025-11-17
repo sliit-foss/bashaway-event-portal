@@ -55,7 +55,7 @@ const Register = () => {
         })
           .unwrap()
           .then((res) => {
-            navigate("/login");
+            navigate("/team-registered");
             toast({ title: res.message });
           });
       } else {
