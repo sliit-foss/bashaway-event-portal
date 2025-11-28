@@ -24,6 +24,10 @@ export const questionFilters = [
         label: "Extreme"
       }
     ]
+  },
+  {
+    key: "max_score",
+    label: "Max Score"
   }
 ];
 
@@ -31,7 +35,7 @@ export const questionSorts = [
   {
     key: "max_score",
     label: "Sort by points",
-    direction: 0
+    direction: -1
   },
   {
     key: "created_at",
