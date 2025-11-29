@@ -24,6 +24,6 @@ export const submissionSorts = [
   {
     key: "score",
     label: "Sort by score",
-    direction: 0
+    direction: -1
   }
 ];
