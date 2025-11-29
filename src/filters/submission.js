@@ -12,20 +12,6 @@ export const submissionFilters = [
         label: "Not Graded"
       }
     ]
-  },
-  {
-    key: "automatically_graded",
-    label: "Grading Type",
-    options: [
-      {
-        key: "true",
-        label: "Auto Graded"
-      },
-      {
-        key: "false",
-        label: "Manually Graded"
-      }
-    ]
   }
 ];
 
