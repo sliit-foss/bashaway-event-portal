@@ -29,6 +29,11 @@ export const questionFilters = [
 
 export const questionSorts = [
   {
+    key: "name",
+    label: "Sort by name",
+    direction: 0
+  },
+  {
     key: "max_score",
     label: "Sort by points",
     direction: 0
