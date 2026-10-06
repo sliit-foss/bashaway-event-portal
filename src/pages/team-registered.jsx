@@ -9,7 +9,7 @@ const TeamRegistered = () => {
   const [countdown, setCountdown] = useState(5);
   const [showLoginButton, setShowLoginButton] = useState(false);
 
-  useTitle("Team Registered | Bashaway 2025");
+  useTitle("Team Registered | Bashaway 2026");
 
   useEffect(() => {
     console.log("TeamRegistered component mounted");
@@ -32,7 +32,7 @@ const TeamRegistered = () => {
   }, []);
 
   const handleJoinWhatsApp = () => {
-    window.open("https://chat.whatsapp.com/HKpbmAUuPCj77c0F5VyZ3D?mode=ems_copy_t", "_blank");
+    window.open("https://chat.whatsapp.com/JmAnJ2k58ziEFDt3x0ePRR", "_blank");
   };
 
   const handleAlreadyJoined = () => {
