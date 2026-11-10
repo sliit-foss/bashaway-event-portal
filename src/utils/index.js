@@ -4,7 +4,7 @@ export * from "./jwt";
 export const getRegexPatternFromKey = (key) => {
   if (key === "password")
     return {
-      regex: "(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}",
+      regex: "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,64}$",
       title:
         "Password should have at least one lowercase letter, one uppercase letter, one number and one special character and should be at least 8 characters long"
     };
