@@ -4,11 +4,7 @@ import animate from "tailwindcss-animate";
 export default {
   important: true,
   darkMode: ["class"],
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-    "node_modules/@sliit-foss/bashaway-ui/**/*.{js,jsx,ts,tsx}"
-  ],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}", "node_modules/@sliit-foss/bashaway-ui/dist/**/*.js"],
   theme: {
     container: {
       center: true,
@@ -19,6 +15,19 @@ export default {
     },
     extend: {
       colors: {
+        // Tailwind 3 values of the palette shades in use, v4 redefined the palette in oklch
+        gray: {
+          50: "#f9fafb",
+          100: "#f3f4f6",
+          200: "#e5e7eb",
+          400: "#9ca3af",
+          500: "#6b7280",
+          600: "#4b5563",
+          700: "#374151",
+          900: "#111827"
+        },
+        red: { 50: "#fef2f2", 100: "#fee2e2", 300: "#fca5a5", 400: "#f87171", 600: "#dc2626" },
+        blue: { 600: "#2563eb" },
         border: "var(--border)",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -73,14 +82,31 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out"
       },
       fontFamily: {
+        // Tailwind 3 default stack, the v4 default no longer starts with the system UI font
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          '"Noto Sans"',
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"'
+        ],
         inter: ["Inter", "sans-serif"],
         consolas: ["Consolas", "monospace"],
         poppins: ["Poppins", "sans-serif"]
       },
       screens: {
-        xs: "400px",
-        xsm: "450px",
-        xlm: "1320px"
+        xs: "25rem",
+        xsm: "28.125rem",
+        xlm: "82.5rem"
       },
       transitionDuration: {
         medium: "300ms",

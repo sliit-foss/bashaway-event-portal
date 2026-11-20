@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../tailwind.config.js";
 
-const config = resolveConfig(tailwindConfig);
+// Tailwind 4 has no resolveConfig, so its default breakpoints are listed here
+const screens = {
+  "sm": "640px",
+  "md": "768px",
+  "lg": "1024px",
+  "xl": "1280px",
+  "2xl": "1536px",
+  ...tailwindConfig.theme.extend.screens
+};
 
 const calculateBreakpoints = () =>
-  Object.entries(config.theme.screens).reduce((acc, [key, value]) => {
+  Object.entries(screens).reduce((acc, [key, value]) => {
     acc[key] = window.matchMedia(`(min-width: ${value})`).matches;
     return acc;
   }, {});
