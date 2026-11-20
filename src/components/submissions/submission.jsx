@@ -12,7 +12,7 @@ const Submission = ({ submission, highlight = false, ...props }) => {
         "rounded-xl py-6 md:py-4 px-5 cursor-default transition-all duration-medium",
         highlight
           ? "bg-red-50/90 border-transparent"
-          : "bg-gray-50 hover:bg-red-50/90 border-black/[0.05] hover:border-transparent"
+          : "bg-gray-50 hover:bg-red-50/90 border-black/5 hover:border-transparent"
       )}
       {...props}
     >

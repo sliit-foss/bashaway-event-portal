@@ -54,7 +54,7 @@ export default function QuestionDetails() {
             store.dispatch(submissionApi.util.resetApiState());
             document.getElementById("file-upload").value = "";
           });
-      } catch (e) {
+      } catch {
         toast({ variant: "destructive", title: "Submission upload failed" });
       } finally {
         setUploading(false);
@@ -95,7 +95,9 @@ export default function QuestionDetails() {
                 <CheckCircle2 size={16} />
               </Badge>
               <Body3 className="font-bold transition-all duration-medium">{question?.name}</Body3>
-              <ReactMarkdown className="markdown [&>p]:font-semibold">{question?.description}</ReactMarkdown>
+              <div className="markdown [&>p]:font-semibold">
+                <ReactMarkdown>{question?.description}</ReactMarkdown>
+              </div>
               <div className="flex flex-wrap gap-3 [&>span]:px-3 [&>span]:py-2 [&>span]:rounded-lg [&>span]:transition-all [&>span]:duration-medium">
                 <Footnote>{startCase(question?.difficulty?.toLowerCase())}</Footnote>
                 <Footnote>{question?.max_score}PT</Footnote>
@@ -116,7 +118,7 @@ export default function QuestionDetails() {
               />
               <Skeleton
                 containerClassName="flex flex-wrap gap-1.5 mt-[0.1rem]"
-                className="w-[4rem] h-[2.6rem] mb-[0.08rem] rounded-[7px] z-50"
+                className="w-16 h-[2.6rem] mb-[0.08rem] rounded-[7px] z-50"
                 count={3}
                 shade="dark"
               />

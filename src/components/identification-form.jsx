@@ -93,8 +93,8 @@ const IdentificationForm = () => {
       }}
     >
       <AlertDialogContent
-        className="max-h-[90vh] overflow-y-auto z-[200]"
-        overlayClassName="bg-white/80 backdrop-blur-md z-[200]"
+        className="max-h-[90vh] overflow-y-auto z-200"
+        overlayClassName="bg-white/80 backdrop-blur-md z-200"
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <AlertDialogHeader>
@@ -125,7 +125,7 @@ const IdentificationForm = () => {
                       label="Gender *"
                       options={gender.options}
                       className="sm:h-14"
-                      contentClassName="max-h-[8.5rem] overflow-y-auto invisible-scroll"
+                      contentClassName="max-h-34 overflow-y-auto invisible-scroll"
                       value={formData[index].gender}
                       onChange={(e) => onChange(e, index)}
                     />

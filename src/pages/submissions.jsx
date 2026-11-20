@@ -47,7 +47,7 @@ const Submissions = () => {
       />
       <div className="w-full h-full min-h-[70vh] flex flex-col border py-7 px-5 md:px-7 rounded-3xl mt-12 lg:mt-8">
         <Body2 className="text-[22px] font-medium">{authUser()?.name}&apos;s Submissions</Body2>
-        <div className="divider !bg-black/10 mt-4 mb-7" />
+        <div className="divider bg-black/10! mt-4 mb-7" />
         <div className="w-full flex flex-col md:flex-row gap-6">
           <Filters
             filters={submissionFilters}

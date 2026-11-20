@@ -1,8 +1,28 @@
-@import "fonts.css";
-@import "animations/index.css";
+@import "tailwindcss" source(none);
+@import "./fonts.css" layer(base);
+@import "./animations/index.css" layer(base);
 @import "@sliit-foss/bashaway-ui/styles";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../tailwind.config.js";
 
+/*
+  Tailwind CSS v4 changed the default border color, button cursor and
+  placeholder color, so the v3 defaults are restored here to keep everything
+  looking the same. Elements get their border color from bashaway-ui.
+*/
+@layer base {
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: theme(colors.gray.200);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: theme(colors.gray.400);
+  }
+}

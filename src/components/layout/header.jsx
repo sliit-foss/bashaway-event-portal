@@ -26,7 +26,7 @@ const internalNavLinks = [
 const mobileNavIconStyles =
   "block xl:hidden absolute right-8 lg:right-24 h-[1.65rem] w-[1.65rem] cursor-pointer hover:text-black/70 transition-all duration-medium";
 
-const buttonStyles = "mt-1.5 xl:mt-0 px-8 xl:px-[1.15rem] pb-2.5 xl:pb-[0.4rem] min-w-[12rem] xl:min-w-[6rem]";
+const buttonStyles = "mt-1.5 xl:mt-0 px-8 xl:px-[1.15rem] pb-2.5 xl:pb-[0.4rem] min-w-48 xl:min-w-24";
 
 const Header = ({ className }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -64,7 +64,7 @@ const Header = ({ className }) => {
   return (
     <header
       className={twMerge(
-        `w-full min-h-[70px] xs:min-h-[90px] backdrop-blur-md fixed z-[200] transition-all duration-long border-b`,
+        `w-full min-h-[70px] xs:min-h-[90px] backdrop-blur-md fixed z-200 transition-all duration-long border-b`,
         className,
         mobileNavOpen && !breakpoints["xl"] ? "h-screen bg-white" : "h-[70px] xs:h-[90px] bg-white/80"
       )}
@@ -72,7 +72,7 @@ const Header = ({ className }) => {
       <div className="w-full max-w-body mx-auto flex justify-between py-3.5 xs:py-6 px-8 lg:px-24">
         <div
           className={twMerge(
-            "grid place-content-start grid-flow-col items-center space-x-[20px] sm:space-x-[30px] transition-all duration-medium",
+            "grid place-content-start grid-flow-col items-center [&>*+*]:ml-[20px] sm:[&>*+*]:ml-[30px] transition-all duration-medium",
             !breakpoints["xl"] ? (mobileNavOpen ? "opacity-0" : "opacity-100 pointer-events-none") : ""
           )}
         >
@@ -89,7 +89,7 @@ const Header = ({ className }) => {
           <FOSS className="transform scale-[0.85] -translate-x-1" />
         </div>
         <div className={twMerge("absolute inset-0 xl:relative")}>
-          <div className="w-full min-h-[70px] xs:min-h-[90px] xl:!min-h-0 flex justify-end items-center px-8 lg:px-24 relative z-50">
+          <div className="w-full min-h-[70px] xs:min-h-[90px] xl:min-h-0! flex justify-end items-center px-8 lg:px-24 relative z-50">
             <AnimatedSwitcher
               show={!mobileNavOpen && !breakpoints["xl"]}
               className="flex justify-center items-center h-full w-full"
@@ -103,7 +103,7 @@ const Header = ({ className }) => {
           </div>
           <div
             className={twMerge(
-              `h-full xl:bg-transparent xl:h-auto flex flex-col xl:flex-row justify-center items-center gap-[1.5rem] xlm:gap-[1.575rem] cursor-pointer font-semibold text-2xl xl:text-base`,
+              `h-full xl:bg-transparent xl:h-auto flex flex-col xl:flex-row justify-center items-center gap-6 xlm:gap-[1.575rem] cursor-pointer font-semibold text-2xl xl:text-base`,
               !breakpoints["xl"] ? "transition-all duration-medium" : "",
               mobileNavOpen && !breakpoints["xl"]
                 ? "opacity-100 delay-150 pb-[70px] xs:pb-[90px]"
@@ -128,7 +128,7 @@ const Header = ({ className }) => {
                 Join
               </a>
               <RiWhatsappFill
-                className="transition-colors duration-medium group-hover:text-black/70 ml-0.5 xl:ml-0 transform scale-125 xl:scale-100 translate-y-[1px] xl:translate-y-0"
+                className="transition-colors duration-medium group-hover:text-black/70 ml-0.5 xl:ml-0 transform scale-125 xl:scale-100 translate-y-px xl:translate-y-0"
                 size={18}
               />
             </div>
@@ -136,7 +136,7 @@ const Header = ({ className }) => {
               <a href={ruleLink} target="_blank" className="link ml-8 xl:ml-0" rel="noreferrer">
                 Rules & Regulations
               </a>
-              <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] before:group-hover:w-[1.45rem] xl:before:group-hover:w-[0.75rem] translate-y-[-0.1rem]" />
+              <LinkIcon className="transform -rotate-45 before:w-[1.2rem] xl:before:w-[0.6rem] group-hover:before:w-[1.45rem] xl:group-hover:before:w-3 translate-y-[-0.1rem]" />
             </div>
             {!data && isLoading ? (
               <Skeleton containerClassName="w-48 xl:w-24 h-[2.2rem]" className="rounded-full" />
